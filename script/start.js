@@ -1,6 +1,5 @@
 const merge = require('webpack-merge')
 const webpack = require('webpack')
-const path = require('path')
 
 const webpackBaseConfig = require('./webpack.base.config')
 
@@ -10,6 +9,10 @@ module.exports = merge(webpackBaseConfig, {
     pathinfo: true, // 开发环境，显示模块信息
     publicPath: '/'
   },
+  // 性能提示
+  performance: {
+    hints: 'warning',
+  },
   devtool: 'inline-source-map',
   // 开发环境配置
   devServer: {
@@ -17,6 +20,7 @@ module.exports = merge(webpackBaseConfig, {
     port: 3000
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin()
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoEmitOnErrorsPlugin()
   ]
 })
