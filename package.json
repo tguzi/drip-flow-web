@@ -3,9 +3,11 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
+    "analyzer": "webpack --config script/analyzer.js",
     "dll": "webpack --config script/dll.js",
     "start": "webpack-dev-server --config script/start.js --progress --color --inline --hot",
-    "build": "webpack --config script/build.js --progress --color"
+    "build": "webpack --config script/build.js --progress --color",
+    "bd": "npm run dll && npm run bd"
   },
   "author": "",
   "license": "ISC",
@@ -24,6 +26,7 @@
     "babel-preset-react": "^6.24.1",
     "clean-webpack-plugin": "^3.0.0",
     "css-loader": "^3.5.3",
+    "happypack": "^5.0.1",
     "html-webpack-plugin": "^4.3.0",
     "mini-css-extract-plugin": "^0.9.0",
     "optimize-css-assets-webpack-plugin": "^5.0.3",

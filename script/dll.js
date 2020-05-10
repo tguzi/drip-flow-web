@@ -22,16 +22,15 @@ module.exports = {
 		path: OUTPUT_PATH,
 		hashDigestLength: 8,
 		filename: '[name]-[hash].js',
-		library: 'lib_[name]',
+		library: 'lib_dll',
 		libraryTarget: 'var'
 	},
 	plugins: [
-		new CleanWebpackPlugin({
-      include: ['lib']
-    }),
+		new CleanWebpackPlugin(),
 		new webpack.HashedModuleIdsPlugin(),
 		new webpack.DllPlugin({
-			path: path.resolve(OUTPUT_PATH, '[name]-manifest.json'),
+			context: __dirname,
+			path: path.resolve(OUTPUT_PATH, 'manifest.json'),
 			name: '[name]-[hash]'
 		})
 	]

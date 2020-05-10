@@ -1,20 +1,17 @@
 const path = require('path')
-const webpack = require('webpack')
-// const os = require('os')
-const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+// const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const TerserPlugin = require('terser-webpack-plugin')
-const { BUILD_OUTPUT_DIR } = require('./base.config')
-
-// const threads = os.cpus().length
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+// const { BUILD_OUTPUT_DIR } = require('./config')
 
 // dll地图
-const dllMap = require(`${BUILD_OUTPUT_DIR}/lib/dll-manifest.json`)
+// const dllMap = require(`${BUILD_OUTPUT_DIR}/lib/manifest.json`)
 
 module.exports = {
-  entry: './src/index',
+  entry: './src/index.tsx',
   output: {
     filename: '[name].js',
     path: path.resolve(__dirname, '../dist'),
@@ -25,9 +22,9 @@ module.exports = {
   // 配置如何展示性能提示
   performance: {
     hints: 'warning', // 提示类型
-    // 定一个创建后超过 500kb 的资源，将展示一条警告
-    maxAssetSize: 1024 * 10,
-    maxEntrypointSize: 1024 * 10,
+    // 定一个创建后超过 200kb 的资源，将展示一条警告
+    maxAssetSize: 1024 * 200,
+    maxEntrypointSize: 1024 * 200,
   },
   // 添加插件
   optimization: {
@@ -83,19 +80,34 @@ module.exports = {
       // 拆分块的名称
       name: true,
       cacheGroups: {
-        styles: {
-          name: 'static/css/styles',
-          test: /\.(css|scss|sass)$/,
-          chunks: 'all',
-          enforce: true,
-        },
+        // 抽出css
+        // styles: {
+        //   name: 'static/css/styles',
+        //   test: /\.(css|scss|sass)$/,
+        //   chunks: 'all',
+        //   enforce: true,
+        // },
+        // 抽出公共模块
         commons: {
-          name: 'static/js/commons',
+          name: 'static/js/components',
           test: path.join(__dirname, '..', 'src/components'),
           minChunks: 3,
           priority: 5,
           reuseExistingChunk: true,
         },
+        // 单独抽出react
+        react: {
+          test: /[\\/]node_modules[\\/](react)[\\/]/,
+          name: 'static/js/react',
+          priority: 20,
+        },
+        // 单独抽出react-dom
+        reactDom: {
+          test: /[\\/]node_modules[\\/](react-dom)[\\/]/,
+          name: 'static/js/react-dom',
+          priority: 20,
+        },
+        // 抽出第三方的包
         vendors: {
           name: 'static/js/vendors',
           test: /[\\/]node_modules[\\/]/,
@@ -147,9 +159,7 @@ module.exports = {
   },
   plugins: [
     // 清除包
-    new CleanWebpackPlugin({
-      exclude: ['lib']
-    }),
+    new CleanWebpackPlugin(),
     // html模版
     new HtmlWebpackPlugin({
       title: 'TGU Blog',
@@ -166,10 +176,13 @@ module.exports = {
       },
     }),
     // 使用dll
-    new webpack.DllReferencePlugin({
-			name: 'lib_dll',
-			manifest: dllMap
-		}),
+    // new webpack.DllReferencePlugin({
+    //   context: __dirname,
+    //   scope: "tgu",
+    //   sourceType: "commonjs2",
+		// 	name: 'lib_dll',
+		// 	manifest: dllMap
+		// }),
     // 提取css
     new MiniCssExtractPlugin({
       filename: 'static/css/[name].[hash:8].css',
