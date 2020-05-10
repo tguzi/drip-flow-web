@@ -16,8 +16,47 @@ module.exports = merge(webpackBaseConfig, {
   devtool: 'inline-source-map',
   // 开发环境配置
   devServer: {
+    port: 3000,
+    historyApiFallback: true,
+    inline: true,
+    hot: true,
+    open: true,
     compress: true,
-    port: 3000
+  },
+  module: {
+    rules: [
+      {
+        test: /\.scss$/,
+        use: [
+          {
+            loader: 'style-loader',
+          },
+          {
+            loader: 'css-loader',
+            options: {
+              // 指定启用css modules
+              import: false,
+              modules: true,
+              importLoaders: 2,
+            },
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              ident: 'postcss',
+              sourceMap: true,
+              plugins: [require('autoprefixer')],
+            },
+          },
+          {
+            loader: 'sass-loader',
+            options: {
+              sourceMap: true,
+            },
+          },
+        ],
+      },
+    ],
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
