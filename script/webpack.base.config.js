@@ -13,7 +13,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 module.exports = {
   entry: './src/index.tsx',
   output: {
-    filename: '[name].js',
+    filename: '[name].[hash:8].js',
     path: path.resolve(__dirname, '../dist'),
     chunkFilename: "[name].js",
     publicPath: './'
@@ -133,7 +133,7 @@ module.exports = {
       // css 加载
       {
         test: /\.css$/,
-        use: [ 'style-loader', 'css-loader' ]
+        use: ['style-loader', 'css-loader']
       },
       // 使用typescript
       {
@@ -143,6 +143,73 @@ module.exports = {
           loader: 'ts-loader',
         },
       },
+      // html
+      // {
+      //   test: /\.(html)$/,
+      //   use: {
+      //     loader: 'html-loader',
+      //     options: {
+      //       attrs: ['img:src'],
+      //     }
+      //   }
+      // },
+      // 静态资源
+      {
+        test: /\.(png|svg|jpg|gif|ico)$/,
+        use: [{
+          loader: 'file-loader',
+          options: {
+            name: '[name].[ext]',
+            limit: 1024,
+            outputPath: 'images/',
+            publicPath: '../dist/images',
+            esModule: false
+          }
+        }]
+      },
+      // 加载图片
+      {
+        test: /\.(png|svg|jpg|jpeg|gif)/,
+        // 匹配数组中任何一个符合条件。not 必须排除数组中的所有条件。and 必须匹配数组中的所有条件。
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              outputPath: 'static/img/',
+            },
+          },
+        ],
+      },
+      // 加载字体
+      {
+        test: /\.(woff|woff2|eot|ttf|otf)$/,
+        // 设置依赖文件索引目录（匹配特定条件）
+        include: [path.resolve(__dirname, '..', 'src')],
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              outputPath: 'static/fonts/',
+            },
+          },
+        ],
+      },
+      // 地址加载
+      {
+        test: /\.(png|jpg|jpeg|gif|eot|ttf|woff|woff2|svg|svgz)$/,
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              name: '[name].[ext]',
+              limit: 1024,
+              outputPath: 'images/',
+              publicPath: '../dist/images',
+              esModule: false
+            }
+          }
+        ]
+      }
     ]
   },
   // 解析模块请求的选项
@@ -180,9 +247,9 @@ module.exports = {
     //   context: __dirname,
     //   scope: "tgu",
     //   sourceType: "commonjs2",
-		// 	name: 'lib_dll',
-		// 	manifest: dllMap
-		// }),
+    // 	name: 'lib_dll',
+    // 	manifest: dllMap
+    // }),
     // 提取css
     new MiniCssExtractPlugin({
       filename: 'static/css/[name].[hash:8].css',

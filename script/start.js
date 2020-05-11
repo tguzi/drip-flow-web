@@ -11,7 +11,7 @@ module.exports = merge(webpackBaseConfig, {
   },
   // 性能提示
   performance: {
-    hints: 'warning',
+    hints: false,
   },
   devtool: 'inline-source-map',
   // 开发环境配置
