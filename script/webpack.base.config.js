@@ -222,6 +222,8 @@ module.exports = {
     extensions: ['.js', '.json', '.jsx', '.ts', '.tsx'],
     alias: {
       '@': path.resolve(__dirname, '..', 'src'),
+      '@components': path.resolve(__dirname, '..', 'src/components'),
+      '@/pages': path.resolve(__dirname, '..', 'src/pages'),
     }
   },
   plugins: [
