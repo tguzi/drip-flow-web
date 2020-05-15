@@ -1,11 +1,16 @@
 const path = require('path')
+const os = require('os')
 // const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const TerserPlugin = require('terser-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const HappyPack = require('happypack')
 // const { BUILD_OUTPUT_DIR } = require('./config')
+
+// 手动创建进程池
+const happyThreadPool =  HappyPack.ThreadPool({ size: os.cpus().length })
 
 // dll地图
 // const dllMap = require(`${BUILD_OUTPUT_DIR}/lib/manifest.json`)
@@ -128,7 +133,8 @@ module.exports = {
       {
         test: /.jsx?$/,
         exclude: /(node_modules|bower_components)/,
-        loader: 'babel-loader'
+        // loader: 'babel-loader',
+        loader: 'happypack/loader?id=happyBabel',
       },
       // css 加载
       {
@@ -244,7 +250,7 @@ module.exports = {
         collapseWhitespace: true,
       },
     }),
-    // 使用dll
+    // 使用dll - 因为和splitChunks不太兼容，所以直接弃用了
     // new webpack.DllReferencePlugin({
     //   context: __dirname,
     //   scope: "tgu",
@@ -257,5 +263,10 @@ module.exports = {
       filename: 'static/css/[name].[hash:8].css',
       chunkFilename: 'static/css/[id].[hash:8].css',
     }),
+    new HappyPack({
+      id: 'happyBabel',
+      threadPool: happyThreadPool,
+      loaders: ['babel-loader?cacheDirectory']
+    })
   ]
 }
