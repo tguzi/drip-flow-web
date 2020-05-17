@@ -10,7 +10,7 @@ const HappyPack = require('happypack')
 // const { BUILD_OUTPUT_DIR } = require('./config')
 
 // 手动创建进程池
-const happyThreadPool =  HappyPack.ThreadPool({ size: os.cpus().length })
+const happyThreadPool = HappyPack.ThreadPool({ size: os.cpus().length })
 
 // dll地图
 // const dllMap = require(`${BUILD_OUTPUT_DIR}/lib/manifest.json`)
@@ -133,13 +133,33 @@ module.exports = {
       {
         test: /.jsx?$/,
         exclude: /(node_modules|bower_components)/,
-        // loader: 'babel-loader',
         loader: 'happypack/loader?id=happyBabel',
       },
       // css 加载
       {
-        test: /\.css$/,
-        use: ['style-loader', 'css-loader']
+        test: /\.css|.scss$/,
+        use: [
+          {
+            loader: 'style-loader',
+          },
+          {
+            loader: 'css-loader',
+            options: {
+              // 指定启用css modules
+              import: false,
+              modules: true,
+              importLoaders: 2,
+            }
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              ident: 'postcss',
+              sourceMap: true,
+              plugins: [require('autoprefixer')],
+            }
+          }
+        ]
       },
       // 使用typescript
       {
@@ -173,23 +193,10 @@ module.exports = {
           }
         }]
       },
-      // 加载图片
-      {
-        test: /\.(png|svg|jpg|jpeg|gif)/,
-        // 匹配数组中任何一个符合条件。not 必须排除数组中的所有条件。and 必须匹配数组中的所有条件。
-        use: [
-          {
-            loader: 'file-loader',
-            options: {
-              outputPath: 'static/img/',
-            },
-          },
-        ],
-      },
       // 加载字体
       {
         test: /\.(woff|woff2|eot|ttf|otf)$/,
-        // 设置依赖文件索引目录（匹配特定条件）
+        // 设置依赖文件索引目录（匹配特定条件
         include: [path.resolve(__dirname, '..', 'src')],
         use: [
           {
@@ -200,9 +207,9 @@ module.exports = {
           },
         ],
       },
-      // 地址加载
+      // 资源
       {
-        test: /\.(png|jpg|jpeg|gif|eot|ttf|woff|woff2|svg|svgz)$/,
+        test: /\.(png|jpg|jpeg|gif|svg|svgz)$/,
         use: [
           {
             loader: 'url-loader',
@@ -210,8 +217,6 @@ module.exports = {
               name: '[name].[ext]',
               limit: 1024,
               outputPath: 'images/',
-              publicPath: '../dist/images',
-              esModule: false
             }
           }
         ]
@@ -227,9 +232,10 @@ module.exports = {
     // 自动解析确定的扩展
     extensions: ['.js', '.json', '.jsx', '.ts', '.tsx'],
     alias: {
-      '@': path.resolve(__dirname, '..', 'src'),
-      '@components': path.resolve(__dirname, '..', 'src/components'),
-      '@/pages': path.resolve(__dirname, '..', 'src/pages'),
+      'src': path.resolve(__dirname, '../src'),
+      'components': path.resolve(__dirname, '../src/components'),
+      'static': path.resolve(__dirname, '../src/static'),
+      'pages': path.resolve(__dirname, '../src/pages'),
     }
   },
   plugins: [
@@ -240,6 +246,7 @@ module.exports = {
       title: 'TGU Blog',
       filename: 'index.html',
       template: './public/index.html',
+      favicon: './public/favicon.ico',
       // 压缩html文件
       hash: true,
       // 压缩 => production 模式使用
@@ -249,6 +256,11 @@ module.exports = {
         // 折叠 html 为一行
         collapseWhitespace: true,
       },
+      templateParameters: {
+        assets: {
+          css: ['./public/reset.css'],
+        }
+      }
     }),
     // 使用dll - 因为和splitChunks不太兼容，所以直接弃用了
     // new webpack.DllReferencePlugin({

@@ -24,39 +24,6 @@ module.exports = merge(webpackBaseConfig, {
     compress: true,
   },
   module: {
-    rules: [
-      {
-        test: /\.scss$/,
-        use: [
-          {
-            loader: 'style-loader',
-          },
-          {
-            loader: 'css-loader',
-            options: {
-              // 指定启用css modules
-              import: false,
-              modules: true,
-              importLoaders: 2,
-            },
-          },
-          {
-            loader: 'postcss-loader',
-            options: {
-              ident: 'postcss',
-              sourceMap: true,
-              plugins: [require('autoprefixer')],
-            },
-          },
-          {
-            loader: 'sass-loader',
-            options: {
-              sourceMap: true,
-            },
-          },
-        ],
-      },
-    ],
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),

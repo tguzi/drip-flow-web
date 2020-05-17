@@ -1,6 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
 
+import logo from 'static/tgu2.png'
+
 const HeaderEl = styled.header`
   position: fixed;
   top: 0;
@@ -10,9 +12,14 @@ const HeaderEl = styled.header`
   box-shadow: 5px 5px 5px #eee;
 `
 
+const LogoEl = styled.img`
+
+`
+
 const Header = () => (
   <HeaderEl>
     1111
+    <LogoEl src={logo} />
   </HeaderEl>
 )
 
