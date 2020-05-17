@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import logo from 'static/tgu2.png'
+import logo from 'imgs/tgu.png'
 
 const HeaderEl = styled.header`
   position: fixed;
@@ -18,7 +18,7 @@ const LogoEl = styled.img`
 
 const Header = () => (
   <HeaderEl>
-    1111
+    11112
     <LogoEl src={logo} />
   </HeaderEl>
 )

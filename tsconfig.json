@@ -44,8 +44,9 @@
     "paths": {
       "src/*": ["src/*"],
       "components/*": ["src/components/*"],
-      "static/*": ["src/static/*"],
       "pages/*": ["src/pages/*"],
+      "static/*": ["src/static/*"],
+      "imgs/*": ["src/static/imgs/*"],
     },
     // "paths": {},                           /* A series of entries which re-map imports to lookup locations relative to the 'baseUrl'. */
     // "rootDirs": [],                        /* List of root folders whose combined content represents the structure of the project at runtime. */

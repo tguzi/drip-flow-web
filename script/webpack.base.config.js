@@ -14,9 +14,10 @@ const happyThreadPool = HappyPack.ThreadPool({ size: os.cpus().length })
 
 // dll地图
 // const dllMap = require(`${BUILD_OUTPUT_DIR}/lib/manifest.json`)
+// const isDev = process.env.NODE_ENV === 'developmet'
 
 module.exports = {
-  entry: './src/index.tsx',
+  entry: [path.resolve(__dirname, '../src/index.tsx')].filter(Boolean),
   output: {
     filename: '[name].[hash:8].js',
     path: path.resolve(__dirname, '../dist'),
@@ -129,11 +130,28 @@ module.exports = {
   // 模块
   module: {
     rules: [
-      // babel编译 .babelrc配置
+      // babel编译 .babelrc配置 & eslint
       {
         test: /.jsx?$/,
         exclude: /(node_modules|bower_components)/,
-        loader: 'happypack/loader?id=happyBabel',
+        loader: ['happypack/loader?id=happyBabel'],
+      },
+      // eslint
+      {
+        test: /\.(ts|tsx)$/,
+        enforce: 'pre',
+        use: [
+          {
+            options: {
+              formatter: require.resolve('react-dev-utils/eslintFormatter'),
+              eslintPath: require.resolve('eslint'),
+              resolvePluginsRelativeTo: __dirname,
+              showEslintErrorsInOverlay: true,
+            },
+            loader: require.resolve('eslint-loader'),
+          },
+        ],
+        include: path.resolve(__dirname, '../src'),
       },
       // css 加载
       {
@@ -220,8 +238,9 @@ module.exports = {
     alias: {
       'src': path.resolve(__dirname, '../src'),
       'components': path.resolve(__dirname, '../src/components'),
-      'static': path.resolve(__dirname, '../src/static'),
       'pages': path.resolve(__dirname, '../src/pages'),
+      'static': path.resolve(__dirname, '../src/static'),
+      'imgs': path.resolve(__dirname, '../src/static/imgs'),
     }
   },
   plugins: [

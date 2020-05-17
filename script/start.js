@@ -21,6 +21,7 @@ module.exports = merge(webpackBaseConfig, {
     inline: true,
     hot: true,
     open: true,
+    clientLogLevel: 'none',
     compress: true,
   },
   module: {
