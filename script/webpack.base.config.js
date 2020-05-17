@@ -179,20 +179,6 @@ module.exports = {
       //     }
       //   }
       // },
-      // 静态资源
-      {
-        test: /\.(png|svg|jpg|gif|ico)$/,
-        use: [{
-          loader: 'file-loader',
-          options: {
-            name: '[name].[ext]',
-            limit: 1024,
-            outputPath: 'images/',
-            publicPath: '../dist/images',
-            esModule: false
-          }
-        }]
-      },
       // 加载字体
       {
         test: /\.(woff|woff2|eot|ttf|otf)$/,
@@ -207,7 +193,7 @@ module.exports = {
           },
         ],
       },
-      // 资源
+      // 静态资源
       {
         test: /\.(png|jpg|jpeg|gif|svg|svgz)$/,
         use: [
@@ -216,7 +202,7 @@ module.exports = {
             options: {
               name: '[name].[ext]',
               limit: 1024,
-              outputPath: 'images/',
+              outputPath: 'static/images/',
             }
           }
         ]
