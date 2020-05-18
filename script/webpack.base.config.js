@@ -248,7 +248,7 @@ module.exports = {
     new CleanWebpackPlugin(),
     // html模版
     new HtmlWebpackPlugin({
-      title: 'TGU Blog',
+      title: 'T谷子',
       filename: 'index.html',
       template: './public/index.html',
       favicon: './public/favicon.ico',

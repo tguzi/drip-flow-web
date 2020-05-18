@@ -9,6 +9,7 @@ const Layout = styled.div`
   height: 100vh;
   display: flex;
   padding-top: 80px;
+  overflow: hidden;
 `
 
 const Homepage = () => (
