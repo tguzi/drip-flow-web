@@ -3,6 +3,8 @@
     "@babel/react",
     "@babel/preset-env"
   ],
+  "parser": "@typescript-eslint/parser",
+  "extends": "eslint:recommended",
   "plugins": [
     "@babel/transform-runtime"
   ]

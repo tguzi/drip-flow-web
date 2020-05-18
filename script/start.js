@@ -20,7 +20,7 @@ module.exports = merge(webpackBaseConfig, {
     historyApiFallback: true,
     inline: true,
     hot: true,
-    open: true,
+    // open: true,
     clientLogLevel: 'none',
     compress: true,
   },

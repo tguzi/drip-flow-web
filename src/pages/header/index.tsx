@@ -1,36 +1,65 @@
 import React from 'react'
 import styled from 'styled-components'
 
+import Flex from 'components/Flex'
 import logo from 'imgs/logo.jpg'
 
-const HeaderEl = styled.header`
+const Header = styled.header`
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 80px;
   padding: 5px 50px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   box-shadow: 5px 5px 5px #eee;
 `
 
-const LogoEl = styled.img`
+const Keynote = styled(Flex)`
+  width: 300px;
   height: 100%;
+  img {
+    height: 100%;
+  }
 `
 
-const Slogan = styled.span`
+const NavList = styled(Flex)`
+  width: 300px;
+  list-style: none;
+`
+
+const NavItem = styled.li`
+  margin: 10px;
+  cursor: pointer;
+  transition: all 0.25s linear;
+  &:hover {
+    transform: scale(1.25);
+    color: #abcdef;
+  }
+`
+
+const Website = styled.div`
 
 `
 
-const Header = () => (
-  <HeaderEl>
-    <LogoEl src={logo} />
-    <Slogan>拾聿，拾谷，拾未然</Slogan>
-    <ul>
-      <li>随记</li>
-      <li>两周一题</li>
-      <li>未解之谜</li>
-    </ul>
-  </HeaderEl>
+export default () => (
+  <Header>
+    <Keynote>
+      <img src={logo} alt="tgu"/>
+      <span>拾聿，拾谷，拾未然</span>
+    </Keynote>
+    <NavList
+      justify="space-around"
+      align="center"
+    >
+      <NavItem>随记</NavItem>
+      <NavItem>两周一题</NavItem>
+      <NavItem>未解之谜</NavItem>
+    </NavList>
+    <Website>
+      关于我（们）
+    </Website>
+  </Header>
 )
-
-export default Header
