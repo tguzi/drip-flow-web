@@ -20,7 +20,7 @@ module.exports = {
   entry: [path.resolve(__dirname, '../src/index.tsx')].filter(Boolean),
   output: {
     filename: '[name].[hash:8].js',
-    path: path.resolve(__dirname, '../dist'),
+    path: path.resolve(__dirname, '../../serverless-web/dist'),
     chunkFilename: "[name].js",
     publicPath: './'
   },

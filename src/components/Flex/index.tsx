@@ -1,31 +1,25 @@
 import React from 'react'
 import styled from 'styled-components'
 
-// type Partial<T> = {
-//   [P in keyof T]?: T[P]
-// }
+type TSlot = Partial<{
+  width: string;
+  flex: string|number;
+  wrap: string;
+  basis: string;
+  grow: number;
+  shrink: number;
+  self: string;
+  direction: string;
+  align: string;
+  justify: string;
+}>
 
-interface ISlot {
-  width?: string,
-  flex?: string,
-  wrap?: string,
-  basis?: string,
-  grow?: number,
-  shrink?: number,
-  self?: string,
-  direction?: string,
-  align?: string,
-  justify?: string,
-}
-
-// type TSlot = Partial<ISlot>
-
-interface IProps extends ISlot {
+interface IProps extends TSlot {
   children: React.ReactNode,
-  // el: never
+  el?: never,
 }
 
-const Container = styled.div < ISlot > `
+const Container = styled.div < TSlot > `
   display: flex;
   width: ${props => props.width};
   flex: ${props => props.flex};
@@ -41,10 +35,10 @@ const Container = styled.div < ISlot > `
 
 const Flex: React.SFC<IProps> = ({
   children,
-  // el,
+  el,
   ...slot
 }) => (
-  <Container className="my__flex" {...slot}>{children}</Container>
+  <Container className="my__flex" as={el} {...slot}>{children}</Container>
 )
 
 Flex.defaultProps = {

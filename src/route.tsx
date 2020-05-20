@@ -7,7 +7,7 @@ import NotFound from './pages/not-found'
 export default () => (
   <BrowserRouter>
     <Switch>
-      <Route path="/" render={Homepage} />
+      <Route path="/" exact render={Homepage} />
       <Route path="/*" render={NotFound} />
     </Switch>
   </BrowserRouter>

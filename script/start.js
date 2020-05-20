@@ -7,7 +7,7 @@ module.exports = merge(webpackBaseConfig, {
   mode: 'development',
   output: {
     pathinfo: true, // 开发环境，显示模块信息
-    publicPath: '/'
+    publicPath: './'
   },
   // 性能提示
   performance: {

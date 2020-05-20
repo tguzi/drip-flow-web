@@ -9,7 +9,7 @@ const Header = styled.header`
   top: 0;
   left: 0;
   width: 100vw;
-  height: 80px;
+  height: 60px;
   padding: 5px 50px;
   display: flex;
   align-items: center;
@@ -48,7 +48,7 @@ export default () => (
   <Header>
     <Keynote>
       <img src={logo} alt="tgu"/>
-      <span>拾聿，拾谷，拾未然</span>
+      {/* <span>拾聿，拾谷，拾未然</span> */}
     </Keynote>
     <NavList
       justify="space-around"
@@ -59,7 +59,7 @@ export default () => (
       <NavItem>未解之谜</NavItem>
     </NavList>
     <Website>
-      关于我（们）
+      网站详情
     </Website>
   </Header>
 )

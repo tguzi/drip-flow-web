@@ -1,21 +1,23 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import Header from '../header'
-import Content from '../content'
+import Flex from 'components/Flex'
+import Header from 'pages/header'
+import Content from 'pages/content'
+import Footer from 'pages/footer'
 
-const Layout = styled.div`
+const Layout = styled(Flex)`
   width: 100vw;
   height: 100vh;
-  display: flex;
-  padding-top: 80px;
+  padding-top: 60px;
   overflow: hidden;
 `
 
 const Homepage = () => (
-  <Layout>
+  <Layout direction="column">
     <Header />
     <Content />
+    <Footer />
   </Layout>
 )
 
