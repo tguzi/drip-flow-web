@@ -6,8 +6,8 @@ const webpackBaseConfig = require('./webpack.base.config')
 module.exports = merge(webpackBaseConfig, {
   mode: 'development',
   output: {
-    pathinfo: true, // 开发环境，显示模块信息
-    publicPath: './'
+    // pathinfo: true, // 开发环境，显示模块信息
+    publicPath: '/'
   },
   // 性能提示
   performance: {

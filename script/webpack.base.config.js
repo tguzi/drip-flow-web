@@ -187,16 +187,6 @@ module.exports = {
           loader: 'ts-loader',
         },
       },
-      // html
-      // {
-      //   test: /\.(html)$/,
-      //   use: {
-      //     loader: 'html-loader',
-      //     options: {
-      //       attrs: ['img:src'],
-      //     }
-      //   }
-      // },
       // 加载字体
       {
         test: /\.(woff|woff2|eot|ttf|otf)$/,
@@ -224,7 +214,12 @@ module.exports = {
             }
           }
         ]
-      }
+      },
+      // markdown编辑器
+      {
+        test: /\.md$/,
+        use: 'raw-loader'
+      },
     ]
   },
   // 解析模块请求的选项
@@ -248,7 +243,7 @@ module.exports = {
     new CleanWebpackPlugin(),
     // html模版
     new HtmlWebpackPlugin({
-      title: 'T谷子',
+      title: '闲拾聿',
       filename: 'index.html',
       template: './public/index.html',
       favicon: './public/favicon.ico',

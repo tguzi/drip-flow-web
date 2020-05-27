@@ -41,7 +41,7 @@ const NavItem = styled.li`
 `
 
 const Website = styled.div`
-
+  cursor: pointer;
 `
 
 export default () => (
@@ -54,9 +54,8 @@ export default () => (
       justify="space-around"
       align="center"
     >
-      <NavItem>随记</NavItem>
-      <NavItem>两周一题</NavItem>
-      <NavItem>未解之谜</NavItem>
+      <NavItem>札记</NavItem>
+      <NavItem>两周一话</NavItem>
     </NavList>
     <Website>
       网站详情

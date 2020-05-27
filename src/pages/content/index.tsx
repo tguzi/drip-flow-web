@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import MarkDownEditor from 'src/components/MarkDownEditor'
 
 const Content = styled.div`
   flex: 1;
@@ -9,6 +10,11 @@ const Content = styled.div`
   background: #fff;
 `
 
-export default () => (
-  <Content>我是内容</Content>
-)
+export default () => {
+
+  return (
+    <Content>
+      <MarkDownEditor />
+    </Content>
+  )
+}
