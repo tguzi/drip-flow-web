@@ -1,6 +1,6 @@
 import React from 'react'
-import ReactMarkDown from 'react-markdown'
-import toc from 'remark-toc'
+import ReactMarkDown from 'react-markdown/with-html'
+import 'github-markdown-css'
 
 import CodeBlock from './codeBlock'
 
@@ -11,17 +11,20 @@ interface IProps {
 // markdown 编辑器
 const MarkDownView: React.SFC<IProps> = ({
   content,
+  children,
   ...slot
-}) => (
-  <ReactMarkDown
-    escapeHtml={false}
-    source={content}
-    skipHtml={false}
-    plugins={[toc]}
-    renderers={{ code: CodeBlock }}
-    {...slot}
-  />
-)
+}) => {
+  return (
+    <ReactMarkDown
+      escapeHtml={false}
+      skipHtml={false}
+      source={content}
+      renderers={{
+        code: CodeBlock
+      }}
+    />
+  )
+}
 
 MarkDownView.defaultProps = {
   content: '',
