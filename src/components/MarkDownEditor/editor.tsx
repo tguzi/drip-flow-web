@@ -1,11 +1,4 @@
 import React, { useRef, useState, useEffect } from 'react'
-// import CodeMirror from 'codemirror'
-// 基础样式
-// import 'codemirror/lib/codemirror.css'
-// 语言类型
-// import 'codemirror/mode/markdown/markdown'
-// 主题
-// import 'codemirror/theme/monokai.css'
 
 const CodeMirror = window.CodeMirror
 

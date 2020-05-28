@@ -11,7 +11,6 @@ interface IProps {
 // markdown 编辑器
 const MarkDownView: React.SFC<IProps> = ({
   content,
-  children,
   ...slot
 }) => {
   return (
@@ -22,6 +21,7 @@ const MarkDownView: React.SFC<IProps> = ({
       renderers={{
         code: CodeBlock
       }}
+      {...slot}
     />
   )
 }
