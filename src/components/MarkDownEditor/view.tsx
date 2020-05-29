@@ -2,7 +2,8 @@ import React from 'react'
 import ReactMarkDown from 'react-markdown/with-html'
 import 'github-markdown-css'
 
-import CodeBlock from './codeBlock'
+import CodeBlock from './view-render/code'
+import TableBlock from './view-render/table'
 
 interface IProps {
   content: string, // 显示内容
@@ -19,7 +20,8 @@ const MarkDownView: React.SFC<IProps> = ({
       skipHtml={false}
       source={content}
       renderers={{
-        code: CodeBlock
+        code: CodeBlock,
+        table: TableBlock,
       }}
       {...slot}
     />

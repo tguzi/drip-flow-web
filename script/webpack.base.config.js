@@ -114,7 +114,7 @@ module.exports = {
           priority: 20,
         },
         // 抽离codemirror
-        reactDom: {
+        codemirror: {
           test: /[\\/]node_modules[\\/](codemirror)[\\/]/,
           name: 'static/js/codemirror',
           priority: 20,
