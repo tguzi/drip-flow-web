@@ -3,6 +3,7 @@ import styled from 'styled-components'
 
 import Editor from './editor'
 import View from './view'
+import AnchorNav from './anchorNav'
 
 const Wrap = styled.div`
   position: absolute;
@@ -37,6 +38,8 @@ const MarkDownEditor = () => {
 
   const [val, setVal] = useState('')
 
+  const [anchorList, setAnchorList] = useState<Array<any>>([])
+
   return (
     <Wrap>
       <EditorBox>
@@ -51,8 +54,14 @@ const MarkDownEditor = () => {
         />
       </EditorBox>
       <ViewBox>
-        <View content={val} />
+        <View
+          content={val}
+          handleAnchorChange={setAnchorList}
+        />
       </ViewBox>
+      <AnchorNav
+        list={anchorList}
+      />
     </Wrap>
   )
 }

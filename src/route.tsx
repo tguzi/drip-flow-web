@@ -2,7 +2,7 @@ import React from 'react'
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
 
 import Content from './pages/content'
-import NotFound from './pages/not-found'
+// import NotFound from './pages/not-found'
 
 export default () => (
   <BrowserRouter>
