@@ -113,6 +113,12 @@ module.exports = {
           name: 'static/js/react-dom',
           priority: 20,
         },
+        // 抽离codemirror
+        reactDom: {
+          test: /[\\/]node_modules[\\/](codemirror)[\\/]/,
+          name: 'static/js/codemirror',
+          priority: 20,
+        },
         // 抽出第三方的包
         vendors: {
           name: 'static/js/vendors',

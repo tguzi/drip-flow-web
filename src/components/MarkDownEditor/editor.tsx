@@ -1,71 +1,69 @@
-import React, { useRef, useState, useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
+import CodeMirror from 'codemirror'
+// 语言类型
+import 'codemirror/mode/markdown/markdown'
+// 快捷键
+import 'codemirror/keymap/sublime.js'
+// 主题样式
+// import 'codemirror/theme/ayu-mirage.css'
+// 主要样式
+// import 'codemirror/lib/codemirror.css'
+// const CodeMirror = window.CodeMirror
 
-const CodeMirror = window.CodeMirror
-
-type IPProps = Partial<{
+type TProps = Partial<{
   readOnly: boolean,
   textAreaClassName: string,
   forceTextArea: string,
-  value: any,
-  onChange: any,
+  value: string,
+  onChange: (event: React.ChangeEvent<HTMLTextAreaElement>) => void,
+  handleChange: any,
 }>
 
-interface IProps extends IPProps {
-  mode: string,
-  theme: string
-}
+const Editor:React.SFC<TProps> = (props) => {
 
-const CodeMirrorEditor:React.SFC<IProps> = (props) => {
+  const editorRef = useRef(null)
 
   const {
     value,
     onChange,
-    readOnly,
     textAreaClassName,
-    forceTextArea,
+    readOnly,
+    handleChange,
   } = props
 
-  const editorRef = useRef(null)
-
-  let editor: any = null
-
-  const [val, setVal] = useState(value)
-
-  const editorEl = React.createElement('textarea', {
-    ref: editorRef,
-    value: val,
-    onChange: onChange,
-    readOnly: readOnly,
-    className: textAreaClassName,
-  })
-
   useEffect(() => {
-    if (!forceTextArea) {
-      // CodeMirror
-      editor = CodeMirror.fromTextArea(editorRef.current as any, props)
-      editor.on('change', handleChange)
-    }
+
+    // 初始化
+    const editor = CodeMirror.fromTextArea(editorRef.current as any, {
+      mode: 'markdown',
+      theme: 'ayu-mirage',
+      // keyMap: 'sumbit',
+      // lineNumbers: true
+    })
+    editor.on('change', (evt: any) => {
+      const val = evt.getValue()
+      handleChange(val)
+    })
+
   }, [])
 
-  // 编辑器的值变化
-  function handleChange () {
-    if (!editor) {
-      return
-    }
-    // 编辑器内容
-    const editorVal = editor.getValue()
-    setVal(editorVal)
-    onChange(editorVal)
-  }
-
-  return React.createElement('div', null, editorEl)
+  return (
+    <textarea
+      ref={editorRef}
+      value={value}
+      readOnly={readOnly}
+      onChange={onChange}
+      className={textAreaClassName}
+    />
+  )
 }
 
-CodeMirrorEditor.defaultProps = {
+Editor.defaultProps = {
   value: '',
   readOnly: false,
-  onChange: () => {},
   textAreaClassName: '',
+  onChange: () => {},
+  handleChange: () => {},
 }
 
-export default CodeMirrorEditor
+export default Editor

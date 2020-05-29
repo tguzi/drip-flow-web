@@ -1,9 +1,7 @@
-import React, { useEffect } from 'react'
-import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter'
-// 设置高亮样式
-import { coy } from 'react-syntax-highlighter/dist/esm/styles/prism'
-// 设置高亮的语言
-import { jsx, javascript } from 'react-syntax-highlighter/dist/esm/languages/prism'
+import React from 'react'
+import SyntaxHighlighter from 'react-syntax-highlighter'
+// 主题样式
+import { tomorrowNightEighties } from 'react-syntax-highlighter/dist/esm/styles/hljs'
 
 interface IProps {
   value: string
@@ -11,20 +9,14 @@ interface IProps {
 
 const CodeBlock: React.SFC<IProps> = ({
   value
-}) => {
+}) => (
+  <SyntaxHighlighter style={tomorrowNightEighties}>
+    {value}
+  </SyntaxHighlighter>
+)
 
-  useEffect(() => {
-    SyntaxHighlighter.registerLanguage('jsx', jsx)
-    SyntaxHighlighter.registerLanguage('javascript', javascript)
-  }, [])
-
-  return (
-    <figure className='highlight'>
-      <SyntaxHighlighter style={coy}>
-        {value}
-      </SyntaxHighlighter>
-    </figure>
-  )
+CodeBlock.defaultProps = {
+  value: ''
 }
 
 export default CodeBlock
