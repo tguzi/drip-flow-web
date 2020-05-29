@@ -8,7 +8,7 @@ export default () => (
   <BrowserRouter>
     <Switch>
       <Route path="/" exact render={Content} />
-      <Route path="/*" render={NotFound} />
+      <Route path="/*" render={Content} />
     </Switch>
   </BrowserRouter>
 )

@@ -28,6 +28,7 @@ const ViewBox = styled.div`
   width: 50%;
   height: 100%;
   padding: 10px;
+  overflow: auto;
   box-sizing: border-box;
   border: 1px dashed #efefef;
 `
