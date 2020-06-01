@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { SFC } from 'react'
 import styled from 'styled-components'
 
 type TSlot = Partial<{
@@ -14,12 +14,7 @@ type TSlot = Partial<{
   justify: string;
 }>
 
-interface IProps extends TSlot {
-  children: React.ReactNode,
-  el?: never,
-}
-
-const Container = styled.div < TSlot > `
+const Container = styled.div<TSlot>`
   display: flex;
   width: ${props => props.width};
   flex: ${props => props.flex};
@@ -33,16 +28,14 @@ const Container = styled.div < TSlot > `
   justify-content: ${props => props.justify};
 `
 
-const Flex: React.SFC<IProps> = ({
+const Flex: SFC<TSlot> = ({
   children,
-  el,
   ...slot
 }) => (
-  <Container className="my__flex" as={el} {...slot}>{children}</Container>
+  <Container className="my__flex" {...slot}>{children}</Container>
 )
 
 Flex.defaultProps = {
-  // el: undefined,
   width: '100%',
   flex: 'initial',
   wrap: 'auto',

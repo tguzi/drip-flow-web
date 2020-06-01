@@ -1,7 +1,6 @@
 import React from 'react'
 import ReactDom from 'react-dom'
-import Route from './route'
-// import 'static/css/reset.css'
+import Route from './router'
 
 const el = window.document.querySelector('#root')
 

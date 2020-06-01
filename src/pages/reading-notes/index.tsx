@@ -4,7 +4,7 @@ import Layout from 'layout'
 
 const Homepage = () => (
   <Layout>
-    首页
+    读书笔记
   </Layout>
 )
 

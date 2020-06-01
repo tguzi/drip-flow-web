@@ -73,7 +73,7 @@ module.exports = {
       // 这表示将选择哪些块进行优化。当提供一个字符串，有效值为 all, async 和 initial. 提供 all 可以特别强大，因为这意味着即使在异步和非异步块之间也可以共享块。
       chunks: 'all',
       // 要生产的块最小大小（以字节为单位）
-      minSize: 10240,
+      minSize: 1024 * 10,
       maxSize: 0,
       // 分割前必须共享模块的最小块数
       minChunks: 1,
@@ -214,9 +214,9 @@ module.exports = {
           {
             loader: 'url-loader',
             options: {
+              // 20k以下的图片打包成base64，减少资源请求
               name: '[name].[ext]',
-              limit: 1024,
-              outputPath: 'static/images/',
+              limit: 1024 * 20,
             }
           }
         ]
@@ -242,6 +242,7 @@ module.exports = {
       'pages': path.resolve(__dirname, '../src/pages'),
       'static': path.resolve(__dirname, '../src/static'),
       'imgs': path.resolve(__dirname, '../src/static/imgs'),
+      'layout': path.resolve(__dirname, '../src/layout'),
     }
   },
   plugins: [
