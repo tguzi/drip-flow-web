@@ -1,3 +1,5 @@
+## 项目结构
+
 ```bash
 ├── dist                        编译后项目文件
 ├── node_modules                依赖包
@@ -19,3 +21,12 @@
 ├── tsconfig.json               typescript 配置
 ├── README.md                   描述文件
 ```
+## git分支规范
+
+* feat：新功能（feature）
+* fix：修补bug
+* docs：文档（documentation）
+* style： 格式（不影响代码运行的变动）
+* refactor：重构（即不是新增功能，也不是修改bug的代码变动）
+* test：增加测试
+* chore：构建过程或辅助工具的变动
