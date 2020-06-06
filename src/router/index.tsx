@@ -1,11 +1,13 @@
 import React from 'react'
-import { BrowserRouter } from 'react-router-dom'
+import { BrowserRouter, Switch } from 'react-router-dom'
 
 import routes from './routes'
 import RenderRoute from './render'
 
 export default () => (
   <BrowserRouter>
-    { routes.map(v => <RenderRoute key={v.path} {...v} />) }
+    <Switch>
+      { routes.map(v => <RenderRoute key={v.path} {...v} />) }
+    </Switch>
   </BrowserRouter>
 )

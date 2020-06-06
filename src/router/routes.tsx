@@ -16,14 +16,6 @@ export default [
     component: '/homepage',
   },
   {
-    path: '/*',
-    name: '404',
-    exact: false,
-    title: '页面未找到',
-    component: '/not-found',
-    notRender: true
-  },
-  {
     path: '/reading-notes',
     name: 'readingNotes',
     title: '札记'
@@ -32,5 +24,11 @@ export default [
     path: '/half-month-topic',
     name: 'halfMonthTopic',
     title: '两周一话'
+  },
+  {
+    path: '/*',
+    name: '404',
+    title: '页面未找到',
+    component: '/not-found',
   }
 ]

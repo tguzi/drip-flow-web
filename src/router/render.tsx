@@ -22,17 +22,17 @@ const BeforRender = (filepath: string) => {
   // 页面懒加载，加载出错则提示
   return (
     <ErrorBoundary>
-      <LazyComponent filepath={filepath} />
+      <LazyComponent filename={filepath} />
     </ErrorBoundary>
   )
 }
 
 const RenderRouter: SFC<TProps> = props => {
   const { path, exact, component, notRender } = props
-  const filepath = component || path
+  const filename = component || path
   return notRender
-    ? <Route path={path} exact={exact} component={() => BeforRender(filepath)} />
-    : <Route path={path} exact={exact} render={() => BeforRender(filepath)} />
+    ? <Route path={path} exact={exact} component={() => BeforRender(filename)} />
+    : <Route path={path} exact={exact} render={() => BeforRender(filename)} />
 }
 
 RenderRouter.defaultProps = {
