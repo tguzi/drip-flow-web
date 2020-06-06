@@ -73,6 +73,7 @@
     "codemirror": "^5.54.0",
     "github-markdown-css": "^4.0.0",
     "highlight.js": "^10.0.3",
+    "lodash": "^4.17.15",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-markdown": "^4.3.1",

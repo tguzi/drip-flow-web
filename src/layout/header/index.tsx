@@ -32,7 +32,7 @@ const NavList = styled(Flex)`
 `
 
 const NavItem = styled.li`
-  margin: 10px;
+  margin: 10px 20px;
   cursor: pointer;
   transition: all 0.25s linear;
   &:hover {

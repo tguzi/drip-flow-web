@@ -11,11 +11,16 @@ type IProps = Partial<{
   footer: ReactElement; // 自定义footer
   showHeader: boolean; // 是否隐藏header
   showFooter: boolean; // 隐藏footer
+}> & IContent
+
+type IContent = Partial<{
+  bgColor: string;
 }>
 
-const Content = styled.div`
-  min-height: calc(100vh - 90px);
-  background: #fff;
+const Content = styled.div<IContent>`
+  height: calc(100vh - 90px);
+  background: ${({ bgColor }) => bgColor};
+  overflow: auto;
 `
 
 const Layout: SFC<IProps> = ({
@@ -23,14 +28,19 @@ const Layout: SFC<IProps> = ({
   showHeader,
   footer,
   header,
+  bgColor,
   children
 }) => (
   <Fragment>
     { showHeader && header }
-    <Content>{children}</Content>
+    <Content bgColor={bgColor}>{children}</Content>
     { showFooter && footer }
   </Fragment>
 )
+
+Content.defaultProps = {
+  bgColor: '#efefef'
+}
 
 Layout.defaultProps = {
   showHeader: true,

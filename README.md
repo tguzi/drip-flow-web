@@ -11,7 +11,13 @@
 │   ├── start.js                  开发环境启动    
 │   ├── webpack.base.config.js    webpack基础配置    
 ├── src                         源码
+│   ├── components                公共组件
+│   ├── layout                    布局组件
+│   ├── modules                   通用模块
 │   ├── pages                     页面组件
+│   ├── router                    路由配置模块
+│   ├── static                    静态资源文件
+│   ├── utils                     工具模块
 │   ├── index.tsx                 入口文件
 ├── .babelrc                    babel 配置
 ├── .eslintrc.js                eslint 配置

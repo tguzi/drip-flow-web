@@ -240,9 +240,11 @@ module.exports = {
       'src': path.resolve(__dirname, '../src'),
       'components': path.resolve(__dirname, '../src/components'),
       'pages': path.resolve(__dirname, '../src/pages'),
+      'modules': path.resolve(__dirname, '../src/modules'),
       'static': path.resolve(__dirname, '../src/static'),
       'imgs': path.resolve(__dirname, '../src/static/imgs'),
       'layout': path.resolve(__dirname, '../src/layout'),
+      'utils': path.resolve(__dirname, '../src/utils'),
     }
   },
   plugins: [
