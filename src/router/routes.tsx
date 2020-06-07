@@ -16,6 +16,11 @@ export default [
     component: '/homepage',
   },
   {
+    path: '/login',
+    name: 'login',
+    title: '登陆页',
+  },
+  {
     path: '/reading-notes',
     name: 'readingNotes',
     title: '札记'

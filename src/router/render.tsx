@@ -30,6 +30,7 @@ const BeforRender = (filepath: string) => {
 const RenderRouter: SFC<TProps> = props => {
   const { path, exact, component, notRender } = props
   const filename = component || path
+  // 之后可以在这边加入权限校验 - 路由校验等功能
   return notRender
     ? <Route path={path} exact={exact} component={() => BeforRender(filename)} />
     : <Route path={path} exact={exact} render={() => BeforRender(filename)} />
