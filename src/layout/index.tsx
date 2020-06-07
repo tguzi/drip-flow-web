@@ -18,7 +18,7 @@ type IContent = Partial<{
 }>
 
 const Content = styled.div<IContent>`
-  height: calc(100vh - 90px);
+  min-height: calc(100vh - 90px);
   background: ${({ bgColor }) => bgColor};
   overflow: auto;
 `

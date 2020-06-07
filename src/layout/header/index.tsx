@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { useHistory } from 'react-router-dom'
+import { useHistory, useLocation } from 'react-router-dom'
 
 import Flex from 'components/Flex'
 import logo from 'imgs/logo.jpg'
@@ -39,15 +39,30 @@ const NavItem = styled.li`
     transform: scale(1.25);
     color: #abcdef;
   }
+  &.active {
+    color: #abcdef;
+  }
 `
 
 const Website = styled.div`
   cursor: pointer;
 `
 
+const navList = [{
+  path: '/',
+  label: '首页'
+}, {
+  path: '/reading-notes',
+  label: '札记'
+}, {
+  path: '/half-month-topic',
+  label: '两周一话'
+}]
+
 export default () => {
 
   const history = useHistory()
+  const location = useLocation()
 
   return (
     <Header>
@@ -56,9 +71,17 @@ export default () => {
         {/* <span>拾聿，拾谷，拾未然</span> */}
       </Keynote>
       <NavList>
-        <NavItem onClick={() => history.push('/')}>首页</NavItem>
-        <NavItem onClick={() => history.push('/reading-notes')}>札记</NavItem>
-        <NavItem onClick={() => history.push('/half-month-topic')}>两周一话</NavItem>
+        {
+          navList.map(v => (
+            <NavItem
+              onClick={() => history.push(v.path)}
+              key={v.path}
+              className={v.path === location.pathname ? 'active' : 'normal'}
+            >
+              {v.label}
+            </NavItem>
+          ))
+        }
       </NavList>
       <Website>网站详情</Website>
     </Header>

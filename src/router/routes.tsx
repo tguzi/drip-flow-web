@@ -31,6 +31,11 @@ export default [
     title: '两周一话'
   },
   {
+    path: '/blog-detail',
+    name: 'blogDetail',
+    title: '博客详情'
+  },
+  {
     path: '/*',
     name: '404',
     title: '页面未找到',

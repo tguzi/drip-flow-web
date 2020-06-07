@@ -1,12 +1,10 @@
 import React from 'react'
-import styled from 'styled-components'
-
-const Content = styled.section`
-  height: 100%;
-`
+import Item from './item'
 
 const BlogList = () => (
-  <Content>博客列表</Content>
+  <section>
+    <Item />
+  </section>
 )
 
 export default BlogList
