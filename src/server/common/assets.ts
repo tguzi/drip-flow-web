@@ -1,0 +1,46 @@
+type TAssets = {
+  js: any[];
+  css: any[];
+};
+export default function () {
+  let devHost = '//localhost:9002'
+
+  let jsFiles = ['libs.js', 'main.js']
+  let cssFiles = ['main.css']
+
+  let assets: TAssets = {
+    js: [],
+    css: []
+  };
+  if (process.env.NODE_ENV === 'development') {
+    // 开发环境
+    assets.js.push(
+      `<script type="text/javascript"  src="${devHost}/libs.js"></script>`
+    )
+    assets.js.push(
+      `<script type="text/javascript"  src="${devHost}/main.js"></script>`
+    )
+    assets.css.push(
+      `<link rel="stylesheet" type="text/css" href="${devHost}/main.css" />`
+    )
+  } else {
+    // 生产环境 从 asset-manifest.json 读取资源
+    const map = require('@dist/server/asset-manifest.json')
+    jsFiles.forEach((item) => {
+      if (map[item]) {
+        assets.js.push(
+          `<script type="text/javascript"  src="${map[item]}"></script>`
+        )
+      }
+    })
+    cssFiles.forEach((item) => {
+      if (map[item]) {
+        assets.css.push(
+          `<link rel="stylesheet" type="text/css" href="${map[item]}" />`
+        )
+      }
+    })
+  }
+
+  return assets
+}

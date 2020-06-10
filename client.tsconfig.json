@@ -1,0 +1,29 @@
+{
+  "compilerOptions": {
+    "target": "es5", 
+    "module": "commonjs",
+    "lib": [
+      "DOM",
+      "dom.iterable",
+      "ESNext"
+    ], 
+    "allowJs": true,
+    "jsx": "react", 
+    "strict": true,
+    "types": [
+      "webpack-env"
+    ], 
+    "esModuleInterop": true, 
+    "experimentalDecorators": true, 
+    "emitDecoratorMetadata": true, 
+    "forceConsistentCasingInFileNames": true
+  },
+  "include": [
+    "src/client",
+    "*.d.ts"
+  ],
+  "exclude": [
+    "/node_models/",
+    "src/server"
+  ]
+}
