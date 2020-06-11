@@ -29,7 +29,7 @@ const print = (data) => {
     //接收到服务端代码编译完成的通知
     startNodeServer(); //重启 node 服务
   } else if (str.indexOf('[at-loader]') > -1) {
-    log(chalk.yellow(str));
+    log(chalk.yellowBright(str));
   } else {
     log(str);
   }
