@@ -2,9 +2,9 @@ import React from 'react'
 import Item from './item'
 
 const BlogList = () => (
-  <section>
+  <React.Fragment>
     <Item />
-  </section>
+  </React.Fragment>
 )
 
 export default BlogList

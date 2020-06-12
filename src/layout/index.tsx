@@ -18,7 +18,8 @@ type IContent = Partial<{
 }>
 
 const Content = styled.div<IContent>`
-  min-height: calc(100vh - 90px);
+  min-height: 100vh;
+  padding-top: 60px;
   background: ${({ bgColor }) => bgColor};
   overflow: auto;
 `
@@ -34,7 +35,7 @@ const Layout: SFC<IProps> = ({
   <Fragment>
     { showHeader && header }
     <Content bgColor={bgColor}>{children}</Content>
-    { showFooter && footer }
+    {/* { showFooter && footer } */}
   </Fragment>
 )
 

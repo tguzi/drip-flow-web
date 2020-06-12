@@ -6,12 +6,16 @@ import Flex from 'components/Flex'
 import logo from 'imgs/logo.jpg'
 
 const Header = styled.header`
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 60px;
   padding: 5px 50px;
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  background: #fff;
+  align-items: center;
   box-shadow: 5px 5px 5px #eee;
 `
 
@@ -45,7 +49,8 @@ const NavItem = styled.li`
 `
 
 const Website = styled.div`
-  cursor: pointer;
+  width: 300px;
+  /* cursor: pointer; */
 `
 
 const navList = [{
@@ -70,7 +75,7 @@ export default () => {
         <img src={logo} alt="tgu"/>
         {/* <span>拾聿，拾谷，拾未然</span> */}
       </Keynote>
-      <NavList>
+      <NavList justify="space-around">
         {
           navList.map(v => (
             <NavItem
@@ -83,7 +88,8 @@ export default () => {
           ))
         }
       </NavList>
-      <Website>网站详情</Website>
+      <Website />
+      {/* <Website>网站详情</Website> */}
     </Header>
   )
 }
