@@ -72,10 +72,10 @@
     /* Advanced Options */
     "forceConsistentCasingInFileNames": true /* Disallow inconsistently-cased references to the same file. */
   },
-  "include": [
+ "include": [
     "src/",
     "*.d.ts"
-  ],
+  ], 
   "exclude": [
     "/node_models/"
   ]

@@ -1,4 +1,4 @@
-import React, { ReactElement, SFC, ReactChild, Fragment } from 'react'
+import React, { SFC, Fragment } from 'react'
 import styled from 'styled-components'
 
 import Header from './header'
@@ -7,10 +7,8 @@ import Footer from './footer'
 import 'static/css/reset.css'
 
 type IProps = Partial<{
-  header: ReactChild; // 自定义header
-  footer: ReactElement; // 自定义footer
-  showHeader: boolean; // 是否隐藏header
-  showFooter: boolean; // 隐藏footer
+  cName: string;
+  layout: string;
 }> & IContent
 
 type IContent = Partial<{
@@ -19,35 +17,32 @@ type IContent = Partial<{
 
 const Content = styled.div<IContent>`
   min-height: 100vh;
-  padding-top: 60px;
   background: ${({ bgColor }) => bgColor};
   overflow: auto;
+  &.layout-content-center {
+    width: 1100px;
+    margin: 0 auto;
+  }
 `
 
 const Layout: SFC<IProps> = ({
-  showFooter,
-  showHeader,
-  footer,
-  header,
   bgColor,
+  cName,
+  layout,
   children
 }) => (
   <Fragment>
-    { showHeader && header }
-    <Content bgColor={bgColor}>{children}</Content>
-    {/* { showFooter && footer } */}
+    <Header />
+    <Content
+      bgColor={bgColor}
+      className={`${cName} layout-${layout}`}
+    >{children}</Content>
+    <Footer />
   </Fragment>
 )
 
-Content.defaultProps = {
-  bgColor: '#efefef'
-}
-
 Layout.defaultProps = {
-  showHeader: true,
-  showFooter: true,
-  header: <Header />,
-  footer: <Footer />,
+  bgColor: 'rgba(240, 240, 240, 0.5)'
 }
 
 export default Layout

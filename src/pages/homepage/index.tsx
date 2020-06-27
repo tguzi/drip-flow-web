@@ -2,15 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 import Layout from 'layout'
-import BlogList from './BlogList'
-
-const Content = styled.div`
-  width: 1100px;
-  height: 100%;
-  margin: 0 auto;
-  background: #fff;
-  padding: 20px;
-`
+import Content from './content'
 
 const AddBlogBtn = styled.button`
   position: fixed;
@@ -31,11 +23,9 @@ const AddBlogBtn = styled.button`
 `
 
 const Homepage = () => (
-  <Layout bgColor="#efefef">
-    <Content>
-      <BlogList />
-    </Content>
-    <AddBlogBtn>+</AddBlogBtn>
+  <Layout layout="content-center">
+    <Content />
+    <AddBlogBtn />
   </Layout>
 )
 
