@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import Header from './header'
 import Footer from './footer'
 
-// import '../static/css/reset.css'
+import '../static/css/reset.css'
 
 type IProps = Partial<{
   header: ReactChild; // 自定义header

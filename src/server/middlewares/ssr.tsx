@@ -22,7 +22,8 @@ export default (ctx: any, next: any) => {
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>my react ssr</title>
+  <title>水滴</title>
+  ${assetsMap.css.join('')}
 </head>
 <body>
   <div id="root">${html}</div>

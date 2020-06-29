@@ -5,6 +5,7 @@ const {
   CheckerPlugin,
   TsConfigPathsPlugin,
 } = require('awesome-typescript-loader');
+const noCssPlugin = require('../plugins/no-require-css')
 
 const baseConfig = require('../webpack.config');
 
@@ -36,6 +37,12 @@ module.exports = merge(baseConfig, {
         include: [resolve('../../src/server')],
         exclude: [/node_modules/, resolve('../../src/client')],
       },
+      {
+        test: /\.css?&/,
+        use: {
+          loader: 'no-require-css'
+        }
+      }
     ],
   },
   plugins: [
@@ -48,5 +55,6 @@ module.exports = merge(baseConfig, {
       'process.env': { NODE_ENV: '"development"' },
       __IS_PROD__: false,
     }),
+    // noCssPlugin()
   ],
 });
