@@ -16,12 +16,14 @@ export default [
   {
     path: '/reading-notes',
     name: 'readingNotes',
-    title: '札记'
+    title: '札记',
+    exact: true,
   },
   {
     path: '/half-month-topic',
     name: 'halfMonthTopic',
-    title: '两周一话'
+    title: '两周一话',
+    exact: true,
   },
   {
     path: '/*',

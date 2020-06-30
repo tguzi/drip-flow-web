@@ -1,8 +1,8 @@
-import React from 'react'
-import styled from 'styled-components'
-import { useHistory } from 'react-router-dom'
+import React from 'react';
+import styled from 'styled-components';
+import { NavLink } from 'react-router-dom';
 
-import Flex from '../../components/Flex'
+import Flex from '../../components/Flex';
 // import logo from '../../static/imgs/logo.jpg'
 
 const Header = styled.header`
@@ -13,7 +13,7 @@ const Header = styled.header`
   align-items: center;
   justify-content: space-between;
   box-shadow: 5px 5px 5px #eee;
-`
+`;
 
 const Keynote = styled.nav`
   display: flex;
@@ -24,12 +24,12 @@ const Keynote = styled.nav`
   img {
     height: 100%;
   }
-`
+`;
 
 const NavList = styled(Flex)`
   width: 300px;
   list-style: none;
-`
+`;
 
 const NavItem = styled.li`
   margin: 10px;
@@ -39,16 +39,13 @@ const NavItem = styled.li`
     transform: scale(1.25);
     color: #abcdef;
   }
-`
+`;
 
 const Website = styled.div`
   cursor: pointer;
-`
+`;
 
 export default () => {
-
-  const history = useHistory()
-
   return (
     <Header>
       <Keynote>
@@ -56,11 +53,17 @@ export default () => {
         {/* <span>拾聿，拾谷，拾未然</span> */}
       </Keynote>
       <NavList>
-        <NavItem onClick={() => history.push('/')}>首页</NavItem>
-        <NavItem onClick={() => history.push('/reading-notes')}>札记</NavItem>
-        <NavItem onClick={() => history.push('/half-month-topic')}>两周一话</NavItem>
+        <NavItem>
+          <NavLink to="/">首页</NavLink>
+        </NavItem>
+        <NavItem>
+          <NavLink to="/reading-notes">札记</NavLink>
+        </NavItem>
+        <NavItem>
+          <NavLink to="/half-month-topic">两周一话</NavLink>
+        </NavItem>
       </NavList>
       <Website>网站详情</Website>
     </Header>
-  )
-}
+  );
+};

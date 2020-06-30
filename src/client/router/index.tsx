@@ -1,12 +1,11 @@
 import React from 'react';
-import { StaticRouter, Switch, Route, Router } from 'react-router-dom';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 // 按文件名引入模块
 const _import = (path: any) => () => require(`../pages${path}`).default();
 
 export default ({ routeList }: any) => {
   return (
-    <StaticRouter>
       <Switch>
         {routeList.map(({ name, path, exact, component }: any) => {
           // 没有路由
@@ -24,6 +23,5 @@ export default ({ routeList }: any) => {
           );
         })}
       </Switch>
-    </StaticRouter>
   );
 };

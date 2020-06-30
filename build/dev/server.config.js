@@ -5,7 +5,7 @@ const {
   CheckerPlugin,
   TsConfigPathsPlugin,
 } = require('awesome-typescript-loader');
-const noCssPlugin = require('../plugins/no-require-css')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const baseConfig = require('../webpack.config');
 
@@ -37,12 +37,24 @@ module.exports = merge(baseConfig, {
         include: [resolve('../../src/server')],
         exclude: [/node_modules/, resolve('../../src/client')],
       },
+      // TODO: node端移除CSS部分, node引入组件，从而引入css
       {
-        test: /\.css?&/,
-        use: {
-          loader: 'no-require-css'
-        }
-      }
+        test: /\.(sa|sc|c)ss$/,
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+          },
+          {
+            loader: 'css-loader',
+          },
+          {
+            loader: 'postcss-loader',
+          },
+          {
+            loader: 'sass-loader',
+          },
+        ],
+      },
     ],
   },
   plugins: [
@@ -51,6 +63,9 @@ module.exports = merge(baseConfig, {
       transpileOnly: true,
     }),
     new CheckerPlugin(),
+    new MiniCssExtractPlugin({
+      filename: '[name].css', //设置名称
+    }),
     new webpack.DefinePlugin({
       'process.env': { NODE_ENV: '"development"' },
       __IS_PROD__: false,
