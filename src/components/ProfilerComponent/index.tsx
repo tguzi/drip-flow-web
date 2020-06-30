@@ -39,7 +39,8 @@ const list = [{
 // 渲染回调
 function onRenderCallback(...props: any): void {
   props.forEach((v: any, key: number) => {
-    console.log(`[Profiler ${list[key].label}]: ${v}`)
+    const isMs = ['actualDuration', 'baseDuration', 'startTime', 'commitTime'].includes(list[key].key)
+    console.log(`[Profiler ${list[key].label}]: ${v}${isMs ? ' ms' : ''}`)
   })
   console.log('-----------------------')
 }

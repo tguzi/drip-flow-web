@@ -11,7 +11,9 @@ module.exports = merge(webpackBaseConfig, {
   },
   // 性能提示
   performance: {
-    hints: false,
+    hints: false, // 提示类型
+    maxAssetSize: 1024 * 1024 * 3,
+    maxEntrypointSize: 1024 * 1024 * 5,
   },
   devtool: 'inline-source-map',
   // 开发环境配置

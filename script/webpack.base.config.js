@@ -20,7 +20,7 @@ module.exports = {
   entry: [path.resolve(__dirname, '../src/index.tsx')].filter(Boolean),
   output: {
     filename: '[name].[hash:8].js',
-    path: path.resolve(__dirname, '../../serverless-web/dist'),
+    path: path.resolve(__dirname, '../dist'),
     chunkFilename: "[name].js",
     publicPath: './'
   },
@@ -29,8 +29,8 @@ module.exports = {
   performance: {
     hints: 'warning', // 提示类型
     // 定一个创建后超过 200kb 的资源，将展示一条警告
-    maxAssetSize: 1024 * 200,
-    maxEntrypointSize: 1024 * 200,
+    maxAssetSize: 1024 * 300,
+    maxEntrypointSize: 1024 * 500,
   },
   // 添加插件
   optimization: {
