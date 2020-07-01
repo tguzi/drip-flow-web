@@ -9,6 +9,7 @@ class Fetch {
   constructor () {}
 
   // 基础请求路径
+  // TODO: 移出去放到config中，作为可配置项，gitignore忽略config文件，后续不上传这种具体配置信息
   private BASE_URL = ''
 
   // 默认参数
