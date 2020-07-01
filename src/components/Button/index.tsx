@@ -1,22 +1,24 @@
-import React, { SFC } from 'react'
+import React, { SFC, MouseEventHandler } from 'react'
 import { Container, ButtonSelf } from './styled'
 
-type ButtonType = 'primary' | 'ghost' | 'dashed' | 'danger' | 'link' | 'text'
-
 type Props = {
-  // TODO: 设置按钮类型
-  type?: ButtonType;
-  disabled: boolean;
-  width: string;
-  onClick:
-    | ((event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void)
-    | undefined;
+  // TODO: 补充其他API
+  onClick?: React.MouseEventHandler<HTMLElement>;
 }
 
-const Button: SFC<any> = ({ children }) => (
-  <Container>
-    <ButtonSelf>{children}</ButtonSelf>
-  </Container>
-)
+const Button: SFC<Props> = ({ children, onClick }) => {
+  const handleClick: React.MouseEventHandler<
+    HTMLButtonElement | HTMLAnchorElement
+  > = (e) => {
+    if (onClick) {
+      ;(onClick as MouseEventHandler<HTMLButtonElement | HTMLAnchorElement>)(e)
+    }
+  }
+  return (
+    <Container>
+      <ButtonSelf onClick={handleClick}>{children}</ButtonSelf>
+    </Container>
+  )
+}
 
 export default Button

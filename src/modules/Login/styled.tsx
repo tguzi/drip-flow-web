@@ -21,6 +21,7 @@ export const Container = styled.div`
 export const Title = styled.div`
   padding: 81px 0 60px;
   font-size: 36px;
+  font-family: 'PingFang SC';
   font-weight: bold;
   line-height: 34px;
   color: #396afe;
@@ -30,14 +31,22 @@ export const Form = styled.form`
   width: 330px;
 `
 
-export const InputBox = styled.div``
+export const InputBox = styled.div`
+  &.mt8 {
+    margin-top: 8px;
+  }
+`
 
 export const Label = styled.label`
-  font-size: 16px;
-  line-height: 20px;
+  display: block;
+  margin-bottom: 10px;
+  font-size: 12px;
+  font-family: 'PingFang SC';
+  line-height: 16px;
   color: rgba(0, 0, 0, 0.54);
 `
 export const Tip = styled.p`
+  margin-top: 20px;
   font-size: 12px;
   line-height: 17px;
   color: #9fa2a8;

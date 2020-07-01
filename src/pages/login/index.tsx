@@ -1,7 +1,7 @@
 import React from 'react'
 import LoginModal from 'modules/Login'
 const Login = () => (
-  <LoginModal></LoginModal>
+  <LoginModal />
 )
 
 export default Login
