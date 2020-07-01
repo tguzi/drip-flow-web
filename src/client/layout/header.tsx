@@ -1,18 +1,21 @@
-import React from 'react'
-import styled from 'styled-components'
-import Flex from '../components/Flex/index'
+import React from 'react';
+import styled from 'styled-components';
+import Flex from '../components/Flex/index';
 
 const Header = styled.header`
+  position: sticky;
+  top: 0;
   width: 1100px;
   height: 80px;
-  margin: 0 auto;
+  margin: 20px auto 0;
   display: flex;
   align-items: center;
   padding: 15px 30px;
   background: #fff;
   border-radius: 5px;
-  box-shadow: 0 5px 15px -7px rgba(0,0,0,0.09);
-`
+  box-shadow: 0 5px 15px -7px rgba(0, 0, 0, 0.09);
+  z-index: 1;
+`;
 
 const Avatar = styled.img`
   width: 50px;
@@ -20,7 +23,7 @@ const Avatar = styled.img`
   border-radius: 50px;
   border: 1px solid #eee;
   cursor: pointer;
-`
+`;
 
 const Author = styled.div`
   margin-left: 15px;
@@ -35,13 +38,13 @@ const Author = styled.div`
     font-size: 12px;
     color: #999;
   }
-`
+`;
 
 const Nav = styled.nav`
   display: flex;
   margin-left: 50px;
   list-style: none;
-`
+`;
 
 const NavItem = styled.li`
   padding: 20px;
@@ -50,12 +53,16 @@ const NavItem = styled.li`
   text-transform: uppercase;
   transition: color 0.25s linear;
   cursor: pointer;
-  &:hover, &.active {
-    color: #666;
+  &.active {
+    color: #555;
   }
-`
+  &:hover {
+    color: #777;
+  }
+`;
 
-const avatarUrl = 'http://demo.qzhai.net/cell/wp-content/uploads/2020/01/stock-photo-1005217204-100x100.png'
+const avatarUrl =
+  'http://demo.qzhai.net/cell/wp-content/uploads/2020/01/stock-photo-1005217204-100x100.png';
 
 const HeaderBar = () => {
   return (
@@ -63,17 +70,17 @@ const HeaderBar = () => {
       <Flex width="auto">
         <Avatar src={avatarUrl} />
         <Author>
-          <h3>T谷子</h3>
+          <h3>DirpFlow</h3>
           <p>frivolous的博客小站</p>
         </Author>
       </Flex>
       <Nav>
-        <NavItem>首页</NavItem>
-        <NavItem>札记</NavItem>
-        <NavItem>两周一话</NavItem>
+        <NavItem className="active">首页</NavItem>
+        {/* <NavItem>札记</NavItem>
+        <NavItem>两周一话</NavItem> */}
       </Nav>
     </Header>
-  )
-}
+  );
+};
 
-export default HeaderBar
+export default HeaderBar;
