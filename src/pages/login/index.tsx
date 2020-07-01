@@ -102,7 +102,6 @@
 import React from 'react'
 
 const Login = () => {
-  console.log(111)
   return (
     <div>111</div>
   )
