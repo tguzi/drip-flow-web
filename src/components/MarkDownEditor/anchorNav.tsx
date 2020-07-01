@@ -26,7 +26,6 @@ const Box = styled.dl`
 const AnchorNav: React.SFC<IProps> = ({
   list
 }) => {
-  console.log('list: ', list)
 
   if (!list || !list.length) {
     return null

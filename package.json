@@ -79,6 +79,7 @@
     "react-dom": "^16.13.1",
     "react-markdown": "^4.3.1",
     "react-router-dom": "^5.1.2",
+    "react-svg": "^11.0.28",
     "react-syntax-highlighter": "^12.2.1",
     "remark-toc": "^7.0.0",
     "xtend": "^4.0.2"

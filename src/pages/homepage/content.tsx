@@ -1,9 +1,20 @@
-import React from 'react'
+import React, { SFC } from 'react'
 import styled from 'styled-components'
 import Waterfall, { MasonryItem } from 'components/Waterfall'
 import Tag from 'components/Tag'
 
-const Wrap = styled.div`
+interface IItemProps {
+  tag: string;
+  time: string;
+  title: string;
+  cover: string;
+}
+
+const Wrap = styled.section`
+  width: 100%;
+`
+
+const Box = styled.div`
   width: 360px;
   border-radius: 8px;
   padding: 15px;
@@ -37,6 +48,9 @@ const Title = styled.h2`
   font-weight: normal;
   text-overflow: ellipsis;
   cursor: pointer;
+  &:hover {
+    color: #666;
+  }
 `
 
 const Cover = styled.div`
@@ -123,27 +137,37 @@ const list = [
   }
 ]
 
+const Item: SFC<IItemProps> = ({tag, time, title, cover}) => (
+  <Box>
+    <Label>
+      <Tag text={tag} />
+      <Time>{time}</Time>
+    </Label>
+    <Title title={title}>{title}</Title>
+    <Cover><img src={cover} alt={title} title={`${tag}-${title}`} /></Cover>
+  </Box>
+)
+
 const Content = () => {
   const noNull = list?.length
   return (
-    <Waterfall>
+    <Wrap>
       {
-        noNull ? list.map((v, k) => (
-          <MasonryItem key={k}>
-            <Wrap>
-              <Label>
-                <Tag text={v.tag} />
-                <Time>{v.time}</Time>
-              </Label>
-              <Title title={v.title}>{k}. {v.title}</Title>
-              <Cover><img src={v.cover} alt={v.title} title={`${v.tag}-${v.title}`} /></Cover>
-            </Wrap>
-          </MasonryItem>
-        )) : (
+        noNull ? (
+          <Waterfall>
+            {
+              list.map((v, k) => (
+                <MasonryItem key={k}>
+                  <Item tag={v.tag} time={v.time} title={v.title} cover={v.cover} />
+                </MasonryItem>
+              ))
+            }
+          </Waterfall>
+        ) : (
           <div>空空如也</div>
         )
       }
-    </Waterfall>
+    </Wrap>
   )
 }
 

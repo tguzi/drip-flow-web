@@ -49,7 +49,9 @@ const ProfilerComponent: SFC<TProps> = ({
   id,
   children
 }) => {
-
+  if (!children || !id) {
+    return null
+  }
   return <Profiler id={id} onRender={onRenderCallback}>{children}</Profiler>
 }
 

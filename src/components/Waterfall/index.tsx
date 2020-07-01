@@ -29,8 +29,8 @@ const Waterfall: SFC<TProps> = ({
 }) => {
   const boxRef = useRef(null)
 
-  const clientBound = (bound: IBound) => {
-    console.log('props: ', bound.el.offsetWidth)
+  const clientBound = () => {
+    // console.log('props: ', bound.el.offsetWidth)
   }
 
   return (
