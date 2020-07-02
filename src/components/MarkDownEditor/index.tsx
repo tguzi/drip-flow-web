@@ -6,11 +6,8 @@ import View from './view'
 import AnchorNav from './anchorNav'
 
 const Wrap = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   display: flex;
   z-index: 1;
 `
@@ -59,9 +56,7 @@ const MarkDownEditor = () => {
           handleAnchorChange={setAnchorList}
         />
       </ViewBox>
-      <AnchorNav
-        list={anchorList}
-      />
+      <AnchorNav list={anchorList} />
     </Wrap>
   )
 }
