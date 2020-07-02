@@ -1,47 +1,24 @@
-import React, { SFC } from 'react'
-import styled from 'styled-components'
+import React, { SFC, MouseEventHandler } from 'react'
+import { Container, ButtonSelf } from './styled'
 
-type TProps = Partial<{
-  theme: string;
-  width: string;
-  height: string;
-  radius: string;
-  font: string;
-  color: string;
-}>
+type Props = {
+  // TODO: 补充其他API
+  onClick?: React.MouseEventHandler<HTMLElement>;
+}
 
-const Wrap = styled.button<TProps>`
-  border: none;
-  outline: none;
-  cursor: pointer;
-  user-select: none;
-  width: ${(props) => props.width};
-  height: ${(props) => props.height};
-  border-radius: ${(props) => props.radius};
-  font-size: ${(props) => props.font};
-  color: ${(props) => props.color};
-  &.text {
-    background: transparent;
-    width: auto;
-    height: auto;
+const Button: SFC<Props> = ({ children, onClick }) => {
+  const handleClick: React.MouseEventHandler<
+    HTMLButtonElement | HTMLAnchorElement
+  > = (e) => {
+    if (onClick) {
+      ;(onClick as MouseEventHandler<HTMLButtonElement | HTMLAnchorElement>)(e)
+    }
   }
-`
-
-const Button: SFC<TProps> = ({
-  children,
-  theme,
-  ...slotProps
-}) => (
-  <Wrap className={`${theme} my__button`} {...slotProps}>{children}</Wrap>
-)
-
-Button.defaultProps = {
-  theme: 'default',
-  width: '100%',
-  height: '40px',
-  radius: '20px',
-  font: 'inhreit',
-  color: '#fff',
+  return (
+    <Container>
+      <ButtonSelf onClick={handleClick}>{children}</ButtonSelf>
+    </Container>
+  )
 }
 
 export default Button
