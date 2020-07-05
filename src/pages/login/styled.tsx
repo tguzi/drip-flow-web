@@ -1,4 +1,13 @@
 import styled from 'styled-components'
+import bg from 'static/images/both-hands-stained-with-paints-1161542.jpg'
+
+export const Wrap = styled.div`
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: url(${bg});
+  background-size: cover;
+`
 
 export const Container = styled.div`
   position: absolute;
@@ -8,8 +17,8 @@ export const Container = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  width: 500px;
-  height: 560px;
+  width: 450px;
+  padding: 20px 0;
   background: white;
   border-radius: 8px;
   -webkit-transform: translate(-50%, -50%);
@@ -20,15 +29,22 @@ export const Container = styled.div`
 `
 
 export const Title = styled.div`
-  padding: 81px 0 60px;
+  padding: 60px 0 60px;
+  text-align: center;
   font-size: 36px;
-  font-family: 'PingFang SC';
   font-weight: bold;
   line-height: 34px;
   color: #396afe;
 `
 
-export const Form = styled.form`
+export const Slogan = styled.p`
+  line-height: 2;
+  font-weight: normal;
+  font-size: 14px;
+  color: #9fa2a8;
+`
+
+export const Form = styled.div`
   width: 330px;
 `
 

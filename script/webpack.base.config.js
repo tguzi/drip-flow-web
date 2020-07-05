@@ -239,6 +239,8 @@ module.exports = {
     alias: {
       'src': path.resolve(__dirname, '../src'),
       'components': path.resolve(__dirname, '../src/components'),
+      'fetch': path.resolve(__dirname, '../src/fetch'),
+      'hooks': path.resolve(__dirname, '../src/hooks'),
       'pages': path.resolve(__dirname, '../src/pages'),
       'modules': path.resolve(__dirname, '../src/modules'),
       'static': path.resolve(__dirname, '../src/static'),
