@@ -6,15 +6,15 @@ import { post } from 'fetch/index'
 import { Wrap, Slogan, Container, Title, Form, InputBox, Label, Tip } from './styled'
 
 function onLoginClick() {
-  post('http://localhost:8080/api/user/login', {
+  post('http://129.226.171.102:8080/api/user/login', {
     body: JSON.stringify({
       nickname: '1213123',
       password: '123456'
     })
   }).then(res => {
-    console.log('res', res)
-  }).catch(e => {
-    console.log('e: ', e)
+    console.log('res: ', res)
+  }).catch(err => {
+    console.log('err: ', err)
   })
 }
 
@@ -35,7 +35,7 @@ const Login = () => (
           <Input palceholder="请输入邮箱" type="underline" />
         </InputBox>
         <Button onClick={onLoginClick}>登录</Button>
-        <Tip> 没有账号?联系站长给个账号加入我们吧!微信号: xxxx</Tip>
+        <Tip> 欢迎加入我们!微信号: wqf124</Tip>
       </Form>
     </Container>
   </Wrap>

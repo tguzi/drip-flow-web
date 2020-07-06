@@ -9,10 +9,10 @@ const interceptorResponse = ((res: Response) => {
 
 // 超时判断
 const timeout = (fetchFn: Promise<any>) => {
-  const promsie: Promise<string> = new Promise((_, reject) => {
-    setTimeout(() => { reject(new Error('timeout')) }, 1)
-    return Promise.race([fetchFn, promsie])
+  const promsie: any = new Promise((_, reject) => {
+    setTimeout(() => { reject(new Error('timeout')) }, 5000)
   })
+  return Promise.race([fetchFn, promsie])
 }
 
 // 请求

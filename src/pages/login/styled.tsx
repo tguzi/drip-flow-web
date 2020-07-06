@@ -65,6 +65,7 @@ export const Label = styled.label`
 
 export const Tip = styled.p`
   margin-top: 20px;
+  text-align: center;
   font-size: 12px;
   line-height: 17px;
   color: #9fa2a8;

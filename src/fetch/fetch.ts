@@ -1,16 +1,5 @@
-import { IOptions, IFetch, TInitConfig, IInterceptor } from './types'
-
-// body: JSON.stringify(data), // must match 'Content-Type' header
-// cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-// credentials: 'same-origin', // include, same-origin, *omit
-// headers: {
-// 'user-agent': 'Mozilla/4.0 MDN Example',
-// 'content-type': 'application/json'
-// },
-// method: 'POST', // *GET, POST, PUT, DELETE, etc.
-// mode: 'cors', // no-cors, cors, *same-origin
-// redirect: 'follow', // manual, *follow, error
-// referrer: 'no-referrer', // *client, no-referrer
+import { IOptions, IFetch, TRequestParams, IInterceptor } from './types'
+import { isUrl } from 'utils/validate'
 
 /**
  * 有兼容性问题，在ie上存在无法使用的风险
@@ -18,17 +7,42 @@ import { IOptions, IFetch, TInitConfig, IInterceptor } from './types'
  */
 class Fetch {
 
-  constructor(props?: TInitConfig) {
+  constructor(props?: TRequestParams) {
     // base config
     this.baseUrl = props?.baseUrl || ''
     this.timeout = props?.timeout || 5000
+    this.defaultContentType = props?.contentType || 'json'
+    // set content type
+    this.CONTENT_TYPE.set('json', 'application/json;charset=utf-8')
+    this.CONTENT_TYPE.set('form', 'application/x-www-form-urlencoded;charset=utf-8')
+    this.CONTENT_TYPE.set('multipart', 'multipart/form-data;boundary=----WebKitFormBoundarykkrZ5yIY8cr0hdgE')
   }
 
-  private baseUrl: string
+  // default params
+  private readonly baseUrl: string
+  private readonly timeout: number
+  private readonly defaultContentType: string
 
-  private timeout: number
+  // base content type
+  private readonly CONTENT_TYPE = new Map()
 
+  // request response interceptor
+  // private requestInterceptor: any
+  // private responseInterceptor: any
   private interceptors: any[] = []
+
+  private readonly defaultInit: RequestInit = {
+    method: 'GET',
+    headers: {},
+    body: null,
+    mode: 'cors', // cors/no-cors/same-origin
+    credentials: 'same-origin', // omit/same-origin/include/FederatedCredential/PasswordCredential
+    cache: 'default', // default/no-store/reload/no-cache/force-cache/only-if-cached
+    redirect: 'follow', // follow/error/manual
+    referrer: 'client', // no-referrer/client/url地址,
+    referrerPolicy: '', // no-referrer/no-referrer-when-downgrade/origin/origin-when-cross-origin/unsafe-url
+    integrity: '', // 请求的subresource integrity值
+  }
 
   /**
    * get base config
@@ -40,6 +54,26 @@ class Fetch {
       timeout: this.timeout
     }
   }
+
+  /**
+   * registry request interceptor
+   * @param {*} interceptor
+   */
+  public useRequestInterceptor(interceptor: any) {
+    this.requestInterceptor = interceptor
+  }
+
+  /**
+   * registry response interceptor
+   * @param {*} interceptor
+   */
+  public useResponseInterceptor(interceptor: any) {
+    this.responseInterceptor = interceptor
+  }
+
+  private responseInterceptor() {}
+
+  private requestInterceptor() {}
 
   /**
    * add interceptor
@@ -55,10 +89,22 @@ class Fetch {
    * @param {RequestInit} [init]
    * @returns {Promise<Response>}
    */
-  public request(url: string, init?: RequestInit, options?: any): Promise<Response> {
-    // return fetch(url, init).then(interface)
-    console.log('options: ', options)
-    return fetch(url, init)
+  public request(url: string, init?: RequestInit, options?: TRequestParams): Promise<Response> {
+    const uri = isUrl(url) ? url : `${options?.baseUrl}${url}`
+    // console.log('options: ', options)
+    return fetch(uri, init)
+  }
+
+  /**
+   * json to url params
+   * @private
+   * @param {*} data
+   * @returns {string}
+   */
+  private jsonToUrlParams(data: any): string {
+    return Object.keys(data)
+      .map(k => `${encodeURIComponent(k)}=${encodeURIComponent(data[k])}`)
+      .join('&')
   }
 
   /**
@@ -89,15 +135,14 @@ class Fetch {
   /**
    * fetch request timeout
    * @param {IFetch} fetchFn
-   * @param {number} timer
    * @returns 
    */
-  // public timeout(fetchFn: IFetch, timer: number) {
-  //   const timeoutFn = setTimeout(() => {
-  //     Promise.reject(new Error('timeout'))
-  //   }, timer)
-  //   return Promise.race([fetchFn, timeoutFn])
-  // }
+  public timeoutFn(fetchFn: IFetch) {
+    const promsie = new Promise((_, reject) => {
+      setTimeout(() => { reject(new Error('timeout')) }, this.timeout || 5000)
+    })
+    return Promise.race([fetchFn, promsie])
+  }
 
   /**
    * retry fetch
@@ -125,13 +170,13 @@ class Fetch {
   }
 
   /**
-   * abort fetch
-   * @param {IFetch} fetch
+   * 取消
+   * @param {AbortController} controller
+   * @param {Function} cb
    */
-  public cancel() {
-    // const controller = new AbortController()
-    // const signal = controller.signal
-    // controller.abort()
+  public cancel(controller: AbortController, cb: Function) {
+    controller?.abort()
+    cb()
   }
 
 }
@@ -179,5 +224,11 @@ export default Fetch
 //     return response;
 //   }
 // });
+
+// const fetch = new Fetch()
+
+// fetch.useRequestInterceptor((res: any) => {
+//   console.log('res', res)
+// })
 
 // export const fetchInterceptor = new FetchInterceptor();
