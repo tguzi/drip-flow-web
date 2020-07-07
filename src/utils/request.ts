@@ -3,17 +3,19 @@ import createAttempt from 'src/Ask/retry'
 
 ask.interceptors.response.use(
   (response: any) => {
-    if (response.ok) {
-      response.json().then((data: any) => {
-        if (data.code === '200') {
-          return data.data
-        } else {
-          return Promise.reject(data.message || '系统异常')
-        }
-      })
-    } else {
-      return Promise.reject('系统异常')
-    }
+    return new Promise((resolve, reject) => {
+      if (response.ok) {
+        response.json().then((data: any) => {
+          if (data.code === '200') {
+            resolve(data.data)
+          } else {
+            reject(data.message || '系统异常')
+          }
+        })
+      } else {
+        reject('系统异常')
+      }
+    })
   },
   (err: any) => {
     return Promise.reject(err)
