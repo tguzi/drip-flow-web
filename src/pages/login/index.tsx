@@ -1,7 +1,6 @@
 import React from 'react'
 import Input from 'components/Input'
 import Button from 'components/Button'
-import { post } from '../../utils/request'
 
 import {
   Wrap,
@@ -13,15 +12,12 @@ import {
   Label,
   Tip,
 } from './styled'
+import { login } from 'api'
 
-function onLoginClick() {
-  post('http://129.226.171.102:8080/api/user/login', {
-    maxAttempts: 3,
-    attemptDelay: 3000,
-    data: {
-      nickname: '1213123',
-      password: '123456',
-    },
+const onLoginClick = () => {
+  login({
+    nickname: '1213123',
+    password: '123456',
   })
     .then((res: any) => {
       console.log('res', res)
@@ -29,18 +25,6 @@ function onLoginClick() {
     .catch((e: Error) => {
       console.error('e:', e)
     })
-  // retry(post, 'http://129.226.171.102:8080/api/user/login', {
-  //   data: {
-  //     nickname: 'sillyY',
-  //     password: 'liuyu',
-  //   },
-  // })(3, 3000)
-  //   .then((res) => {
-  //     console.log('res', res)
-  //   })
-  //   .catch((e) => {
-  //     console.error('e: ', e)
-  //   })
 }
 
 const Login = () => (

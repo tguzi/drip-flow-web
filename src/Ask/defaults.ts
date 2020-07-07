@@ -9,7 +9,6 @@ function getDefaultAdapter() {
 }
 
 var defaults = {
-  url: '',
   adapter: getDefaultAdapter(),
   timeout: 1000,
   maxAttempts: 1,

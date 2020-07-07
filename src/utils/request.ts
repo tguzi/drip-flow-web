@@ -1,6 +1,11 @@
 import ask from '../Ask'
 import createAttempt from 'src/Ask/retry'
 
+ask.interceptors.request.use((config: any) => {
+  config.baseUrl = 'http://129.226.171.102:8080'
+  return config
+})
+
 ask.interceptors.response.use(
   (response: any) => {
     return new Promise((resolve, reject) => {
@@ -24,7 +29,7 @@ ask.interceptors.response.use(
 // 请求
 const request = (url: string, init: RequestInit) => {
   const config = {
-    path: url,
+    url,
     ...init,
   }
   return ask.request(config)

@@ -17,6 +17,8 @@ export default function fetchAdapter(config: any) {
     body: JSON.stringify(requestData),
   }
 
+  var fullPath = config.baseUrl + config.url
+
   function singleRequest() {
     try {
       const timeoutPromise = new Promise((resolve: any, reject: any) => {
@@ -25,7 +27,7 @@ export default function fetchAdapter(config: any) {
         }, timeout)
       })
 
-      return Promise.race([fetch(config.path, options), timeoutPromise])
+      return Promise.race([fetch(fullPath, options), timeoutPromise])
     } catch (err) {
       return Promise.reject(err)
     }
