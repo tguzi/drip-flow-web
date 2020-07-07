@@ -44,7 +44,7 @@
     "paths": {
       "src/*": ["src/*"],
       "components/*": ["src/components/*"],
-      "fetch/*": ["src/fetch/*"],
+      "ask/*": ["src/Ask/*"],
       "hooks/*": ["src/hooks/*"],
       "pages/*": ["src/pages/*"],
       "modules/*": ["src/modules/*"],

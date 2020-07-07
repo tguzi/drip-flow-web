@@ -1,4 +1,11 @@
-import { IOptions, IFetch, TInitConfig, IInterceptor } from './types'
+import {
+  AskInterceptorManager,
+  AskRequestConfig,
+  AskResponse,
+} from '../types'
+import InterceptorManger from '../interceptorManger'
+import dispatchRequest from '../dispatchRequest'
+import mergeConfig from '../mergeConfig'
 
 // body: JSON.stringify(data), // must match 'Content-Type' header
 // cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
@@ -16,37 +23,20 @@ import { IOptions, IFetch, TInitConfig, IInterceptor } from './types'
  * 有兼容性问题，在ie上存在无法使用的风险
  * @class Fetch
  */
-class Fetch {
-
-  constructor(props?: TInitConfig) {
+class Ask {
+  constructor(instanceConfig?: AskRequestConfig) {
     // base config
-    this.baseUrl = props?.baseUrl || ''
-    this.timeout = props?.timeout || 5000
-  }
-
-  private baseUrl: string
-
-  private timeout: number
-
-  private interceptors: any[] = []
-
-  /**
-   * get base config
-   * @returns 
-   */
-  public getBaseConfig() {
-    return {
-      baseUrl: this.baseUrl,
-      timeout: this.timeout
+    this.defaults = instanceConfig
+    this.interceptors = {
+      request: new InterceptorManger(),
+      response: new InterceptorManger(),
     }
   }
+  private defaults: AskRequestConfig | undefined
 
-  /**
-   * add interceptor
-   * @param {IInterceptor} interceptor
-   */
-  public addInterceptor(interceptor: IInterceptor) {
-    this.interceptors.push(interceptor)
+  public interceptors: {
+    request: AskInterceptorManager<AskRequestConfig>;
+    response: AskInterceptorManager<AskResponse>;
   }
 
   /**
@@ -55,70 +45,54 @@ class Fetch {
    * @param {RequestInit} [init]
    * @returns {Promise<Response>}
    */
-  public request(url: string, init?: RequestInit, options?: any): Promise<Response> {
+  public request(config: any): Promise<any> {
     // return fetch(url, init).then(interface)
-    console.log('options: ', options)
-    return fetch(url, init)
-  }
 
-  /**
-   * fetch request interceptor
-   * @param {IFetch} fetch
-   * @param {IOptions} options
-   * @returns 
-   */
-  public interceptor(fetch: IFetch, options: IOptions) {
-    const reversedInterceptors = this.interceptors.reduce((array, interceptor) => [...[interceptor], array])
-    let promise = Promise.resolve(options)
-    reversedInterceptors.forEach(({ request, requestError }: any) => {
-      if (request || requestError) {
-        promise = promise.then(opt => request(opt.input, opt.init), requestError)
-      }
-    })
-    let responsePromise = promise.then(opt => fetch(opt.input, opt.init))
-    reversedInterceptors.forEach(({ response, responseError }: any) => {
-      if (response || responseError) {
-        responsePromise = responsePromise.then((res: Response) => {
-          return response(res)
-        })
-      }
-    })
-    return responsePromise
-  }
+    config = mergeConfig(this.defaults, config)
 
-  /**
-   * fetch request timeout
-   * @param {IFetch} fetchFn
-   * @param {number} timer
-   * @returns 
-   */
-  // public timeout(fetchFn: IFetch, timer: number) {
-  //   const timeoutFn = setTimeout(() => {
-  //     Promise.reject(new Error('timeout'))
-  //   }, timer)
-  //   return Promise.race([fetchFn, timeoutFn])
-  // }
+    var chain = [dispatchRequest, undefined]
+    var promise = Promise.resolve(config)
+
+    this.interceptors.request.forEach(function unshiftRequestInterceptors(
+      interceptor: any
+    ) {
+      chain.unshift(interceptor.fulfilled, interceptor.rejected)
+    })
+    this.interceptors.response.forEach(function pushResponseInterceptors(
+      interceptor: any
+    ) {
+      chain.push(interceptor.fulfilled, interceptor.rejected)
+    })
+
+    while (chain.length) {
+      promise = promise.then(chain.shift(), chain.shift())
+    }
+
+    return promise
+  }
 
   /**
    * retry fetch
    * @param {Function} fn
    * @param {number} times
    * @param {number} delay
-   * @returns 
+   * @returns
    */
   public retry(fn: Function, times: number, delay: number) {
     return new Promise((resolve, reject) => {
       function attempt() {
-        fn().then(resolve).catch((err: Error) => {
-          if (times <= 0) {
-            reject(err)
-          } else {
-            times--
-            setTimeout(() => {
-              attempt()
-            }, delay)
-          }
-        })
+        fn()
+          .then(resolve)
+          .catch((err: Error) => {
+            if (times <= 0) {
+              reject(err)
+            } else {
+              times--
+              setTimeout(() => {
+                attempt()
+              }, delay)
+            }
+          })
       }
       attempt()
     })
@@ -133,10 +107,9 @@ class Fetch {
     // const signal = controller.signal
     // controller.abort()
   }
-
 }
 
-export default Fetch
+export default Ask
 
 // export class FetchInterceptor {
 //   public interceptors: any[] = [];

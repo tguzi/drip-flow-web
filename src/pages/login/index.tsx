@@ -1,21 +1,46 @@
 import React from 'react'
 import Input from 'components/Input'
 import Button from 'components/Button'
-import { post } from 'fetch/index'
+import { post } from '../../utils/request'
 
-import { Wrap, Slogan, Container, Title, Form, InputBox, Label, Tip } from './styled'
+import {
+  Wrap,
+  Slogan,
+  Container,
+  Title,
+  Form,
+  InputBox,
+  Label,
+  Tip,
+} from './styled'
 
 function onLoginClick() {
-  post('http://localhost:8080/api/user/login', {
-    body: JSON.stringify({
+  post('http://129.226.171.102:8080/api/user/login', {
+    maxAttempts: 3,
+    attemptDelay: 3000,
+    data: {
       nickname: '1213123',
-      password: '123456'
-    })
-  }).then(res => {
-    console.log('res', res)
-  }).catch(e => {
-    console.log('e: ', e)
+      password: '123456',
+    },
   })
+    .then((res: any) => {
+      console.log('res', res)
+    })
+    .catch((e: Error) => {
+      console.error('e:', e)
+    })
+  // retry(post, 'http://129.226.171.102:8080/api/user/login', {
+  //   data: {
+  //     nickname: 'sillyY',
+  //     password: 'liuyu',
+  //   },
+  // })(3, 3000)
+  //   .then((res) => {
+  //     console.log('res', res)
+  //   })
+  //   .catch((e) => {
+  //     console.error('e: ', e)
+  //   })
 }
 
 const Login = () => (
@@ -30,7 +55,7 @@ const Login = () => (
           <Label>邮箱</Label>
           <Input palceholder="请输入邮箱" type="underline" />
         </InputBox>
-        <InputBox className='mt8'>
+        <InputBox className="mt8">
           <Label>密码</Label>
           <Input palceholder="请输入邮箱" type="underline" />
         </InputBox>
