@@ -14,17 +14,23 @@ import {
 } from './styled'
 import { login } from 'api'
 
-const onLoginClick = () => {
-  login({
-    nickname: '1213123',
-    password: '123456',
-  })
-    .then((res: any) => {
-      console.log('res', res)
+const onLoginClick = async () => {
+  try {
+    if (!valiAccount) {
+      return
+    }
+    const res = await login({
+      nickname: '1213123',
+      password: '123456',
     })
-    .catch((e: Error) => {
-      console.error('e:', e)
-    })
+    console.log(res)
+  } catch (error) {
+    console.error(error)
+  }
+}
+
+const valiAccount = () => {
+  return true
 }
 
 const Login = () => (
@@ -41,7 +47,11 @@ const Login = () => (
         </InputBox>
         <InputBox className="mt8">
           <Label>密码</Label>
-          <Input palceholder="请输入邮箱" type="underline" />
+          <Input
+            palceholder="请输入邮箱"
+            type="underline"
+            htmlType="password"
+          />
         </InputBox>
         <Button onClick={onLoginClick}>登录</Button>
         <Tip> 没有账号?联系站长给个账号加入我们吧!微信号: xxxx</Tip>
