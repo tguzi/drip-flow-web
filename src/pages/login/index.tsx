@@ -43,14 +43,14 @@ const Login = () => (
       <Form>
         <InputBox>
           <Label>邮箱</Label>
-          <Input palceholder="请输入邮箱" type="underline" />
+          <Input placeholder="请输入邮箱" inputType="underline" />
         </InputBox>
         <InputBox className="mt8">
           <Label>密码</Label>
           <Input
-            palceholder="请输入邮箱"
-            type="underline"
-            htmlType="password"
+            placeholder="请输入邮箱"
+            inputType="underline"
+            type="password"
           />
         </InputBox>
         <Button onClick={onLoginClick}>登录</Button>
