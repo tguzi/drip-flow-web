@@ -36,8 +36,8 @@ export default [
     title: '两周一话'
   },
   {
-    path: '/blog-detail',
-    name: 'blogDetail',
+    path: '/article/:id',
+    name: 'article',
     title: '博客详情'
   },
   {

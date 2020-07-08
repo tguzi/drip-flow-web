@@ -16,7 +16,7 @@ type IContent = Partial<{
 }>
 
 const Content = styled.div<IContent>`
-  min-height: 100vh;
+  min-height: calc(100vh - 175px);
   background: ${({ bgColor }) => bgColor};
   overflow: auto;
   &.layout-content-center {
