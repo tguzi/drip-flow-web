@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 
+import { throttle } from 'utils/index'
 import Editor from './editor'
 import View from './view'
-import AnchorNav from './anchorNav'
+// import AnchorNav from './anchorNav'
 
 const Wrap = styled.div`
   width: 100%;
@@ -35,28 +36,33 @@ const MarkDownEditor = () => {
 
   const [val, setVal] = useState('')
 
-  const [anchorList, setAnchorList] = useState<Array<any>>([])
+  // const [anchorList, setAnchorList] = useState<Array<any>>([])
+
+  function setValue(text: any) {
+    setVal(text)
+  }
+
+  function setAnchorBar(val: any) {
+    console.log('val: ', val)
+    // setAnchorList(val)
+  }
 
   return (
     <Wrap>
       <EditorBox>
         <Editor
           value={val}
-          onChange={(v: any) => {
-            setVal(v)
-          }}
-          handleChange={(text: string) => {
-            setVal(text)
-          }}
+          onChange={throttle(setValue)}
+          handleChange={throttle(setValue)}
         />
       </EditorBox>
       <ViewBox>
         <View
           content={val}
-          handleAnchorChange={setAnchorList}
+          handleAnchorChange={throttle(setAnchorBar)}
         />
       </ViewBox>
-      <AnchorNav list={anchorList} />
+      {/* <AnchorNav list={Object.values(anchorList)} /> */}
     </Wrap>
   )
 }

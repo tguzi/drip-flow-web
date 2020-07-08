@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 interface IProps {
-  children: any
+  children: any;
 }
 
 const Table = styled.table`

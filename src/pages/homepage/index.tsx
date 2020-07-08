@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import { useHistory } from 'react-router-dom'
 
 import Layout from 'layout'
 import Content from './content'
@@ -31,17 +32,31 @@ const AddBlogBtn = styled.button`
   }
   &:hover {
     background: #67D1FF;
+    transform: scale(1.2);
   }
   &:active {
     background: #37C2FF1A;
   }
 `
 
-const Homepage = () => (
-  <Layout layout="content-center">
-    <Content />
-    <AddBlogBtn />
-  </Layout>
-)
+const Homepage = () => {
+  const history = useHistory()
+  return (
+    <Layout layout="content-center">
+      <Content />
+      <AddBlogBtn
+        onClick={() => {
+          history.push({
+            pathname: '/editor',
+            state: {
+              new: true,
+              backpath: '/'
+            }
+          })
+        }}
+      />
+    </Layout>
+  )
+}
 
 export default Homepage

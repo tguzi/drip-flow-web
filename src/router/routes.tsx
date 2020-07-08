@@ -21,6 +21,11 @@ export default [
     title: '登陆页',
   },
   {
+    path: '/editor',
+    name: 'editor',
+    title: '编辑页',
+  },
+  {
     path: '/reading-notes',
     name: 'readingNotes',
     title: '札记'

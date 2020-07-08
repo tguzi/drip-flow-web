@@ -1,15 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-
-interface IAnchorList {
-  anchor: string,
-  title: string,
-  level: number,
-}
-
-interface IProps {
-  list: Array<IAnchorList>
-}
+import { IAnchorProps } from './types'
 
 const Box = styled.dl`
   position: absolute;
@@ -18,12 +9,13 @@ const Box = styled.dl`
   z-index: 1;
   padding: 10px;
   line-height: 20px;
-  background: #abcdef;
-  box-shadow: 10px 10px 10px #efefef;
+  background: #fff;
+  border: 1px solid #ccc;
+  box-shadow: 5px 5px 5px rgb(245, 245, 245);
   color: rgba(255, 255, 255, .5);
 `
 
-const AnchorNav: React.SFC<IProps> = ({
+const AnchorNav: React.SFC<IAnchorProps> = ({
   list
 }) => {
 

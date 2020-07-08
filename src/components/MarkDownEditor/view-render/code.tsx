@@ -4,7 +4,7 @@ import SyntaxHighlighter from 'react-syntax-highlighter'
 import { tomorrowNightEighties } from 'react-syntax-highlighter/dist/esm/styles/hljs'
 
 interface IProps {
-  value: string
+  value: string;
 }
 
 const CodeBlock: React.SFC<IProps> = ({
