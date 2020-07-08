@@ -21,19 +21,17 @@ const HrBox = () => (
 class Input extends Component<InputProps, InputState> {
   // 后续static 补充静态组件
   renderUnderLine = () => {
-    const { placeholder, type } = this.props
     return (
       <UnderContainer>
-        <InputSelf placeholder={placeholder} type={type} />
+        <InputSelf {...this.props} />
         <HrBox />
       </UnderContainer>
     )
   }
   renderInput = () => {
-    const { placeholder, type } = this.props
     return (
       <Container>
-        <InputSelf placeholder={placeholder} type={type} />
+        <InputSelf {...this.props} />
       </Container>
     )
   }
