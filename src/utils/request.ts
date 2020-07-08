@@ -9,16 +9,10 @@ ask.interceptors.request.use((config: any) => {
 ask.interceptors.response.use(
   (response: any) => {
     return new Promise((resolve, reject) => {
-      if (response.ok) {
-        response.json().then((data: any) => {
-          if (data.code === '200') {
-            resolve(data.data)
-          } else {
-            reject(data.message || '系统异常')
-          }
-        })
+      if (response.code === '200') {
+        resolve(response.data)
       } else {
-        reject('系统异常')
+        reject(response.message || '系统异常')
       }
     })
   },
