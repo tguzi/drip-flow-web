@@ -18,18 +18,26 @@ export default function fetchAdapter(config: any) {
   }
 
   function singleRequest() {
-    try {
-      const timeoutPromise = new Promise((resolve: any, reject: any) => {
-        setTimeout(() => {
-          reject(new Error('timeout'))
-        }, timeout)
-      })
+    const timeoutPromise = new Promise((resolve: any, reject: any) => {
+      setTimeout(() => {
+        reject(new Error('timeout'))
+      }, timeout)
+    })
 
-      return Promise.race([fetch(config.path, options), timeoutPromise])
-    } catch (err) {
-      return Promise.reject(err)
-    }
+    return new Promise((resolve, reject) => {
+      try {
+        Promise.race([fetch(config.path, options), timeoutPromise]).then(
+          (res) => {
+            console.log(123, res)
+            resolve((res as any).json())
+          }
+        )
+      } catch (err) {
+        reject(err)
+      }
+    })
   }
+
   if (maxAttempts === 1) {
     return singleRequest()
   } else {
