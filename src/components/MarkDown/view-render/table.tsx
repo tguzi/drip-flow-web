@@ -6,7 +6,7 @@ interface IProps {
 }
 
 const Table = styled.table`
-  th, td {
+  /* th, td {
     text-align: center;
     padding: 6px 13px;
     border: 1px solid #abcdef;
@@ -21,7 +21,7 @@ const Table = styled.table`
         background: #dfe2e5;
       }
     }
-  }
+  } */
 `
 
 const TableBlock: React.SFC<IProps> = ({

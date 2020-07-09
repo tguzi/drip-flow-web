@@ -18,7 +18,7 @@ const Editor: React.SFC<TEditorProps> = (props) => {
     // 初始化
     const editor = CodeMirror.fromTextArea(editorRef.current as any, {
       mode: 'markdown',
-      theme: 'ayu-mirage',
+      theme: 'mdn-like',
     })
     editor.on('change', throttle(onEditorChange))
   }, [])

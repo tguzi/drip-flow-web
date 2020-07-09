@@ -6,9 +6,10 @@ import MarkdownView from 'components/MarkDown/view'
 import { ArticelContent } from './styled'
 
 const Article = () => {
-  const params = useParams()
+  const params: any = useParams()
   const val = localStorage.getItem('demo-article') || ''
-  console.log(params)
+  const id = params?.id
+  console.log(id)
   return (
     <Layout>
       <ArticelContent>
