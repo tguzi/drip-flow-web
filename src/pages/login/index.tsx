@@ -20,7 +20,7 @@ const Login = () => {
 
   const [userInfo, setUserInfo] = useSessionStorageState<any>('userInfo', () => {
     return {
-      user_nickname: '1231'
+      user_nickname: 'T谷子'
     }
   })
 
