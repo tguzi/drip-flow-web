@@ -1,3 +1,5 @@
+const CONFUSION = 'tguzi'
+
 // 根据路径导出文件
 export const _require = (path: string) => () => require(path)
 export const _import = (file: string)=> () => import(file)
@@ -32,4 +34,36 @@ export function debounch(fn: Function, wait: number) {
     }, wait)
   }
   return zhix
+}
+
+// 密码加密
+export function encodePwd(str: string) {
+  if (typeof str !== 'string') {
+    return str
+  }
+  let out = ''
+  for (const c of str) {
+    out += c.charCodeAt(0) - 20
+  }
+  return out
+}
+
+// id加密
+export function encodeId(id: number) {
+  try {
+    const str = `${CONFUSION}-${id}`
+    return window.btoa(window.encodeURIComponent(str))
+  } catch (e) {
+    return ''
+  }
+}
+
+// id解密
+export function decodeId(str: string) {
+  try {
+    const originStr = window.atob(window.decodeURIComponent(str))
+    return originStr.split('-')[1]
+  } catch (e) {
+    return ''
+  }
 }

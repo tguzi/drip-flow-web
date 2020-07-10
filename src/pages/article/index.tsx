@@ -1,6 +1,8 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 
+import { decodeId } from 'utils/index'
+import { get } from 'src/fetch'
 import Layout from 'layout'
 import Icon from 'components/Icon'
 import MarkdownView from 'components/MarkDown/view'
@@ -14,37 +16,48 @@ import {
 
 const Article = () => {
   const params: any = useParams()
-  const val = localStorage.getItem('demo-article') || ''
-  const id = params?.id
-  console.log(id)
+  const id = decodeId(params?.id)
+  const [articleInfo, setArticleInfo] = useState<any>({})
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const info = await get(`/api/article/get?id=${id}`)
+        setArticleInfo(info?.data)
+      } catch (e) {
+        console.log('请求详情出错: ', e)
+      }
+    })()
+  }, [])
+
   return (
     <Layout>
       <Content>
-        <Title>标题标题标题标题标题标题标题标题</Title>
+        <Title>{articleInfo?.article_title}</Title>
         <Info>
           <Item>
             <Icon ico="user-o" />
-            <span>用户</span>
+            <span>{articleInfo?.user_id}</span>
           </Item>
           <Item>
             <Icon ico="bookmark-o" />
-            <span>分类</span>
+            <span>{articleInfo?.label_id}</span>
           </Item>
           <Item>
             <Icon ico="calendar-o" />
-            <span>时间</span>
+            <span>{articleInfo?.updatedAt}</span>
           </Item>
           <Item>
             <Icon ico="eye" />
-            <span>199</span>
+            <span>{articleInfo?.article_view_count}</span>
           </Item>
           <Item>
             <Icon ico="heart-o" />
-            <span>0</span>
+            <span>{articleInfo?.article_like_count}</span>
           </Item>
         </Info>
-        <Cover src="http://demo.qzhai.net/gohan/wp-content/uploads/2020/01/seashore-2882660-scaled.jpg" />
-        <MarkdownView content={val} />
+        <Cover src={articleInfo?.article_cover} />
+        <MarkdownView content={articleInfo?.article_content} />
       </Content>
     </Layout>
   )

@@ -1,4 +1,5 @@
 import React from 'react'
+import { useHistory } from 'react-router-dom'
 import styled from 'styled-components'
 import Flex from 'components/Flex'
 
@@ -64,6 +65,7 @@ const NavItem = styled.li`
 const avatarUrl = 'http://demo.qzhai.net/cell/wp-content/uploads/2020/01/stock-photo-1005217204-100x100.png'
 
 const HeaderBar = () => {
+  const history = useHistory()
   return (
     <Header>
       <Flex width="auto">
@@ -74,9 +76,7 @@ const HeaderBar = () => {
         </Author>
       </Flex>
       <Nav>
-        <NavItem className="active">首页</NavItem>
-        {/* <NavItem>札记</NavItem> */}
-        {/* <NavItem>两周一话</NavItem> */}
+        <NavItem onClick={() => history.push('/')} className="active">首页</NavItem>
       </Nav>
     </Header>
   )

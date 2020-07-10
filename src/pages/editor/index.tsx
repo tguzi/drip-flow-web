@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 
-import { throttle } from 'utils/index'
+import { throttle, encodeId } from 'utils/index'
 import { post } from 'src/fetch'
 import MarkdownEditor from 'components/MarkDown/editor'
 import MarkdownView from 'components/MarkDown/view'
@@ -13,7 +13,7 @@ import {
   Content,
   EditorBox,
   ViewBox
-} from './styled' 
+} from './styled'
 
 const EditorArticle = () => {
   const history = useHistory()
@@ -34,14 +34,11 @@ const EditorArticle = () => {
         content: val
       }
       const res = await post('/api/article/add', { body: JSON.stringify(param) })
-      console.log('res: ', res)
+      const info = res?.data
+      history.push(`/article/${encodeId(info.article_id)}`)
     } catch (e) {
       console.log('保存失败')
     }
-    // localStorage.setItem('demo-article', val)
-    // history.push({
-    //   pathname: '/article/1',
-    // })
   }
 
   return (
