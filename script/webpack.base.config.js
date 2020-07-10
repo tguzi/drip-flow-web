@@ -254,7 +254,7 @@ module.exports = {
     new CleanWebpackPlugin(),
     // html模版
     new HtmlWebpackPlugin({
-      title: '闲拾聿',
+      title: '滴流谷',
       filename: 'index.html',
       template: './public/index.html',
       favicon: './public/favicon.ico',

@@ -38,7 +38,6 @@ export const Title = styled.h1`
 
 export const Cover = styled.img`
   max-width: 100%;
-  max-height: 300px;
   margin: 0 auto;
   padding: 15px;
 `

@@ -1,3 +1,5 @@
+import { altSessionStorageState } from 'hooks/useStorage/useSessionStorageState'
+
 // 响应拦截
 const interceptorResponse = ((res: Response) => {
   if (res.ok) {
@@ -17,6 +19,8 @@ const timeout = (fetchFn: Promise<any>) => {
 
 // 请求
 const request = (url: string, init: RequestInit) => {
+  const [userInfo] = altSessionStorageState('userInfo')
+  console.log('userInfo: ', userInfo)
   return timeout(fetch(`http://129.226.171.102:8080${url}`, init).then(interceptorResponse))
 }
 

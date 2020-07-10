@@ -2,6 +2,7 @@ import React from 'react'
 import { useHistory } from 'react-router-dom'
 import styled from 'styled-components'
 import Flex from 'components/Flex'
+import { useSessionStorageState } from 'hooks/useStorage/useSessionStorageState'
 
 const Header = styled.header`
   position: sticky;
@@ -62,17 +63,16 @@ const NavItem = styled.li`
   }
 `
 
-const avatarUrl = 'http://demo.qzhai.net/cell/wp-content/uploads/2020/01/stock-photo-1005217204-100x100.png'
-
 const HeaderBar = () => {
   const history = useHistory()
+  const [userInfo] = useSessionStorageState<any>('userInfo')
   return (
     <Header>
       <Flex width="auto">
-        <Avatar src={avatarUrl} />
+        <Avatar src={userInfo?.user_avatar} />
         <Author>
-          <h3>T谷子</h3>
-          <p>frivolous的博客小站</p>
+          <h3>{userInfo?.user_nickname}</h3>
+          <p>兴趣使然的小清新博客站</p>
         </Author>
       </Flex>
       <Nav>

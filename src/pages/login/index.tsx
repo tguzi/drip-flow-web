@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom'
 import Input from 'components/Input'
 import Button from 'components/Button'
 import { post } from 'src/fetch'
+import { useSessionStorageState } from 'hooks/useStorage/useSessionStorageState'
 
 import {
   Wrap,
@@ -16,14 +17,21 @@ import {
 } from './styled'
 
 const Login = () => {
-  const [nickname, setNickname] = useState('')
+
+  const [userInfo, setUserInfo] = useSessionStorageState<any>('userInfo', () => {
+    return {
+      user_nickname: '1231'
+    }
+  })
+
+  const [nickname, setNickname] = useState(userInfo.user_nickname)
   const [password, setPassword] = useState('')
   const history = useHistory()
 
   const onLoginClick = async () => {
     try {
       const res = await post('/api/user/login', { body: JSON.stringify({ nickname, password }) })
-      localStorage.setItem('userInfo', JSON.stringify(res?.data))
+      setUserInfo(res?.data)
       history.push('/')
     } catch (e) {
       console.log('登录出错')

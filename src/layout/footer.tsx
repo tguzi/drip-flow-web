@@ -31,7 +31,7 @@ const Footer = () => {
       <Line />
       <span>&copy;2020 T谷子 版权所有</span>
       &nbsp;
-      <span>备案号xxx</span>
+      {/* <span>备案号xxx</span> */}
     </Wrap>
   )
 }

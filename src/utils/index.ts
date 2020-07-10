@@ -67,3 +67,7 @@ export function decodeId(str: string) {
     return ''
   }
 }
+
+export function isFunction<T>(obj: any): obj is T {
+  return typeof obj === 'function'
+}
