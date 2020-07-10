@@ -13,6 +13,7 @@ export const Header = styled.header`
   height: 50px;
   box-sizing: border-box;
   padding: 0 20px;
+  background: #fff;
   box-shadow: 5px 5px 5px rgb(245, 245, 245);
 `
 
@@ -64,7 +65,6 @@ export const EditorBox = styled.div`
 export const ViewBox = styled.div`
   width: 50%;
   height: 100%;
-  padding: 10px;
   overflow: auto;
   box-sizing: border-box;
   border: 1px dashed #efefef;

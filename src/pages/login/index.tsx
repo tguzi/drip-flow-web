@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
+import { useHistory } from 'react-router-dom'
 import Input from 'components/Input'
 import Button from 'components/Button'
-import { useAsync } from 'hooks/index'
+import { post } from 'src/fetch'
 
 import {
   Wrap,
@@ -13,28 +14,20 @@ import {
   Label,
   Tip,
 } from './styled'
-import { login } from 'api'
 
 const Login = () => {
   const [nickname, setNickname] = useState('')
   const [password, setPassword] = useState('')
-
-  const { execute } = useAsync(
-    () =>
-      login({
-        nickname,
-        password,
-      }),
-    false
-  )
+  const history = useHistory()
 
   const onLoginClick = async () => {
-    // TODO: 账号密码校检
-
-    await execute()
-
-    // TODO: 路由跳转
-
+    try {
+      const res = await post('/api/user/login', { body: JSON.stringify({ nickname, password }) })
+      localStorage.setItem('userInfo', JSON.stringify(res?.data))
+      history.push('/')
+    } catch (e) {
+      console.log('登录出错')
+    }
   }
 
   return (
@@ -65,7 +58,7 @@ const Login = () => {
             />
           </InputBox>
           <Button onClick={onLoginClick}>登录</Button>
-          <Tip> 没有账号?联系站长给个账号加入我们吧!微信号: xxxx</Tip>
+          <Tip> 加这个微信号(btoa): d3FmMTI0，一起加入我们吧！</Tip>
         </Form>
       </Container>
     </Wrap>

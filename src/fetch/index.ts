@@ -17,10 +17,10 @@ const timeout = (fetchFn: Promise<any>) => {
 
 // 请求
 const request = (url: string, init: RequestInit) => {
-  return timeout(fetch(url, init).then(interceptorResponse))
+  return timeout(fetch(`http://129.226.171.102:8080${url}`, init).then(interceptorResponse))
 }
 
-export const get = (url: string, init: RequestInit) => request(url, { ...init, method: 'GET' })
+export const get = (url: string, init?: RequestInit) => request(url, { ...init, method: 'GET' })
 
 export const post = (url: string, init: RequestInit) => request(url, { ...init, method: 'POST', headers: { 'content-type': 'application/json; charset=utf-8' } })
 

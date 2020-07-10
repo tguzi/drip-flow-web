@@ -1,7 +1,8 @@
-import React, { SFC } from 'react'
+import React, { SFC, useEffect } from 'react'
 import styled from 'styled-components'
 import Waterfall, { MasonryItem } from 'components/Waterfall'
 import Tag from 'components/Tag'
+import { get } from 'src/fetch'
 
 interface IItemProps {
   tag: string;
@@ -150,6 +151,16 @@ const Item: SFC<IItemProps> = ({tag, time, title, cover}) => (
 
 const Content = () => {
   const noNull = list?.length
+
+  useEffect(() => {
+    try {
+      const list = get('/api/article/list')
+      console.log('list: ', list)
+    } catch (e) {
+      console.log('获取列表失败')
+    }
+  }, [])
+
   return (
     <Wrap>
       {

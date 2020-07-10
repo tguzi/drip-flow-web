@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 
 export const ViewWrap = styled.article`
+  height: 100%;
   padding: 1em 2em 3em;
 	font-size: 15px;
 	line-height: 1.7;
