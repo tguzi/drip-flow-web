@@ -45,6 +45,7 @@
       "src/*": ["src/*"],
       "components/*": ["src/components/*"],
       "ask/*": ["src/Ask/*"],
+      "config/*": ["src/config/*"],
       "hooks/*": ["src/hooks/*"],
       "pages/*": ["src/pages/*"],
       "modules/*": ["src/modules/*"],

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, useHistory } from 'react-router-dom'
 
 import { decodeId } from 'utils/index'
 import { get } from 'src/fetch'
@@ -18,11 +18,11 @@ const Article = () => {
   const params: any = useParams()
   const id = decodeId(params?.id)
   const [articleInfo, setArticleInfo] = useState<any>({})
-
+  const history = useHistory()
   useEffect(() => {
     (async () => {
       try {
-        const info = await get(`/api/article/get?id=${id}`)
+        const info = await get(`/article/get?id=${id}`)
         setArticleInfo(info?.data)
       } catch (e) {
         console.log('请求详情出错: ', e)
@@ -30,14 +30,18 @@ const Article = () => {
     })()
   }, [])
 
+  const gotoEditor = () => {
+    history.push(`/editor/${params?.id}`)
+  }
+
   return (
     <Layout>
       <Content>
-        <Title>{articleInfo?.article_title}</Title>
+        <Title>{articleInfo?.title}</Title>
         <Info>
           <Item>
             <Icon ico="user-o" />
-            <span>{articleInfo?.user_id}</span>
+            <span>{articleInfo?.id}</span>
           </Item>
           <Item>
             <Icon ico="bookmark-o" />
@@ -45,19 +49,22 @@ const Article = () => {
           </Item>
           <Item>
             <Icon ico="calendar-o" />
-            <span>{articleInfo?.updatedAt}</span>
+            <span>{articleInfo?.updated_at}</span>
           </Item>
           <Item>
             <Icon ico="eye" />
-            <span>{articleInfo?.article_view_count}</span>
+            <span>{articleInfo?.view_count}</span>
           </Item>
           <Item>
             <Icon ico="heart-o" />
-            <span>{articleInfo?.article_like_count}</span>
+            <span>{articleInfo?.like_count}</span>
+          </Item>
+          <Item>
+            <span className="btn" onClick={gotoEditor}>编辑</span>
           </Item>
         </Info>
-        <Cover src={articleInfo?.article_cover} />
-        <MarkdownView content={articleInfo?.article_content} />
+        <Cover src={articleInfo?.cover} />
+        <MarkdownView content={articleInfo?.content} />
       </Content>
     </Layout>
   )

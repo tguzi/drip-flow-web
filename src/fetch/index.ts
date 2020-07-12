@@ -1,4 +1,5 @@
 import { altSessionStorageState } from 'hooks/useStorage/useSessionStorageState'
+import config from 'config/index'
 
 // 响应拦截
 const interceptorResponse = ((res: Response) => {
@@ -19,9 +20,15 @@ const timeout = (fetchFn: Promise<any>) => {
 
 // 请求
 const request = (url: string, init: RequestInit) => {
-  const [userInfo] = altSessionStorageState('userInfo')
-  console.log('userInfo: ', userInfo)
-  return timeout(fetch(`http://129.226.171.102:8080${url}`, init).then(interceptorResponse))
+  const [userInfo] = altSessionStorageState<any>('userInfo')
+  const options = {
+    ...init,
+    headers: {
+      ...init?.headers,
+      'authorization': `Bearer ${userInfo?.token}`
+    }
+  }
+  return timeout(fetch(`${config.baseUrl}${url}`, options).then(interceptorResponse))
 }
 
 export const get = (url: string, init?: RequestInit) => request(url, { ...init, method: 'GET' })

@@ -28,6 +28,10 @@ export const Item = styled.li`
   span {
     margin: 0 3px;
   }
+  .btn {
+    cursor: pointer;
+    color: blue;
+  }
 `
 
 export const Title = styled.h1`

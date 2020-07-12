@@ -96,3 +96,8 @@ export const AddBlogBtn = styled.button`
     background: #37C2FF1A;
   }
 `
+
+export const Empty = styled.div`
+  padding: 50px;
+  text-align: center;
+`
