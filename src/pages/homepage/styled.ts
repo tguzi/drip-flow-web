@@ -47,7 +47,7 @@ export const Cover = styled.div`
   width: 100%;
   height: auto;
   overflow: hidden;
-  box-shadow: 0 2px 15px rgba(0,0,0,0.02);
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.02);
   border-radius: 8px;
   cursor: pointer;
   img {
@@ -75,7 +75,7 @@ export const AddBlogBtn = styled.button`
   text-align: center;
   display: block;
   border: none;
-  background: #37C2FF;
+  background: #37c2ff;
   color: #fff;
   font-size: 32px;
   cursor: pointer;
@@ -89,10 +89,10 @@ export const AddBlogBtn = styled.button`
     height: 100%;
   }
   &:hover {
-    background: #67D1FF;
+    background: #67d1ff;
     transform: scale(1.2);
   }
   &:active {
-    background: #37C2FF1A;
+    background: #37c2ff1a;
   }
 `
