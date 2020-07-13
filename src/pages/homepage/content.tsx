@@ -11,7 +11,8 @@ import {
   Label,
   Time,
   Title,
-  Cover
+  Cover,
+  Empty
 } from './styled'
 
 const Content = () => {
@@ -21,7 +22,7 @@ const Content = () => {
   useEffect(() => {
     (async () => {
       try {
-        const data = await get('/api/article/list')
+        const data = await get('/article/list')
         setList(data?.data)
       } catch (e) {
         console.log('获取列表失败')
@@ -43,12 +44,12 @@ const Content = () => {
                 <MasonryItem key={k}>
                   <Box>
                     <Label>
-                      <Tag text={v.label_id} />
+                      <Tag text={v?.Label?.name ?? '札记'} />
                       <Time>{v.updatedAt}</Time>
                     </Label>
-                    <Title title={v.article_title} onClick={() => gotoArticleDetial(v.article_id)}>{v.article_title}</Title>
-                    <Cover onClick={() => gotoArticleDetial(v.article_id)}>
-                      <img src={v.article_cover} alt={v.article_title} title={`${v.label_id}-${v.article_title}`} />
+                    <Title title={v.title} onClick={() => gotoArticleDetial(v.id)}>{v.title}</Title>
+                    <Cover onClick={() => gotoArticleDetial(v.id)}>
+                      <img src={v.cover} alt={v.title} title={`${v?.Label?.name}-${v.title}`} />
                     </Cover>
                   </Box>
                 </MasonryItem>
@@ -56,7 +57,7 @@ const Content = () => {
             }
           </Waterfall>
         ) : (
-          <div>空空如也</div>
+          <Empty>这里空空如也～</Empty>
         )
       }
     </Wrap>

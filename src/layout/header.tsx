@@ -69,9 +69,9 @@ const HeaderBar = () => {
   return (
     <Header>
       <Flex width="auto">
-        <Avatar src={userInfo?.user_avatar} />
+        <Avatar src={userInfo?.avatar ?? 'https://tse2-mm.cn.bing.net/th/id/OIP.mnD-3m6HyLjvzRvICjgsiwAAAA?w=170&h=180&c=7&o=5&dpr=2&pid=1.7'} />
         <Author>
-          <h3>{userInfo?.user_nickname}</h3>
+          <h3>{userInfo?.nickname ?? `游客${Math.floor(Math.random() * 10000)}`}</h3>
           <p>兴趣使然的小清新博客站</p>
         </Author>
       </Flex>

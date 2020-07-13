@@ -3,6 +3,7 @@ import { Route } from 'react-router-dom'
 import LazyComponent from 'components/LazyComponent'
 import ErrorBoundary from 'components/ErrorBoundary'
 import ProfilerComponent from 'components/ProfilerComponent'
+import config from 'config/index'
 
 // 按文件名引入模块
 interface IProps {
@@ -21,11 +22,24 @@ type TProps = Partial<{
 // 跳转前的操作
 const BeforRender = (path: string, name: string) => {
   // 页面懒加载，加载出错则提示
+  // if (config.isDev) {
+  //   return (
+  //     <ErrorBoundary>
+  //       <ProfilerComponent id={name}>
+  //         <LazyComponent path={path} />
+  //       </ProfilerComponent>
+  //     </ErrorBoundary>
+  //   )
+  // } else {
+  //   return (
+  //     <ErrorBoundary>
+  //       <LazyComponent path={path} />
+  //     </ErrorBoundary>
+  //   )
+  // }
   return (
     <ErrorBoundary>
-      <ProfilerComponent id={name}>
-        <LazyComponent path={path} />
-      </ProfilerComponent>
+      <LazyComponent path={path} />
     </ErrorBoundary>
   )
 }

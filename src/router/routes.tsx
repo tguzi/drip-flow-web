@@ -21,7 +21,7 @@ export default [
     title: '登陆页',
   },
   {
-    path: '/editor',
+    path: '/editor/:id?',
     name: 'editor',
     title: '编辑页',
   },
