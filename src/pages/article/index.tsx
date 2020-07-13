@@ -41,15 +41,15 @@ const Article = () => {
         <Info>
           <Item>
             <Icon ico="user-o" />
-            <span>{articleInfo?.id}</span>
+            <span>{articleInfo?.User?.nickname}</span>
           </Item>
           <Item>
             <Icon ico="bookmark-o" />
-            <span>{articleInfo?.label_id}</span>
+            <span>{articleInfo?.Label?.name}</span>
           </Item>
           <Item>
             <Icon ico="calendar-o" />
-            <span>{articleInfo?.updated_at}</span>
+            <span>{articleInfo?.updatedAt}</span>
           </Item>
           <Item>
             <Icon ico="eye" />

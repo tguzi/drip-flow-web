@@ -32,7 +32,7 @@ const request = (url: string, init: RequestInit) => {
 }
 
 export const get = (url: string, init?: RequestInit) => request(url, { ...init, method: 'GET' })
-
 export const post = (url: string, init: RequestInit) => request(url, { ...init, method: 'POST', headers: { 'content-type': 'application/json; charset=utf-8' } })
+export const put = (url: string, init: RequestInit) => request(url, { ...init, method: 'PUT', headers: { 'content-type': 'application/json' } })
 
 export default request

@@ -10,6 +10,7 @@ export interface IViewProps {
 }
 
 export type TEditorProps = Partial<{
+  defaultValue: string,
   readOnly: boolean;
   textAreaClassName: string;
   forceTextArea: string;

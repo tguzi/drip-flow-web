@@ -2,8 +2,8 @@ import React, { SFC } from 'react'
 import { Route } from 'react-router-dom'
 import LazyComponent from 'components/LazyComponent'
 import ErrorBoundary from 'components/ErrorBoundary'
-import ProfilerComponent from 'components/ProfilerComponent'
-import config from 'config/index'
+// import ProfilerComponent from 'components/ProfilerComponent'
+// import config from 'config/index'
 
 // 按文件名引入模块
 interface IProps {

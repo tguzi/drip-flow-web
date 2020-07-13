@@ -71,3 +71,7 @@ export function decodeId(str: string) {
 export function isFunction<T>(obj: any): obj is T {
   return typeof obj === 'function'
 }
+
+export function dataToString(date: Date): string {
+  return date.toString()
+}
