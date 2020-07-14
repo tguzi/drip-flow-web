@@ -1,18 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { useParams, useHistory } from 'react-router-dom'
 
-import { decodeId } from 'utils/index'
+import { decodeId, timeFormat } from 'utils/index'
 import { get } from 'src/fetch'
 import Layout from 'layout'
 import Icon from 'components/Icon'
 import MarkdownView from 'components/MarkDown/view'
-import {
-  Content,
-  Title,
-  Cover,
-  Info,
-  Item
-} from './styled'
+import { Content, Title, Cover, Info, Item } from './styled'
 
 const Article = () => {
   const params: any = useParams()
@@ -20,7 +14,7 @@ const Article = () => {
   const [articleInfo, setArticleInfo] = useState<any>({})
   const history = useHistory()
   useEffect(() => {
-    (async () => {
+    ;(async () => {
       try {
         const info = await get(`/article/get?id=${id}`)
         setArticleInfo(info?.data)
@@ -39,6 +33,10 @@ const Article = () => {
       <Content>
         <Title>{articleInfo?.title}</Title>
         <Info>
+          <Item>
+            <Icon ico="clock-o" />
+            <span>{timeFormat(articleInfo.updated_at)}</span>
+          </Item>
           <Item>
             <Icon ico="user-o" />
             <span>{articleInfo?.id}</span>
@@ -60,7 +58,9 @@ const Article = () => {
             <span>{articleInfo?.like_count}</span>
           </Item>
           <Item>
-            <span className="btn" onClick={gotoEditor}>编辑</span>
+            <span className="btn" onClick={gotoEditor}>
+              编辑
+            </span>
           </Item>
         </Info>
         <Cover src={articleInfo?.cover} />

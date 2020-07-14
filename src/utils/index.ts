@@ -1,3 +1,5 @@
+import moment from 'moment'
+
 const CONFUSION = 'tguzi'
 
 // 根据路径导出文件
@@ -70,4 +72,8 @@ export function decodeId(str: string) {
 
 export function isFunction<T>(obj: any): obj is T {
   return typeof obj === 'function'
+}
+
+export function timeFormat(time: string) {
+  return moment(time).format('YYYY年MM月DD日 hh:mm:ss')
 }

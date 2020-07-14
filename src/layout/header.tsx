@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { useRef, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import styled from 'styled-components'
 import Flex from 'components/Flex'
+import Menu from './menu'
 import { useSessionStorageState } from 'hooks/useStorage/useSessionStorageState'
+import { useOnClickOutside } from 'src/hooks'
 
 const Header = styled.header`
   position: sticky;
@@ -15,8 +17,12 @@ const Header = styled.header`
   padding: 15px 30px;
   background: #fff;
   border-radius: 5px;
-  box-shadow: 0 5px 15px -7px rgba(0,0,0,0.09);
+  box-shadow: 0 5px 15px -7px rgba(0, 0, 0, 0.09);
   z-index: 1;
+`
+
+const AvatarWrap = styled.div<any>`
+  position: relative;
 `
 
 const Avatar = styled.img`
@@ -66,17 +72,35 @@ const NavItem = styled.li`
 const HeaderBar = () => {
   const history = useHistory()
   const [userInfo] = useSessionStorageState<any>('userInfo')
+
+  const ref = useRef()
+  const [isModalOpen, setModalOpen] = useState(false)
+
+  useOnClickOutside(ref, () => setModalOpen(false))
+
   return (
     <Header>
       <Flex width="auto">
-        <Avatar src={userInfo?.avatar ?? 'https://tse2-mm.cn.bing.net/th/id/OIP.mnD-3m6HyLjvzRvICjgsiwAAAA?w=170&h=180&c=7&o=5&dpr=2&pid=1.7'} />
+        <AvatarWrap ref={ref} onClick={() => setModalOpen(true)}>
+          <Avatar
+            src={
+              userInfo?.avatar ??
+              'https://tse2-mm.cn.bing.net/th/id/OIP.mnD-3m6HyLjvzRvICjgsiwAAAA?w=170&h=180&c=7&o=5&dpr=2&pid=1.7'
+            }
+          />
+          {isModalOpen && <Menu />}
+        </AvatarWrap>
         <Author>
-          <h3>{userInfo?.nickname ?? `游客${Math.floor(Math.random() * 10000)}`}</h3>
+          <h3>
+            {userInfo?.nickname ?? `游客${Math.floor(Math.random() * 10000)}`}
+          </h3>
           <p>兴趣使然的小清新博客站</p>
         </Author>
       </Flex>
       <Nav>
-        <NavItem onClick={() => history.push('/')} className="active">首页</NavItem>
+        <NavItem onClick={() => history.push('/')} className="active">
+          首页
+        </NavItem>
       </Nav>
     </Header>
   )

@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom'
 import Waterfall, { MasonryItem } from 'components/Waterfall'
 import Tag from 'components/Tag'
 import { get } from 'src/fetch'
-import { encodeId } from 'utils/index'
+import { encodeId, timeFormat } from 'utils/index'
 
 import {
   Wrap,
@@ -45,7 +45,7 @@ const Content = () => {
                   <Box>
                     <Label>
                       <Tag text={v?.Label?.name ?? '札记'} />
-                      <Time>{v.updatedAt}</Time>
+                      <Time>{timeFormat(v.updatedAt)}</Time>
                     </Label>
                     <Title title={v.title} onClick={() => gotoArticleDetial(v.id)}>{v.title}</Title>
                     <Cover onClick={() => gotoArticleDetial(v.id)}>
