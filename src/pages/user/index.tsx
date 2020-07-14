@@ -1,5 +1,8 @@
 import React from 'react'
+import Loading from 'components/Loading'
 
-const User = () => <div>user page</div>
+const User = () => <div>
+  <Loading />
+</div>
 
 export default User
