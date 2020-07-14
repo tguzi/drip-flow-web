@@ -77,3 +77,7 @@ export function isFunction<T>(obj: any): obj is T {
 export function timeFormat(time: string) {
   return moment(time).format('YYYY年MM月DD日 hh:mm:ss')
 }
+
+export function dataToString(date: Date): string {
+  return date.toString()
+}

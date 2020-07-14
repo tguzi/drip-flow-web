@@ -11,3 +11,7 @@ interface Window {
   hljs: any,
   CodeMirror: any,
 }
+
+declare interface Date {
+  format(rule: string): string;
+}
