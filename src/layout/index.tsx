@@ -1,6 +1,8 @@
 import React, { SFC, Fragment } from 'react'
 import styled from 'styled-components'
 
+import BackToTop from 'components/BackToTop'
+
 import Header from './header'
 import Footer from './footer'
 
@@ -38,6 +40,7 @@ const Layout: SFC<IProps> = ({
       className={`${cName || ''} layout-${layout}`}
     >{children}</Content>
     <Footer />
+    <BackToTop />
   </Fragment>
 )
 
