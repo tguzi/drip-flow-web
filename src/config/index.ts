@@ -5,7 +5,7 @@ const domain: any = {
     baseUrl: 'http://localhost:8080/api'
   },
   production: {
-    aiNodeUrl: 'http://dripflows.cn:8080/api'
+    baseUrl: 'http://dripflows.cn:8080/api'
   }
 }
 
