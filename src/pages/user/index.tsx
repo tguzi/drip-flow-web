@@ -1,8 +1,10 @@
 import React from 'react'
-import Loading from 'components/Loading'
+import Empty from 'components/Empty'
 
-const User = () => <div>
-  <Loading />
-</div>
+const User = () => (
+  <div>
+    <Empty />
+  </div>
+)
 
 export default User

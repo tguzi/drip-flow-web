@@ -45,3 +45,10 @@ export const Cover = styled.img`
   margin: 0 auto;
   padding: 15px;
 `
+
+export const LoadingBox = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+`
