@@ -2,10 +2,11 @@ import React from 'react'
 import { useHistory } from 'react-router-dom'
 import styled from 'styled-components'
 import Icon from 'components/Icon'
-import { encodeId } from 'utils/'
+import { encodeId } from 'utils/index'
 
 const MenuWrap = styled.nav`
   position: absolute;
+  top: 67px;
   width: 180px;
   padding: 10px 0;
   background-color: #fff;
@@ -16,6 +17,7 @@ const MenuItem = styled.li<any>`
   list-style: none;
   padding: 6px 12px;
   cursor: pointer;
+  color: #71777c;
   span {
     margin-left: 9.6px;
   }

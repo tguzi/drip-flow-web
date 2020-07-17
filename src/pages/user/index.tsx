@@ -1,10 +1,11 @@
 import React from 'react'
-import Empty from 'components/Empty'
+import Layout from 'src/layout'
+import Content from './content'
 
 const User = () => (
-  <div>
-    <Empty />
-  </div>
+  <Layout layout="content-center">
+    <Content />
+  </Layout>
 )
 
 export default User
