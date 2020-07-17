@@ -38,8 +38,7 @@ jobs:
           connect_timeout: 10s
           script: |
             cd Documents/frivolous/drip-flow-web/
-            npm install
-            npm run build
+            mkdir dev
     
 
     # Runs a set of commands using the runners shell
