@@ -28,14 +28,14 @@ jobs:
 
     # ssh deploy
     - name: Deploy
-    - uses: hengkx/ssh-deploy@v1.0.0
-    env:
-      HOST: ${{ secrets.TG_HOST }}
-      USERNAME: ${{ secrets.TG_USER }}
-      PASSWORD: ${{ secrets.TG_PASS }}
-      SOURCE: "./dist"
-      TARGET: "Documents/frivolous/drip-flow-web/dist"
-      AFTER_COMMAND: 'npm run stop && npm install --production && npm run start'
+      uses: hengkx/ssh-deploy@v1.0.0
+      env:
+        HOST: ${{ secrets.TG_HOST }}
+        USERNAME: ${{ secrets.TG_USER }}
+        PASSWORD: ${{ secrets.TG_PASS }}
+        SOURCE: "./dist"
+        TARGET: "Documents/frivolous/drip-flow-web/dist"
+        AFTER_COMMAND: 'npm run stop && npm install --production && npm run start'
 
 
     # SSH pipelines
