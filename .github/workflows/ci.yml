@@ -37,6 +37,25 @@ jobs:
     #     TARGET: "Documents/frivolous/drip-flow-web/dist"
     #     AFTER_COMMAND: 'npm run stop && npm install --production && npm run start'
 
+    - name: ssh scp ssh pipelines
+      uses: cross-the-world/ssh-scp-ssh-pipelines@latest
+      env:
+        WELCOME: "ssh scp ssh pipelines"
+        LASTSSH: "Doing something after copying"
+      with:
+        host: ${{ secrets.TG_HOST }}
+        user: ${{ secrets.TG_USER }}
+        pass: ${{ secrets.TG_PASS }}
+        connect_timeout: 10s
+        first_ssh: |
+          ls -la  \necho $WELCOME 
+        scp: |
+          './dist/*' => Documents/frivolous/drip-flow-web/dist
+        last_ssh: |
+          echo $LASTSSH && 
+          (mkdir test1/test || true)
+          || ls -la
+
     # SSH pipelines
     # - name: Connect
     #   uses: cross-the-world/ssh-pipeline@master
@@ -64,13 +83,13 @@ jobs:
     #     remoteDir: "Documents/frivolous/dist"
 
     # 远端打包
-    - name: Deploy
-      # uses: appleboy/ssh-action@master
-      with:
-        host: ${{ secrets.TG_HOST }}
-        username: ${{ secrets.TG_USER }}
-        password: ${{ secrets.TG_PASS }}
-        script: npm run autoBuild
+    # - name: Deploy
+    #   uses: appleboy/ssh-action@master
+    #   with:
+    #     host: ${{ secrets.TG_HOST }}
+    #     username: ${{ secrets.TG_USER }}
+    #     password: ${{ secrets.TG_PASS }}
+    #     script: npm run autoBuild
 
     # Runs a set of commands using the runners shell
     # - name: Deploy
