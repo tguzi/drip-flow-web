@@ -27,15 +27,15 @@ jobs:
       # run: npm install && npm run build
 
     # ssh deploy 不可用
-    - name: Deploy
-      uses: hengkx/ssh-deploy@v1.0.0
-      env:
-        HOST: ${{ secrets.TG_HOST }}
-        USERNAME: ${{ secrets.TG_USER }}
-        PASSWORD: ${{ secrets.TG_PASS }}
-        SOURCE: "./dist"
-        TARGET: "Documents/frivolous/drip-flow-web/dist"
-        AFTER_COMMAND: 'npm run stop && npm install --production && npm run start'
+    # - name: Deploy
+    #   uses: hengkx/ssh-deploy@v1.0.0
+    #   env:
+    #     HOST: ${{ secrets.TG_HOST }}
+    #     USERNAME: ${{ secrets.TG_USER }}
+    #     PASSWORD: ${{ secrets.TG_PASS }}
+    #     SOURCE: "./dist"
+    #     TARGET: "Documents/frivolous/drip-flow-web/dist"
+    #     AFTER_COMMAND: 'npm run stop && npm install --production && npm run start'
 
     # SSH pipelines
     # - name: Connect
@@ -53,6 +53,15 @@ jobs:
           #   git pull
           #   npm install
           #   npm run build
+
+    - name: FTP-Deploy-Action
+      uses: SamKirkland/FTP-Deploy-Action@3.0.0
+      with:
+        ftp-server: sftp://${{ secrets.TG_HOST }} # 服务器地址和端口（可以填域名，不过我服务器做了全站加速会导向加速结点的IP，所以只能用服务器的IP）
+        ftp-username: ${{ secrets.TG_USER }} # FTP用户名
+        ftp-password: ${{ secrets.TG_PASS }} # FTP密码
+        git-ftp-args: --insecure --remote-root Documents/frivolous/drip-flow-web/dist # 要部署到服务器的哪个位置（我这用的是SFTP，如果是FTP连接的话--insecure不用加）
+        local-dir: ./dist/ # 选择哪些文件要部署到服务器，这个选项在这里选了之后，要在.git-ftp-include中添加相应的路径
 
     # Runs a set of commands using the runners shell
     # - name: Deploy
