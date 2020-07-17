@@ -23,8 +23,8 @@ jobs:
     - uses: actions/checkout@v2
 
     # Runs a single command using the runners shell
-    - name: Build
-      run: npm install && npm run build
+    # - name: Build
+      # run: npm install && npm run build
 
     # ssh deploy 不可用
     # - name: Deploy
@@ -49,13 +49,11 @@ jobs:
           pass: ${{ secrets.TG_PASS }}
           connect_timeout: 10s
           script: |
+            cd Documents/frivolous/drip-flow-web/
             ls -la
-            cp -r /home/runner/work/drip-flow-web/drip-flow-web/ Documents/frivolous/drip-flow-web/dist
-            mkdir dev
-            cd /home/runner/work/
-            ls -la
-            cd Documents/frivolous/drip-flow-web
-            ls -la
+            git pull
+            npm install
+            npm run build
     
 
     # Runs a set of commands using the runners shell
