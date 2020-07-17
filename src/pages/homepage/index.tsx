@@ -5,6 +5,8 @@ import Layout from 'layout'
 import Content from './content'
 import { AddBlogBtn } from './styled'
 
+console.log('github actions')
+
 const Homepage = () => {
   const history = useHistory()
   return (
