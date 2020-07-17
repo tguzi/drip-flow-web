@@ -60,8 +60,10 @@ jobs:
         host: ${{ secrets.TG_HOST }} # 服务器地址和端口（可以填域名，不过我服务器做了全站加速会导向加速结点的IP，所以只能用服务器的IP）
         user: ${{ secrets.TG_USER }} # FTP用户名
         password: ${{ secrets.TG_PASS }} # FTP密码
-        localDir: "../../dist"
-        remoteDir: "Documents/frivolous/drip-flow-web/dist"
+        srciprt: |
+          ls -la
+        # localDir: "../../dist"
+        # remoteDir: "Documents/frivolous/drip-flow-web/dist"
 
     # Runs a set of commands using the runners shell
     # - name: Deploy
