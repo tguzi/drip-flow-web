@@ -38,7 +38,7 @@ jobs:
     #     AFTER_COMMAND: 'npm run stop && npm install --production && npm run start'
 
     - name: ssh scp ssh pipelines
-      uses: cross-the-world/ssh-scp-ssh-pipelines@latest
+      uses: cross-the-world/scp-pipeline@master
       env:
         WELCOME: "ssh scp ssh pipelines"
         LASTSSH: "Doing something after copying"
