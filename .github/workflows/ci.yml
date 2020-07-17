@@ -54,14 +54,24 @@ jobs:
           #   npm install
           #   npm run build
 
-    - name: FTP-Deploy-Action
-      uses: sebastianpopp/ftp-action@releases/v2
+    # - name: FTP-Deploy-Action
+    #   uses: sebastianpopp/ftp-action@releases/v2
+    #   with:
+    #     host: ${{ secrets.TG_HOST }} # 服务器地址和端口（可以填域名，不过我服务器做了全站加速会导向加速结点的IP，所以只能用服务器的IP）
+    #     user: ${{ secrets.TG_USER }} # FTP用户名
+    #     password: ${{ secrets.TG_PASS }} # FTP密码
+    #     localDir: "."
+    #     remoteDir: "Documents/frivolous/dist"
+
+    # 远端打包
+    - name: Deploy
+      uses: appleboy/ssh-action@master
       with:
-        host: ${{ secrets.TG_HOST }} # 服务器地址和端口（可以填域名，不过我服务器做了全站加速会导向加速结点的IP，所以只能用服务器的IP）
-        user: ${{ secrets.TG_USER }} # FTP用户名
-        password: ${{ secrets.TG_PASS }} # FTP密码
-        localDir: "."
-        remoteDir: "Documents/frivolous/dist"
+        host: ${{ secrets.TG_HOST }}
+        username: ${{ secrets.TG_USER }}
+        password: ${{ secrets.TG_PASS }}
+        script: ｜
+          whoami
 
     # Runs a set of commands using the runners shell
     # - name: Deploy
