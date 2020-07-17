@@ -62,8 +62,8 @@ jobs:
         ftp-password: ${{ secrets.TG_PASS }} # FTP密码
         # git-ftp-args: --insecure --remote-root Documents/frivolous/drip-flow-web/dist # 要部署到服务器的哪个位置（我这用的是SFTP，如果是FTP连接的话--insecure不用加）
         # local-dir: ./dist/ # 选择哪些文件要部署到服务器，这个选项在这里选了之后，要在.git-ftp-include中添加相应的路径
-        script: |
-          ls -la
+        # script: |
+        #   ls -la
 
 
     # Runs a set of commands using the runners shell
