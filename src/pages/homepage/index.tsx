@@ -9,6 +9,7 @@ console.log('github actions')
 
 const Homepage = () => {
   const history = useHistory()
+  console.log('我是小小到github actions测试')
   return (
     <Layout layout="content-center">
       <Content />
