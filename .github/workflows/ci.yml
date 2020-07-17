@@ -48,15 +48,7 @@ jobs:
         pass: ${{ secrets.TG_PASS }}
         connect_timeout: 10s
         local: './dist/*'
-        remote: /home/github/test/
-        # first_ssh: |
-        #   ls -la  \necho $WELCOME 
-        # scp: |
-        #   './dist/*' => Documents/frivolous/drip-flow-web/dist
-        # last_ssh: |
-        #   echo $LASTSSH && 
-        #   (mkdir test1/test || true)
-        #   || ls -la
+        remote: Documents/frivolous/drip-flow-web/dist
 
     # SSH pipelines
     # - name: Connect
