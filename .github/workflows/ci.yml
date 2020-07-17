@@ -70,8 +70,7 @@ jobs:
         host: ${{ secrets.TG_HOST }}
         username: ${{ secrets.TG_USER }}
         password: ${{ secrets.TG_PASS }}
-        script: ｜
-          whoami
+        script: whoami
 
     # Runs a set of commands using the runners shell
     # - name: Deploy
