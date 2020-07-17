@@ -26,19 +26,31 @@ jobs:
     - name: Build
       run: npm install && npm run build
 
-    # SSH pipelines
+    # ssh deploy
     - name: Deploy
-      uses: cross-the-world/ssh-pipeline@master
-      env:
-        WELCOME: "ssh pipeline"
-      with:
-          host: ${{ secrets.TG_HOST }}
-          user: ${{ secrets.TG_USER }}
-          pass: ${{ secrets.TG_PASS }}
-          connect_timeout: 10s
-          script: |
-            cd Documents/frivolous/drip-flow-web/
-            mkdir dev
+    - uses: hengkx/ssh-deploy@v1.0.0
+    env:
+      HOST: ${{ secrets.TG_HOST }}
+      USERNAME: ${{ secrets.TG_USER }}
+      PASSWORD: ${{ secrets.TG_PASS }}
+      SOURCE: "./dist"
+      TARGET: "Documents/frivolous/drip-flow-web/dist"
+      AFTER_COMMAND: 'npm run stop && npm install --production && npm run start'
+
+
+    # SSH pipelines
+    # - name: Deploy
+    #   uses: cross-the-world/ssh-pipeline@master
+    #   env:
+    #     WELCOME: "ssh pipeline"
+    #   with:
+    #       host: ${{ secrets.TG_HOST }}
+    #       user: ${{ secrets.TG_USER }}
+    #       pass: ${{ secrets.TG_PASS }}
+    #       connect_timeout: 10s
+    #       script: |
+    #         cd Documents/frivolous/drip-flow-web/
+    #         mkdir dev
     
 
     # Runs a set of commands using the runners shell
@@ -72,3 +84,15 @@ jobs:
 #       echo $WELCOME 
 #       mkdir -p /home/github/test/test1 && 
 #       mkdir -p /home/github/test/test2 &&
+
+
+# steps:
+# - uses: hengkx/ssh-deploy@v1.0.0
+#   env:
+#     HOST: ${{ secrets.DEPLOY_HOST }}
+#     USERNAME: ${{ secrets.DEPLOY_USERNAME }}
+#     PASSWORD: ${{ secrets.DEPLOY_PASSWORD }}
+#     PORT: ${{ secrets.DEPLOY_PORT }}
+#     SOURCE: 'dist/'
+#     TARGET: ${{ secrets.DEPLOY_DEST_PATH }}
+#     AFTER_COMMAND: 'npm run stop && npm install --production && npm run start'
