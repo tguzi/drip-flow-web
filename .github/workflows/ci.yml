@@ -49,6 +49,7 @@ jobs:
           pass: ${{ secrets.TG_PASS }}
           connect_timeout: 10s
           script: |
+            ls -la
             cp -r ./dist/ Documents/frivolous/drip-flow-web/dist
             mkdir dev
     
