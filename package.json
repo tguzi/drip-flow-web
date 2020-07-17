@@ -8,7 +8,8 @@
     "start": "webpack-dev-server --config script/start.js --progress --color --inline --hot",
     "build": "webpack --config script/build.js --progress --color",
     "auto": "git ci -am '自动发布测试' && git ps",
-    "bd": "npm run dll && npm run bd"
+    "bd": "npm run dll && npm run bd",
+    "autoBuild": "git pull && npm run install && npm run build"
   },
   "author": "",
   "license": "ISC",
