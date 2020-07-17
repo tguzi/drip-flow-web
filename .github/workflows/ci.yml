@@ -48,7 +48,7 @@ jobs:
         pass: ${{ secrets.TG_PASS }}
         connect_timeout: 10s
         local: './dist/*'
-        remote: Documents/frivolous/drip-flow-web/dist
+        remote: /usr/share/nginx/html
 
     # SSH pipelines
     # - name: Connect
