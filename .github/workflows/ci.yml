@@ -24,7 +24,7 @@ jobs:
 
     # Runs a single command using the runners shell
     # - name: Build
-      # run: npm install && npm run build
+    #   run: npm install && npm run build
 
     # ssh deploy 不可用
     # - name: Deploy
@@ -65,7 +65,7 @@ jobs:
 
     # 远端打包
     - name: Deploy
-      uses: appleboy/ssh-action@master
+      # uses: appleboy/ssh-action@master
       with:
         host: ${{ secrets.TG_HOST }}
         username: ${{ secrets.TG_USER }}
