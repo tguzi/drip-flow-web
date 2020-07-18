@@ -48,9 +48,13 @@ const Content = () => {
                       <Time>{v.updatedAt}</Time>
                     </Label>
                     <Title title={v.title} onClick={() => gotoArticleDetial(v.id)}>{v.title}</Title>
-                    <Cover onClick={() => gotoArticleDetial(v.id)}>
-                      <img src={v.cover} alt={v.title} title={`${v?.Label?.name}-${v.title}`} />
-                    </Cover>
+                    {
+                      v?.cover && (
+                        <Cover onClick={() => gotoArticleDetial(v.id)}>
+                          <img src={v.cover} alt={v.title} title={`${v?.Label?.name}-${v.title}`} />
+                        </Cover>
+                      )
+                    }
                   </Box>
                 </MasonryItem>
               ))

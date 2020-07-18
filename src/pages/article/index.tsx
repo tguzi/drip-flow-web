@@ -63,7 +63,9 @@ const Article = () => {
             <span className="btn" onClick={gotoEditor}>编辑</span>
           </Item>
         </Info>
-        <Cover src={articleInfo?.cover} />
+        {
+          articleInfo?.cover && <Cover src={articleInfo.cover} />
+        }
         <MarkdownView content={articleInfo?.content} />
       </Content>
     </Layout>
