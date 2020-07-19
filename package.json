@@ -71,6 +71,7 @@
     "webpack-merge": "^4.2.2"
   },
   "dependencies": {
+    "@tgu/hooks": "^0.0.7",
     "codemirror": "^5.54.0",
     "github-markdown-css": "^4.0.0",
     "highlight.js": "^10.0.3",

@@ -58,6 +58,9 @@ const EditorArticle = () => {
         cover,
         content: val
       }
+      if (!cover) {
+        delete param['cover']
+      }
       await post('/article/update', { body: JSON.stringify(param) })
       history.push(`/article/${params?.id}`)
     } catch (e) {
