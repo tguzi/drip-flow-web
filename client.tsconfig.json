@@ -16,11 +16,13 @@
     "esModuleInterop": true, 
     "experimentalDecorators": true, 
     "emitDecoratorMetadata": true, 
-    "forceConsistentCasingInFileNames": true
+    "forceConsistentCasingInFileNames": true,
+    "noImplicitAny": false
   },
   "include": [
     "src/client",
-    "*.d.ts"
+    "*.d.ts",
+    "./src/images.d.ts"
   ],
   "exclude": [
     "/node_models/",

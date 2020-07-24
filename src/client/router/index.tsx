@@ -4,7 +4,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 // 按文件名引入模块
 const _import = (path: any) => () => require(`../pages${path}`).default();
 
-export default ({ routeList }: any) => {
+const RoutePage = ({ routeList }: any) => {
   return (
       <Switch>
         {routeList.map(({ name, path, exact, component }: any) => {
@@ -25,3 +25,5 @@ export default ({ routeList }: any) => {
       </Switch>
   );
 };
+
+export default RoutePage

@@ -1,32 +1,29 @@
 import React from 'react'
-import styled from 'styled-components'
+import { useHistory } from 'react-router-dom'
 
 import Layout from '../../layout'
 import Content from './content'
 
-const AddBlogBtn = styled.button`
-  position: fixed;
-  cursor: pointer;
-  bottom: 100px;
-  right: 100px;
-  width: 50px;
-  height: 50px;
-  border-radius: 50px;
-  line-height: 50px;
-  text-align: center;
-  display: block;
-  border: none;
-  background: #abcdef;
-  color: #fff;
-  font-size: 32px;
-  outline: none;
-`
+import { AddBlogBtn } from './styled'
 
-const Homepage = () => (
-  <Layout layout="content-center">
-    <Content />
-    <AddBlogBtn />
-  </Layout>
-)
+const Homepage = () => {
+  // const history = useHistory()
+  return (
+    <Layout layout="content-center">
+      <Content />
+      <AddBlogBtn
+        onClick={() => {
+          // history.push({
+          //   pathname: '/editor',
+          //   state: {
+          //     new: true,
+          //     backpath: '/',
+          //   },
+          // })
+        }}
+      />
+    </Layout>
+  )
+}
 
 export default Homepage

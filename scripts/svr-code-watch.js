@@ -1,42 +1,45 @@
-const webpack = require('webpack');
-const config = require('../build/dev/server.config');
-const CONSTANTCODE = require('./constant');
+const webpack = require('webpack')
+const config = require('../build/dev/server.config')
 const chalk = require('chalk')
 
 const log = console.log
 
-console.log('svr-code-watch')
-const compiler = webpack(config);
+const compiler = webpack(config)
 
-const watching = compiler.watch(
+log(chalk.cyan('🚀 Starting the development node server...\n'))
+
+
+compiler.watch(
   {
     aggregateTimeout: 300,
     ignored: /node_modules/,
     poll: 2000,
   },
   (err, stats) => {
-    let json = stats.toJson('minimal');
+    if (err || stats.hasErrors()) {
+      // log(chalk.red(err))
+    }
+    let json = stats.toJson('minimal')
     if (json.errors) {
       json.errors.forEach((item) => {
-        console.error(item);
-      });
+        // console.error(item);
+        // log(item)
+      })
     }
     if (json.warnings) {
       json.warnings.forEach((item) => {
-        console.warn(item);
-      });
+        // console.warn(item)
+      })
     }
-
-    console.log(CONSTANTCODE.SVRCODECOMPLETED);
   }
-);
+)
 
 compiler.hooks.done.tap('done', function (data) {
-  log(chalk.green('\n svr code done'));
-});
+  log(chalk.green('\n 🎉服务端代码编译完成\n'))
+})
 
 process.stdin.on('data', function (data) {
   if (data.toString() === 'exit') {
-    process.exit();
+    process.exit()
   }
-});
+})

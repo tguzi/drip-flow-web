@@ -4,7 +4,7 @@ const chalk = require('chalk');
 
 const log = console.log;
 
-log(chalk.blue('\nstarting server...\n'));
+log(chalk.blue('\n🚀 starting server...\n'));
 
 const feCodeWatchProcess = spawn('npm', ['run', 'wds:watch'], {
   stdio: 'inherit',

@@ -1,17 +1,17 @@
 type TAssets = {
-  js: any[];
-  css: any[];
-};
+  js: any[]
+  css: any[]
+}
 export default function () {
   let devHost = '//localhost:9002'
 
   let jsFiles = ['libs.js', 'main.js']
   let cssFiles = ['main.css']
 
-  let assets: TAssets = {
-    js: [],
-    css: []
-  };
+  let assets = {
+    js: [''],
+    css: [''],
+  }
   if (process.env.NODE_ENV === 'development') {
     // 开发环境
     assets.js.push(
@@ -41,6 +41,9 @@ export default function () {
       }
     })
   }
+
+  assets.js.filter((item) => item !== '')
+  assets.css.filter((item) => item !== '')
 
   return assets
 }

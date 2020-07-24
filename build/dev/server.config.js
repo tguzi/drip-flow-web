@@ -1,4 +1,5 @@
 const path = require('path');
+const nodeExternals = require('webpack-node-externals')
 const webpack = require('webpack');
 const merge = require('webpack-merge');
 const {
@@ -20,6 +21,7 @@ module.exports = merge(baseConfig, {
     filename: 'index.js', //设置打包后的文件名
     path: resolve('../../dist/server'), //设置构建结果的输出目录
   },
+  externals: [nodeExternals()],
   resolve: {
     extensions: ['.tsx', '.ts', '.js'],
     alias: {
@@ -70,6 +72,5 @@ module.exports = merge(baseConfig, {
       'process.env': { NODE_ENV: '"development"' },
       __IS_PROD__: false,
     }),
-    // noCssPlugin()
   ],
 });

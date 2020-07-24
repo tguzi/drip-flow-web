@@ -1,41 +1,49 @@
-interface IRequestOptions {
-  uri: string, // 请求地址
-  method?: string, // 请求方式
-  body?: object, // body内容
-  header?: object, // header内容
-}
+import ask from '../Ask'
+import createAttempt from 'src/Ask/retry'
 
-class Fetch {
-  constructor () {}
+ask.interceptors.request.use((config: any) => {
+  config.baseUrl = 'http://129.226.171.102:8080'
+  return config
+})
 
-  // 基础请求路径
-  private BASE_URL = ''
-
-  // 默认参数
-  private defaultParams = {}
-
-  /**
-   * 处理fetch请求参数
-   * @private
-   * @template T
-   * @param {T} options
-   * @returns {T}
-   */
-  private diposeOptions <T> (options: T): T {
-    return options
+ask.interceptors.response.use(
+  (response: any) => {
+    return new Promise((resolve, reject) => {
+      if (response.code === '200') {
+        resolve(response.data)
+      } else {
+        reject(response.message || '系统异常')
+      }
+    })
+  },
+  (err: any) => {
+    return Promise.reject(err)
   }
-
-  /**
-   * 封装request
-   * @param {IRequestOptions} options
-   * @returns {Fetch}
-   */
-  // public request (options: IRequestOptions): Fetch {
-    // return fetch(options.uri)
-  // }
-
+)
+// 请求
+const request = (url: string, init: RequestInit) => {
+  const config = {
+    url,
+    ...init,
+  }
+  return ask.request(config)
 }
 
-export const fetch = new Fetch()
+export const get = (url: string, init: RequestInit) =>
+  request(url, { ...init, method: 'GET' })
 
-export default Fetch
+export const post = (url: string, init: any) =>
+  request(url, {
+    ...init,
+    method: 'POST',
+    headers: { 'content-type': 'application/json; charset=utf-8' },
+  })
+
+export const retry = (fn: any, url: string, init: any) => {
+  const singleRequest = () => fn(url, init)
+  return function (times: number, delay: number) {
+    return createAttempt(singleRequest, times, delay)
+  }
+}
+
+export default request

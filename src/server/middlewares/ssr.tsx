@@ -1,28 +1,26 @@
-import React from 'react';
-// import Route from '../../client/router/index';
-import { StaticRouter, Route } from 'react-router';
-import getAssets from '../common/assets';
-import { renderToString } from 'react-dom/server';
-import routeMap from '../../client/router/route';
-import App from '../../client/router/index';
-import { Context, Next } from 'koa';
+import React from 'react'
+import { StaticRouter, Route } from 'react-router'
+import getAssets from '../common/assets'
+import { renderToString } from 'react-dom/server'
+import routeMap from '../../client/router/route'
+import App from '../../client/router/index'
 
-const assetsMap = getAssets();
+const assetsMap = getAssets()
 
-export default (ctx: any, next: any) => {
-  const path = ctx.request.path;
-  let context = {};
+export default (ctx: any, next: () => void) => {
+  const path = ctx.request.path
+  let context = {}
   const html = renderToString(
     <StaticRouter location={path} context={context}>
       <App routeList={routeMap}></App>
     </StaticRouter>
-  );
+  )
   // const html = renderToString(<Route />);
   ctx.body = `<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>水滴</title>
+  <title>滴流谷</title>
   ${assetsMap.css.join('')}
 </head>
 <body>
@@ -30,7 +28,7 @@ export default (ctx: any, next: any) => {
 </body>
 </html>
 ${assetsMap.js.join('')}
-`;
+`
 
-  return next();
-};
+  return next()
+}

@@ -21,18 +21,18 @@ export default [
     title: '登陆页',
   },
   {
-    path: '/reading-notes',
-    name: 'readingNotes',
-    title: '札记'
+    path: '/user/:id',
+    name: 'user',
+    title: '个人信息'
   },
   {
-    path: '/half-month-topic',
-    name: 'halfMonthTopic',
-    title: '两周一话'
+    path: '/editor/:id?',
+    name: 'editor',
+    title: '编辑页',
   },
   {
-    path: '/blog-detail',
-    name: 'blogDetail',
+    path: '/article/:id',
+    name: 'article',
     title: '博客详情'
   },
   {

@@ -1,6 +1,10 @@
-import React from 'react';
-import styled from 'styled-components';
-import Flex from '../components/Flex/index';
+import React, { useRef, useState } from 'react'
+import { useHistory } from 'react-router-dom'
+import styled from 'styled-components'
+import Flex from '../components/Flex'
+import Menu from './menu'
+import { useSessionStorageState } from '../hooks/useStorage/useSessionStorageState'
+import { useOnClickOutside } from '../hooks'
 
 const Header = styled.header`
   position: sticky;
@@ -15,7 +19,11 @@ const Header = styled.header`
   border-radius: 5px;
   box-shadow: 0 5px 15px -7px rgba(0, 0, 0, 0.09);
   z-index: 1;
-`;
+`
+
+const AvatarWrap = styled.div<any>`
+  position: relative;
+`
 
 const Avatar = styled.img`
   width: 50px;
@@ -23,7 +31,7 @@ const Avatar = styled.img`
   border-radius: 50px;
   border: 1px solid #eee;
   cursor: pointer;
-`;
+`
 
 const Author = styled.div`
   margin-left: 15px;
@@ -38,13 +46,13 @@ const Author = styled.div`
     font-size: 12px;
     color: #999;
   }
-`;
+`
 
 const Nav = styled.nav`
   display: flex;
   margin-left: 50px;
   list-style: none;
-`;
+`
 
 const NavItem = styled.li`
   padding: 20px;
@@ -59,28 +67,43 @@ const NavItem = styled.li`
   &:hover {
     color: #777;
   }
-`;
-
-const avatarUrl =
-  'http://demo.qzhai.net/cell/wp-content/uploads/2020/01/stock-photo-1005217204-100x100.png';
+`
 
 const HeaderBar = () => {
+  const history = useHistory()
+  const [userInfo] = useSessionStorageState<any>('userInfo')
+
+  const ref = useRef()
+  const [isModalOpen, setModalOpen] = useState(false)
+
+  useOnClickOutside(ref, () => setModalOpen(false))
+
   return (
     <Header>
       <Flex width="auto">
-        <Avatar src={avatarUrl} />
+        <AvatarWrap ref={ref} onClick={() => setModalOpen(true)}>
+          <Avatar
+            src={
+              userInfo?.avatar ??
+              'https://tse2-mm.cn.bing.net/th/id/OIP.mnD-3m6HyLjvzRvICjgsiwAAAA?w=170&h=180&c=7&o=5&dpr=2&pid=1.7'
+            }
+          />
+          {isModalOpen && <Menu />}
+        </AvatarWrap>
         <Author>
-          <h3>DirpFlow</h3>
-          <p>frivolous的博客小站</p>
+          <h3>
+            {userInfo?.nickname ?? `游客${Math.floor(Math.random() * 10000)}`}
+          </h3>
+          <p>兴趣使然的小清新博客站</p>
         </Author>
       </Flex>
       <Nav>
-        <NavItem className="active">首页</NavItem>
-        {/* <NavItem>札记</NavItem>
-        <NavItem>两周一话</NavItem> */}
+        <NavItem onClick={() => history.push('/')} className="active">
+          首页
+        </NavItem>
       </Nav>
     </Header>
-  );
-};
+  )
+}
 
-export default HeaderBar;
+export default HeaderBar

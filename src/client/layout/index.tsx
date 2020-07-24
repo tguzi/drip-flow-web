@@ -1,6 +1,8 @@
 import React, { SFC, Fragment } from 'react'
 import styled from 'styled-components'
 
+import BackToTop from '../components/BackToTop'
+
 import Header from './header'
 import Footer from './footer'
 
@@ -16,7 +18,7 @@ type IContent = Partial<{
 }>
 
 const Content = styled.div<IContent>`
-  min-height: 100vh;
+  min-height: calc(100vh - 175px);
   background: ${({ bgColor }) => bgColor};
   overflow: auto;
   &.layout-content-center {
@@ -35,14 +37,16 @@ const Layout: SFC<IProps> = ({
     <Header />
     <Content
       bgColor={bgColor}
-      className={`${cName} layout-${layout}`}
+      className={`${cName || ''} layout-${layout}`}
     >{children}</Content>
     <Footer />
+    <BackToTop />
   </Fragment>
 )
 
 Layout.defaultProps = {
-  bgColor: 'rgba(240, 240, 240, 0.5)'
+  bgColor: 'transparent',
+  layout: 'default'
 }
 
 export default Layout
