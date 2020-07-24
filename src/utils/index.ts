@@ -3,8 +3,8 @@ import moment from 'moment'
 const CONFUSION = 'tguzi'
 
 // 根据路径导出文件
-export const _require = (path: string) => () => require(path)
-export const _import = (file: string)=> () => import(file)
+// export const _require = (path: string) => () => require(path)
+// export const _import = (file: string)=> () => import(file)
 
 // 节流
 export function throttle(fn: Function, wait = 200) {
