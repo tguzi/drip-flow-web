@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useHistory, useParams } from 'react-router-dom'
 
 import { throttle, encodeId, decodeId } from 'utils/index'
-import { post, get, put } from 'src/fetch'
+import { post, get } from 'src/fetch'
 import MarkdownEditor from 'components/MarkDown/editor'
 import MarkdownView from 'components/MarkDown/view'
 import {

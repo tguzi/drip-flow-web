@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom'
 
 import Layout from 'layout'
 import Content from './content'
+
 import { AddBlogBtn } from './styled'
 
 const Homepage = () => {
@@ -16,8 +17,8 @@ const Homepage = () => {
             pathname: '/editor',
             state: {
               new: true,
-              backpath: '/'
-            }
+              backpath: '/',
+            },
           })
         }}
       />

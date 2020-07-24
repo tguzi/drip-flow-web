@@ -21,6 +21,11 @@ export default [
     title: '登陆页',
   },
   {
+    path: '/user/:id',
+    name: 'user',
+    title: '个人信息'
+  },
+  {
     path: '/editor/:id?',
     name: 'editor',
     title: '编辑页',

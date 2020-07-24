@@ -1,8 +1,10 @@
+import moment from 'moment'
+
 const CONFUSION = 'tguzi'
 
 // 根据路径导出文件
-export const _require = (path: string) => () => require(path)
-export const _import = (file: string)=> () => import(file)
+// export const _require = (path: string) => () => require(path)
+// export const _import = (file: string)=> () => import(file)
 
 // 节流
 export function throttle(fn: Function, wait = 200) {
@@ -70,6 +72,10 @@ export function decodeId(str: string) {
 
 export function isFunction<T>(obj: any): obj is T {
   return typeof obj === 'function'
+}
+
+export function timeFormat(time: string) {
+  return moment(time).format('YYYY年MM月DD日 hh:mm:ss')
 }
 
 export function dataToString(date: Date): string {
