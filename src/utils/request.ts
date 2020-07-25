@@ -2,7 +2,7 @@ import ask from '../Ask'
 import createAttempt from 'src/Ask/retry'
 
 ask.interceptors.request.use((config: any) => {
-  config.baseUrl = 'http://129.226.171.102:8080'
+  config.baseUrl = 'http://api.dripflows.cn'
   return config
 })
 
