@@ -3,9 +3,9 @@ import { useHistory } from 'react-router-dom'
 import Input from 'components/Input'
 import Button from 'components/Button'
 import toast from 'components/Toast'
-import { post } from 'src/fetch'
 import { useSessionStorageState } from 'hooks/useStorage/useSessionStorageState'
 import { encodePwd } from 'utils/index'
+import { post } from 'utils/request'
 
 import {
   Wrap,
@@ -35,7 +35,8 @@ const Login = () => {
         toast(res?.message)
       }
     } catch (e) {
-      console.log('登录出错')
+      console.log('登录出错', e)
+      toast('登录出错')
     }
   }
 

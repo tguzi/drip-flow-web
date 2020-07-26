@@ -6,6 +6,7 @@ declare module '*.jpg'
 declare module 'react-markdown/plugins/html-parser'
 declare module 'react-syntax-highlighter/dist/esm/languages/prism'
 declare module 'codemirror/*'
+declare module '@tgu/*'
 
 interface Window {
   hljs: any,

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useParams, useHistory } from 'react-router-dom'
 
 import { decodeId } from 'utils/index'
-import { get } from 'src/fetch'
+import { get } from 'utils/request'
 import Layout from 'layout'
 import Icon from 'components/Icon'
 import MarkdownView from 'components/MarkDown/view'

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useHistory, useParams } from 'react-router-dom'
 
 import { throttle, encodeId, decodeId } from 'utils/index'
-import { post, get, put } from 'src/fetch'
+import { post, get } from 'utils/request'
 import MarkdownEditor from 'components/MarkDown/editor'
 import MarkdownView from 'components/MarkDown/view'
 import {
@@ -59,7 +59,7 @@ const EditorArticle = () => {
         content: val
       }
       if (!cover) {
-        delete param['cover']
+        delete param.cover
       }
       await post('/article/update', { body: JSON.stringify(param) })
       history.push(`/article/${params?.id}`)

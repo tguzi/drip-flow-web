@@ -1,49 +1,43 @@
-import ask from '../Ask'
-import createAttempt from 'src/Ask/retry'
+import TguFetch from '@tgu/fetch'
+import config from 'config/index'
+import { altSessionStorageState } from 'hooks/useStorage/useSessionStorageState'
+import toast from 'components/Toast'
 
-ask.interceptors.request.use((config: any) => {
-  config.baseUrl = 'http://api.dripflows.cn'
+// 请求拦截器
+TguFetch.interceptors.request.use((config: any) => {
+  if (config.method === 'POST') {
+    config.headers = {
+      ...config.headers,
+      'content-type': 'application/json; charset=utf-8'
+    }
+  }
+  const [userInfo] = altSessionStorageState<any>('userInfo')
+  config.headers = {
+    ...config.headers,
+    'authorization': `Bearer ${userInfo?.token}`
+  }
   return config
+}, (err: Error) => {
+  toast(`请求出错${err.message}`)
 })
 
-ask.interceptors.response.use(
-  (response: any) => {
-    return new Promise((resolve, reject) => {
-      if (response.code === '200') {
-        resolve(response.data)
-      } else {
-        reject(response.message || '系统异常')
-      }
-    })
-  },
-  (err: any) => {
-    return Promise.reject(err)
-  }
-)
-// 请求
-const request = (url: string, init: RequestInit) => {
-  const config = {
-    url,
-    ...init,
-  }
-  return ask.request(config)
-}
+// 响应拦截器
+TguFetch.interceptors.response.use((res: Response) => {
+  return res
+}, (err: Error) => {
+  toast(`服务器异常${err.message}`)
+})
 
-export const get = (url: string, init: RequestInit) =>
-  request(url, { ...init, method: 'GET' })
+TguFetch.setConfig({
+  baseURL: config.baseUrl
+})
 
-export const post = (url: string, init: any) =>
-  request(url, {
-    ...init,
-    method: 'POST',
-    headers: { 'content-type': 'application/json; charset=utf-8' },
-  })
+const request = TguFetch.request
 
-export const retry = (fn: any, url: string, init: any) => {
-  const singleRequest = () => fn(url, init)
-  return function (times: number, delay: number) {
-    return createAttempt(singleRequest, times, delay)
-  }
-}
+export const get = (url: string, init?: RequestInit) => request({ ...init, method: 'GET', url })
+
+export const post = (url: string, init: RequestInit) => request({ ...init, method: 'POST', url })
+
+export const put = (url: string, init: RequestInit) => request({ ...init, method: 'PUT', url })
 
 export default request

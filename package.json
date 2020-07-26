@@ -20,6 +20,7 @@
     "@babel/preset-react": "^7.9.4",
     "@types/codemirror": "^0.0.95",
     "@types/highlight.js": "^9.12.4",
+    "@types/lodash": "^4.14.158",
     "@types/react": "^16.9.34",
     "@types/react-dom": "^16.9.7",
     "@types/react-router-dom": "^5.1.5",
@@ -71,10 +72,12 @@
     "webpack-merge": "^4.2.2"
   },
   "dependencies": {
+    "@tgu/fetch": "^0.0.8",
     "@tgu/hooks": "^0.0.7",
     "codemirror": "^5.54.0",
     "github-markdown-css": "^4.0.0",
     "highlight.js": "^10.0.3",
+    "loadsh": "^0.0.4",
     "lodash": "^4.17.15",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",

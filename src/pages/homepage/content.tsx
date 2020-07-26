@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import Waterfall, { MasonryItem } from 'components/Waterfall'
 import Tag from 'components/Tag'
-import { get } from 'src/fetch'
+import { get } from 'utils/request'
 import { encodeId } from 'utils/index'
 
 import {
