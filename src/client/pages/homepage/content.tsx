@@ -23,7 +23,7 @@ const Content = () => {
     (async () => {
       try {
         const data = await get('/article/list')
-        setList(data?.data)
+        setList([])
       } catch (e) {
         console.log('获取列表失败')
       }

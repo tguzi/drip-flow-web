@@ -3,13 +3,13 @@ import { Container, ImgBox, Img, Description, SlotBox } from './styled'
 import EmptyImg from '../../static/imgs/empty.svg'
 
 interface Props {
-  image?: string;
-  imageStyle?: string;
-  description?: string;
+  image?: string
+  imageStyle?: string
+  description?: string
 }
 
 const Empty: SFC<Props> = ({ image, imageStyle, description, children }) => {
-  console.log(EmptyImg)
+  console.log(image)
   return (
     <Container>
       <ImgBox style={imageStyle}>

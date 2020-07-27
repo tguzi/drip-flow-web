@@ -25,7 +25,7 @@ const startNodeServer = () => {
 
 const print = (data) => {
   let str = data.toString();
-  if (str.indexOf(CONSTANTCODE.SVRCODECOMPLETED) > -1) {
+  if (str.indexOf('服务端代码编译完成') > -1) {
     //接收到服务端代码编译完成的通知
     startNodeServer(); //重启 node 服务
   } else if (str.indexOf('[at-loader]') > -1) {

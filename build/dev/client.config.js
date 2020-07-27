@@ -39,6 +39,17 @@ module.exports = merge(baseConfig, {
           },
         ],
       },
+      {
+        test: /\.(png|jpg|gif|svg)$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: 'img/[name].[ext]', //配置图片的输出路径和名称
+            },
+          },
+        ],
+      },
     ],
   },
   plugins: [

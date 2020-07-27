@@ -25,7 +25,7 @@ function createWdsServer(port) {
   let compiler = getWebpackCompiler();
   
   compiler.hooks.done.tap('done', (data) => {
-    console.log(chalk.green('\n\n🎉 web dev server code compile done\n'));
+    console.log(chalk.green('\n\n🎉热更新服务代码编译完成\n'));
     if (compilationTime === 0) {
       //第一次编译完成的时，自动打开浏览器
       // open(`http://localhost:${NODE_SERVER_PORT}/`);
