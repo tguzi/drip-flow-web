@@ -9,7 +9,6 @@ interface Props {
 }
 
 const Empty: SFC<Props> = ({ image, imageStyle, description, children }) => {
-  console.log(image)
   return (
     <Container>
       <ImgBox style={imageStyle}>

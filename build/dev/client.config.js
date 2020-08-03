@@ -1,16 +1,16 @@
-const path = require('path');
-const webpack = require('webpack');
-const merge = require('webpack-merge');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const path = require('path')
+const webpack = require('webpack')
+const merge = require('webpack-merge')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const {
   CheckerPlugin,
   TsConfigPathsPlugin,
-} = require('awesome-typescript-loader');
+} = require('awesome-typescript-loader')
 
-const baseConfig = require('../webpack.config');
+const baseConfig = require('../webpack.config')
 
 //定一个通用的路径转换方法
-const resolve = (pathStr) => path.resolve(__dirname, pathStr);
+const resolve = (pathStr) => path.resolve(__dirname, pathStr)
 
 module.exports = merge(baseConfig, {
   mode: 'development',
@@ -43,7 +43,7 @@ module.exports = merge(baseConfig, {
         test: /\.(png|jpg|gif|svg)$/,
         use: [
           {
-            loader: 'file-loader',
+            loader: 'url-loader',
             options: {
               name: 'img/[name].[ext]', //配置图片的输出路径和名称
             },
@@ -77,4 +77,4 @@ module.exports = merge(baseConfig, {
       },
     },
   },
-});
+})

@@ -15,7 +15,7 @@ module.exports = {
         test: /\.(png|jpg|gif|svg)$/,
         use: [
           {
-            loader: 'file-loader',
+            loader: 'url-loader',
             options: {
               name: 'img/[name].[ext]', //配置图片的输出路径和名称
             },

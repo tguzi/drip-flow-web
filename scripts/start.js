@@ -6,7 +6,7 @@ const log = console.log;
 
 log(chalk.blue('\n🚀 starting server...\n'));
 
-const feCodeWatchProcess = spawn('npm', ['run', 'wds:watch'], {
+const feCodeWatchProcess = spawn('npm', ['run', 'hmr'], {
   stdio: 'inherit',
   shell: process.platform === 'win32',
 });

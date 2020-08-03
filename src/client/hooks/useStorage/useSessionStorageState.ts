@@ -6,6 +6,7 @@ export function useSessionStorageState<T>(
   key: string,
   defaultValue?: T | (() => T)
 ) {
+  // NOTE: 可通过校检Stroage判断
   if (typeof Storage !== undefined) return []
   return useStorageState(sessionStorage, key, defaultValue)
 }
@@ -15,6 +16,7 @@ export function altSessionStorageState<T>(
   key: string,
   defaultValue?: T | (() => T)
 ) {
+  // NOTE: 可通过校检Stroage判断
   if (typeof Storage !== undefined) return []
   return altStorageState(sessionStorage, key, defaultValue)
 }

@@ -13,7 +13,7 @@
     "svr:watch": "node scripts/svr-code-watch.js",
     "start": "node scripts/start.js",
     "dev": "node scripts/start.js",
-    "wds:watch": "cross-env NODE_ENV=development node scripts/wds-start.js"
+    "hmr": "cross-env NODE_ENV=development node scripts/wds-start.js"
   },
   "author": "",
   "license": "ISC",
