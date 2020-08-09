@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useParams, useHistory } from 'react-router-dom'
 
-import { decodeId } from 'utils/index'
+import { decodeId } from '@tgu/utils'
 import { get } from 'utils/request'
 import Layout from 'layout'
 import Icon from 'components/Icon'

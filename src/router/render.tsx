@@ -20,7 +20,7 @@ type TProps = Partial<{
 }> & IProps
 
 // 跳转前的操作
-const BeforRender = (path: string, name: string) => {
+const BeforRender = (path: string) => {
   // 页面懒加载，加载出错则提示
   // if (config.isDev) {
   //   return (
@@ -45,13 +45,13 @@ const BeforRender = (path: string, name: string) => {
 }
 
 const RenderRouter: SFC<TProps> = props => {
-  const { path, exact, component, notRender, name } = props
+  const { path, exact, component, notRender } = props
   const filepath = component || path.split(':')[0]
-  const filename = name || path.split(':')[0]
+  // const filename = name || path.split(':')[0]
   // 之后可以在这边加入权限校验 - 路由校验等功能
   return notRender
-    ? <Route path={path} exact={exact} component={() => BeforRender(filepath, filename)} />
-    : <Route path={path} exact={exact} render={() => BeforRender(filepath, filename)} />
+    ? <Route path={path} exact={exact} component={() => BeforRender(filepath)} />
+    : <Route path={path} exact={exact} render={() => BeforRender(filepath)} />
 }
 
 RenderRouter.defaultProps = {

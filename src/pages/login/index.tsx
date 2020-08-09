@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
-import { useHistory } from 'react-router-dom'
+import { useHistory, useLocation } from 'react-router-dom'
 import Input from 'components/Input'
 import Button from 'components/Button'
 import toast from 'components/Toast'
 import { useSessionStorageState } from 'hooks/useStorage/useSessionStorageState'
-import { encodePwd } from 'utils/index'
+import { encodePwd } from '@tgu/utils'
 import { post } from 'utils/request'
 
 import {
@@ -15,7 +15,7 @@ import {
   Form,
   InputBox,
   Label,
-  Tip,
+  Tip
 } from './styled'
 
 const Login = () => {
@@ -24,13 +24,15 @@ const Login = () => {
   const [nickname, setNickname] = useState(userInfo?.nickname)
   const [password, setPassword] = useState('')
   const history = useHistory()
+  const location = useLocation()
 
   const onLoginClick = async () => {
     try {
       const res = await post('/user/login', { body: JSON.stringify({ nickname, password: encodePwd(password) }) })
       if (res?.data) {
         setUserInfo(res?.data)
-        history.push('/')
+        const state: any = location?.state
+        history.push(state?.successJump ?? '/')
       } else {
         toast(res?.message)
       }

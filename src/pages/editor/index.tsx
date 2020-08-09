@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useHistory, useParams } from 'react-router-dom'
 
-import { throttle, encodeId, decodeId } from 'utils/index'
+import { throttle, encodeId, decodeId } from '@tgu/utils'
 import { post, get } from 'utils/request'
 import MarkdownEditor from 'components/MarkDown/editor'
 import MarkdownView from 'components/MarkDown/view'
@@ -74,7 +74,7 @@ const EditorArticle = () => {
         labelId: 1,
         sortId: 1,
         title,
-        cover,
+        // cover,
         content: val
       }
       const res = await post('/article/add', { body: JSON.stringify(param) })

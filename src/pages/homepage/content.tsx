@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import Waterfall, { MasonryItem } from 'components/Waterfall'
 import Tag from 'components/Tag'
+import useResponse from 'hooks/useResponse'
 import { get } from 'utils/request'
 import { encodeId } from 'utils/index'
 
@@ -20,15 +21,13 @@ const Content = () => {
   const history = useHistory()
   const noNull = list?.length
   useEffect(() => {
-    (async () => {
-      try {
-        const data = await get('/article/list')
-        setList(data?.data)
-      } catch (e) {
-        console.log('获取列表失败')
-      }
-    })()
+    getList()
   }, [])
+
+  async function getList() {
+    const [list] = await useResponse(get('/article/list'))
+    setList(list)
+  }
 
   function gotoArticleDetial(id: number) {
     history.push(`/article/${encodeId(id)}`)

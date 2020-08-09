@@ -31,11 +31,6 @@ export default [
     title: '札记'
   },
   {
-    path: '/half-month-topic',
-    name: 'halfMonthTopic',
-    title: '两周一话'
-  },
-  {
     path: '/article/:id',
     name: 'article',
     title: '博客详情'

@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { throttle } from 'utils/index'
+import { throttle } from '@tgu/utils'
 import { TEditorProps } from './types'
 
 const CodeMirror = window.CodeMirror

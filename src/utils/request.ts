@@ -2,6 +2,16 @@ import TguFetch from '@tgu/fetch'
 import config from 'config/index'
 import { altSessionStorageState } from 'hooks/useStorage/useSessionStorageState'
 import toast from 'components/Toast'
+import history from 'utils/history'
+import { nullValueFilter, assemblingObj } from 'utils/index'
+
+const [userInfo, setUserInfo] = altSessionStorageState<any>('userInfo')
+
+interface IResponse {
+  code: number;
+  data: any;
+  message: string;
+}
 
 // 请求拦截器
 TguFetch.interceptors.request.use((config: any) => {
@@ -11,7 +21,7 @@ TguFetch.interceptors.request.use((config: any) => {
       'content-type': 'application/json; charset=utf-8'
     }
   }
-  const [userInfo] = altSessionStorageState<any>('userInfo')
+  // const [userInfo] = altSessionStorageState<any>('userInfo')
   config.headers = {
     ...config.headers,
     'authorization': `Bearer ${userInfo?.token}`
@@ -22,7 +32,19 @@ TguFetch.interceptors.request.use((config: any) => {
 })
 
 // 响应拦截器
-TguFetch.interceptors.response.use((res: Response) => {
+TguFetch.interceptors.response.use((res: IResponse) => {
+  switch (res.code) {
+    case 401:
+      // 登录信息过期，重新登录
+      setUserInfo({})
+      toast('用户登录信息过期，请重新登录')
+      history.push('/login', {
+        successJump: location.pathname
+      })
+      break
+    default:
+      break
+  }
   return res
 }, (err: Error) => {
   toast(`服务器异常${err.message}`)
@@ -32,12 +54,34 @@ TguFetch.setConfig({
   baseURL: config.baseUrl
 })
 
-const request = TguFetch.request
+/**
+ * 请求封装
+ * @param init
+ */
+const request = (
+  method: string,
+  url: string,
+  data?: any,
+  init?: RequestInit
+) => {
+  const requestParams = nullValueFilter(data)
+  let requestUrl = url
+  let requestInit: RequestInit = { method, ...init }
+  // 自动把请求参数注入到init中
+  switch (method) {
+    case 'GET':
+      requestUrl = assemblingObj(requestParams, url)
+      break
+    case 'POST':
+      requestInit.body = JSON.stringify(requestParams)
+      break
+    default:
+      break
+  }
+  return TguFetch.request({...requestInit, url: requestUrl})
+}
 
-export const get = (url: string, init?: RequestInit) => request({ ...init, method: 'GET', url })
-
-export const post = (url: string, init: RequestInit) => request({ ...init, method: 'POST', url })
-
-export const put = (url: string, init: RequestInit) => request({ ...init, method: 'PUT', url })
+export const get = request.bind(null, 'GET')
+export const post = request.bind(null, 'POST')
 
 export default request

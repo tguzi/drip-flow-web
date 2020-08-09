@@ -74,9 +74,11 @@
   "dependencies": {
     "@tgu/fetch": "^0.0.8",
     "@tgu/hooks": "^0.0.7",
+    "@tgu/utils": "^0.0.8",
     "codemirror": "^5.54.0",
     "github-markdown-css": "^4.0.0",
     "highlight.js": "^10.0.3",
+    "history": "4.10.1",
     "loadsh": "^0.0.4",
     "lodash": "^4.17.15",
     "react": "^16.13.1",

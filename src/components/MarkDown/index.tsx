@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 
-import { throttle } from 'utils/index'
+import { throttle } from '@tgu/utils'
 import Editor from './editor'
 import View from './view'
 // import AnchorNav from './anchorNav'
