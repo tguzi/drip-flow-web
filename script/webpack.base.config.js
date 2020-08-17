@@ -239,6 +239,7 @@ module.exports = {
     alias: {
       'src': path.resolve(__dirname, '../src'),
       'components': path.resolve(__dirname, '../src/components'),
+      'api': path.resolve(__dirname, '../src/api'),
       'config': path.resolve(__dirname, '../src/config'),
       'fetch': path.resolve(__dirname, '../src/fetch'),
       'hooks': path.resolve(__dirname, '../src/hooks'),

@@ -5,6 +5,9 @@ import { throttle, encodeId, decodeId } from '@tgu/utils'
 import { post, get } from 'utils/request'
 import MarkdownEditor from 'components/MarkDown/editor'
 import MarkdownView from 'components/MarkDown/view'
+import Popover from 'components/Popover'
+import Upload from 'components/Upload'
+import useResponse from 'hooks/useResponse'
 import {
   Wrap,
   Header,
@@ -12,7 +15,9 @@ import {
   Button,
   Content,
   EditorBox,
-  ViewBox
+  ViewBox,
+  UploadCover,
+  UploadEmpty
 } from './styled'
 
 const EditorArticle = () => {
@@ -30,66 +35,85 @@ const EditorArticle = () => {
     if (!isUpdate) {
       return
     } else {
-      (async () => {
-        try {
-          const info = await get(`/article/get?id=${id}`)
-          setArticleInfo(info?.data)
-          setDefaultValue(info?.data?.content)
-          setTitle(info?.data?.title)
-          setCover(info?.data?.cover)
-        } catch (e) {
-          console.log('请求详情出错: ', e)
-        }
-      })()
+      getDetail()
     }
   }, [])
+
+  async function getDetail() {
+    const [data] = await useResponse(get(`/article/get?id=${id}`))
+    if (data) {
+      setArticleInfo(data)
+      setDefaultValue(data?.content)
+      setTitle(data?.title)
+      setCover(data?.cover)
+    }
+  }
 
   function setValue(text: any) {
     setVal(text)
   }
 
   async function handleUpdate() {
-    try {
-      const param = {
-        id: articleInfo.id,
-        labelId: 1,
-        sortId: 1,
-        title,
-        cover,
-        content: val
-      }
-      if (!cover) {
-        delete param.cover
-      }
-      await post('/article/update', { body: JSON.stringify(param) })
+    const param = {
+      id: articleInfo.id,
+      labelId: 1,
+      sortId: 1,
+      title,
+      cover,
+      content: val
+    }
+    if (!cover) {
+      delete param.cover
+    }
+    const [data] = await useResponse(post('/article/update', param))
+    if (data) {
       history.push(`/article/${params?.id}`)
-    } catch (e) {
-      console.log('更新失败')
     }
   }
 
   async function handlePublish() {
-    try {
-      const param = {
-        labelId: 1,
-        sortId: 1,
-        title,
-        // cover,
-        content: val
-      }
-      const res = await post('/article/add', { body: JSON.stringify(param) })
-      const info = res?.data
-      history.push(`/article/${encodeId(info.id)}`)
-    } catch (e) {
-      console.log('保存失败')
+    const param = {
+      labelId: 1,
+      sortId: 1,
+      title,
+      cover,
+      content: val
     }
+    const [data] = await useResponse(post('/article/add', param))
+    if (data) {
+      history.push(`/article/${encodeId(data.id)}`)
+    }
+  }
+
+  function onCoverUpload(res: any) {
+    setCover(res?.serverPath)
+  }
+
+  function Cover() {
+    return (
+      <Upload onchange={onCoverUpload}>
+        {
+          cover ? (
+            <UploadCover src={cover} />
+          ) : (
+            <UploadEmpty
+              justify="center"
+              align="center"
+            >+</UploadEmpty>
+          )
+        }
+      </Upload>
+    )
   }
 
   return (
     <Wrap>
       <Header>
         <Input value={title} onChange={(e) => setTitle(e.target.value)} placeholder="输入文章标题..." />
-        <Input value={cover} onChange={(e) => setCover(e.target.value)} placeholder="输入文章封面" />
+        <Popover content={<Cover />}>
+          <Button>上传头图</Button>
+        </Popover>
+        &nbsp;&nbsp;
         <Button onClick={isUpdate ? handleUpdate : handlePublish}>{isUpdate ? '更新' : '发布'}</Button>
       </Header>
       <Content>

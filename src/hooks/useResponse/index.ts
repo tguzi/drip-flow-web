@@ -16,7 +16,7 @@ const useResponse = async (request: any) => {
     error = e
     toast(`请求失败：${e.message}`)
   }
-  return [success, error, res.message, res.code]
+  return [success, error, res?.message, res?.code]
 }
 
 export default useResponse

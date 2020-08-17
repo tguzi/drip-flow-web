@@ -6,6 +6,7 @@ import { get } from 'utils/request'
 import Layout from 'layout'
 import Icon from 'components/Icon'
 import MarkdownView from 'components/MarkDown/view'
+import useResponse from 'hooks/useResponse'
 import {
   Content,
   Title,
@@ -20,15 +21,15 @@ const Article = () => {
   const [articleInfo, setArticleInfo] = useState<any>({})
   const history = useHistory()
   useEffect(() => {
-    (async () => {
-      try {
-        const info = await get(`/article/get?id=${id}`)
-        setArticleInfo(info?.data)
-      } catch (e) {
-        console.log('请求详情出错: ', e)
-      }
-    })()
+    getDetail()
   }, [])
+
+  async function getDetail() {
+    const [data] = await useResponse(get(`/article/get?id=${id}`))
+    if (data) {
+      setArticleInfo(data)
+    }
+  }
 
   const gotoEditor = () => {
     history.push(`/editor/${params?.id}`)

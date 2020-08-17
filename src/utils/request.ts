@@ -21,6 +21,9 @@ TguFetch.interceptors.request.use((config: any) => {
       'content-type': 'application/json; charset=utf-8'
     }
   }
+  if (config.method === 'GET') {
+    delete config.body
+  }
   // const [userInfo] = altSessionStorageState<any>('userInfo')
   config.headers = {
     ...config.headers,

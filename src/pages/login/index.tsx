@@ -2,8 +2,8 @@ import React, { useState } from 'react'
 import { useHistory, useLocation } from 'react-router-dom'
 import Input from 'components/Input'
 import Button from 'components/Button'
-import toast from 'components/Toast'
 import { useSessionStorageState } from 'hooks/useStorage/useSessionStorageState'
+import useResponse from 'hooks/useResponse'
 import { encodePwd } from '@tgu/utils'
 import { post } from 'utils/request'
 
@@ -27,18 +27,11 @@ const Login = () => {
   const location = useLocation()
 
   const onLoginClick = async () => {
-    try {
-      const res = await post('/user/login', { body: JSON.stringify({ nickname, password: encodePwd(password) }) })
-      if (res?.data) {
-        setUserInfo(res?.data)
-        const state: any = location?.state
-        history.push(state?.successJump ?? '/')
-      } else {
-        toast(res?.message)
-      }
-    } catch (e) {
-      console.log('登录出错', e)
-      toast('登录出错')
+    const [data] = await useResponse(post('/user/login', { nickname, password: encodePwd(password) }))
+    if (data) {
+      setUserInfo(data)
+      const state: any = location?.state
+      history.push(state?.successJump ?? '/')
     }
   }
 

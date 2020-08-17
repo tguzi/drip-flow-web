@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import Flex from 'components/Flex'
 
 export const Wrap = styled.div`
   width: 100vw;
@@ -67,5 +68,18 @@ export const ViewBox = styled.div`
   height: 100%;
   overflow: auto;
   box-sizing: border-box;
+  border: 1px dashed #efefef;
+`
+
+export const UploadCover = styled.img`
+  width: 300px;
+  border: 1px dashed #efefef;
+`
+
+export const UploadEmpty = styled(Flex)`
+  width: 100px;
+  height: 100px;
+  background: rgba(245, 245, 245, .8);
+  font-size: 20px;
   border: 1px dashed #efefef;
 `
