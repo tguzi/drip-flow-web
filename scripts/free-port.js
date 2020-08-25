@@ -23,7 +23,7 @@ module.exports = function (port) {
                       if (err) {
                           return console.log('释放指定端口失败！！');
                       }
-                      console.log('port kill');
+                      console.log('接口释放成功');
                   });
               }
           });

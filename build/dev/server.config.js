@@ -1,25 +1,29 @@
-const path = require('path');
+const path = require('path')
 const nodeExternals = require('webpack-node-externals')
-const webpack = require('webpack');
-const merge = require('webpack-merge');
+const webpack = require('webpack')
+const merge = require('webpack-merge')
 const {
   CheckerPlugin,
   TsConfigPathsPlugin,
-} = require('awesome-typescript-loader');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+} = require('awesome-typescript-loader')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
-const baseConfig = require('../webpack.config');
+const baseConfig = require('../webpack.config')
 
 //定一个通用的路径转换方法
-const resolve = (pathStr) => path.resolve(__dirname, pathStr);
+const resolve = (pathStr) => path.resolve(__dirname, pathStr)
 
 module.exports = merge(baseConfig, {
   mode: 'development',
   entry: resolve('../../src/server/index.ts'), //入口文件
-  target: 'node',
   output: {
     filename: 'index.js', //设置打包后的文件名
     path: resolve('../../dist/server'), //设置构建结果的输出目录
+  },
+  target: 'node',
+  node: {
+    __dirname: false,
+    __filename: false,
   },
   externals: [nodeExternals()],
   resolve: {
@@ -73,4 +77,4 @@ module.exports = merge(baseConfig, {
       __IS_PROD__: false,
     }),
   ],
-});
+})

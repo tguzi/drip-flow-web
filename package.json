@@ -10,7 +10,7 @@
     "client:watch": "webpack --config build/dev/client.config.js --watch",
     "bd:client": "webpack --config build/dev/client.config.js",
     "bd:server": "webpack --config build/dev/server.config.js",
-    "svr:watch": "node scripts/svr-code-watch.js",
+    "svr": "node scripts/svr-code-watch.js",
     "start": "node scripts/start.js",
     "dev": "node scripts/start.js",
     "hmr": "cross-env NODE_ENV=development node scripts/wds-start.js"

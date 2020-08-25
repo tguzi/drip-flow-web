@@ -11,7 +11,7 @@ const feCodeWatchProcess = spawn('npm', ['run', 'hmr'], {
   shell: process.platform === 'win32',
 });
 
-const svrCodeWatchProcess = spawn('npm', ['run', 'svr:watch'], {
+const svrCodeWatchProcess = spawn('npm', ['run', 'svr'], {
   shell: process.platform === 'win32',
 });
 

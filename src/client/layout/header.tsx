@@ -73,15 +73,15 @@ const HeaderBar = () => {
   const history = useHistory()
   const [userInfo] = useSessionStorageState<any>('userInfo')
 
-  const ref = useRef()
+  // const ref = useRef()
   const [isModalOpen, setModalOpen] = useState(false)
 
-  useOnClickOutside(ref, () => setModalOpen(false))
+  // useOnClickOutside(ref, () => setModalOpen(false))
 
   return (
     <Header>
       <Flex width="auto">
-        <AvatarWrap ref={ref} onClick={() => setModalOpen(true)}>
+        <AvatarWrap onClick={() => setModalOpen(true)}>
           <Avatar
             src={
               userInfo?.avatar ??
@@ -92,7 +92,7 @@ const HeaderBar = () => {
         </AvatarWrap>
         <Author>
           <h3>
-            {userInfo?.nickname ?? `游客${Math.floor(Math.random() * 10000)}`}
+            {userInfo?.nickname ?? `游客3637`}
           </h3>
           <p>兴趣使然的小清新博客站</p>
         </Author>

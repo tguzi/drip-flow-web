@@ -1,29 +1,27 @@
-import React from 'react';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import React, { useState } from 'react'
+import { BrowserRouter, Switch, Route } from 'react-router-dom'
+import RenderRoute from './render'
+import HomePage from '../pages/homepage'
 
 // 按文件名引入模块
-const _import = (path: any) => () => require(`../pages${path}`).default();
+const _import = (path: any) => () => require(`../pages${path}`).default()
 
 const RoutePage = ({ routeList }: any) => {
+  const getComponent = ({ component, path }) => {
+    const filepath = component || path.split(':')[0]
+    return _import(filepath)
+  }
   return (
+    <>
       <Switch>
-        {routeList.map(({ name, path, exact, component }: any) => {
-          // 没有路由
-          if (!path) {
-            return;
-          }
-          // 返回一个路由
+        {routeList.map((v, i) => {
           return (
-            <Route
-              key={name}
-              path={path}
-              exact={exact}
-              render={_import(component || path)}
-            />
-          );
+            <RenderRoute key={v.path} renderComponent={getComponent(v)} {...v} />
+          )
         })}
       </Switch>
-  );
-};
+    </>
+  )
+}
 
 export default RoutePage

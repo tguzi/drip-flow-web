@@ -1,4 +1,4 @@
-import React, { SFC, Fragment } from 'react'
+import React, { SFC} from 'react'
 import styled from 'styled-components'
 
 import BackToTop from '../components/BackToTop'
@@ -33,7 +33,7 @@ const Layout: SFC<IProps> = ({
   layout,
   children
 }) => (
-  <Fragment>
+  <>
     <Header />
     <Content
       bgColor={bgColor}
@@ -41,7 +41,7 @@ const Layout: SFC<IProps> = ({
     >{children}</Content>
     <Footer />
     <BackToTop />
-  </Fragment>
+  </>
 )
 
 Layout.defaultProps = {

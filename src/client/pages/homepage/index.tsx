@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 
 import Layout from '../../layout'
@@ -8,6 +8,7 @@ import { AddBlogBtn } from './styled'
 
 const Homepage = () => {
   // const history = useHistory()
+  const [name, setName] = useState('小明')
   return (
     <Layout layout="content-center">
       <Content />
