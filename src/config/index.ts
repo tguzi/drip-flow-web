@@ -2,10 +2,10 @@ const env = process.env.NODE_ENV
 
 const domain: any = {
   development: {
-    baseUrl: 'http://localhost:8080/api'
+    baseUrl: '//localhost:8080/api'
   },
   production: {
-    baseUrl: 'https://api.dripflows.cn/api'
+    baseUrl: '//api.dripflows.cn/api'
   }
 }
 
